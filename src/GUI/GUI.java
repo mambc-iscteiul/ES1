@@ -25,26 +25,31 @@ public class GUI {
 	private File rules = new File("rules");
 	private File ham = new File("ham");
 	private File spam = new File("spam");
-	
+
 	private JTextField fp_manual;
 	private JTextField fn_manual;
 	private JTextField fp_automatico;
 	private JTextField fn_automatico;
 
-	public GUI() {
+	public GUI(int x, int y) {
+
+
 		frame = new JFrame("Configuração automática do serviço de filtragem anti-spam");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("/Projeto_ES_2.0/src/GUI/ES.png"));
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLayout(new GridLayout(3, 0));
 		addFrameContent();
 		frame.pack();
+		frame.setSize(x, y);
+		frame.setVisible(true);
 	}
 
 	private void addFrameContent() {
 		//1. Criação de painel inicial dirigido aos ficheiros
 		JPanel ficheiros = new JPanel();
-		frame.add(ficheiros);
 		ficheiros.setLayout(new BorderLayout());
+		frame.add(ficheiros);
+
 
 		//1.1. Título do primeiro painel
 		JLabel lblCaminhosParaFicheiro = new JLabel("Caminhos para ficheiro de configuração:");
@@ -98,18 +103,7 @@ public class GUI {
 		manual.add(configuracao_manual, BorderLayout.CENTER);
 		configuracao_manual.setLayout(new BorderLayout());
 
-		//2.1.1. Criação de painel para titulo da tabela - ALTERAR
-		JPanel titulo_regras_manual = new JPanel();
-		configuracao_manual.add(titulo_regras_manual, BorderLayout.NORTH);
-		titulo_regras_manual.setLayout(new GridLayout(0, 2));
-
-		//2.1.1.1. Titulos da tabela
-		JLabel regras_manual = new JLabel("Regras:");
-		regras_manual.setFont(new Font("", Font.BOLD, 13));
-		titulo_regras_manual.add(regras_manual);
-		JLabel pesos_manual = new JLabel("Pesos:");
-		pesos_manual.setFont(new Font("", Font.BOLD, 13));
-		titulo_regras_manual.add(pesos_manual);
+		//Retirou-se 2.1.1 e 2.1.1.1 para serem alterados
 
 		//2.1.2. Criação de painel para falsos positivos e falsos negativos
 		JPanel falsos_manual = new JPanel();
@@ -162,19 +156,7 @@ public class GUI {
 		configuracao_automatica.setLayout(new BorderLayout());
 		automatico.add(configuracao_automatica, BorderLayout.CENTER);
 
-		//3.1.1. Criação de painel para titulo da tabela - ALTERAR
-		JPanel titulo_regras_automatico = new JPanel();
-		titulo_regras_automatico.setLayout(new GridLayout(0, 2));
-		configuracao_automatica.add(titulo_regras_automatico, BorderLayout.NORTH);
-
-		//3.1.1.1. Titulos da tabela
-		JLabel regras_automatica = new JLabel("Regras:");
-		regras_automatica.setFont(new Font("", Font.BOLD, 13));
-		titulo_regras_automatico.add(regras_automatica);
-
-		JLabel pesos_automatica = new JLabel("Pesos:");
-		pesos_automatica.setFont(new Font("", Font.BOLD, 13));
-		titulo_regras_automatico.add(pesos_automatica);
+		//Retirou-se 3.1.1 e 3.1.1.1 para serem alterados
 
 		//3.1.2. Criação de painel para falsos positivos e falsos negativos
 		JPanel falsos_automatico = new JPanel();
@@ -203,8 +185,9 @@ public class GUI {
 
 		//3.2. Criação de painel para os botões da configuração manual
 		JPanel buttons_configuracao_automatica = new JPanel();
-		automatico.add(buttons_configuracao_automatica, BorderLayout.EAST);
 		buttons_configuracao_automatica.setLayout(new GridLayout(3, 0));
+		automatico.add(buttons_configuracao_automatica, BorderLayout.EAST);
+
 
 		//3.2.1. Adicionar os botões ao painel
 		JButton btnGerarConfigurcaoAutomtica = new JButton("Gerar Conf. Automática c/ JMetal");
@@ -217,15 +200,5 @@ public class GUI {
 		//3.3. Separador de paineis
 		JSeparator separator_1 = new JSeparator();
 		automatico.add(separator_1, BorderLayout.NORTH);
-	}
-
-	private void open(int x, int y){
-		frame.setSize(x, y);
-		frame.setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		GUI window = new GUI();
-		window.open(700, 450);
 	}
 }
