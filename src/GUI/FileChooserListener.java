@@ -19,7 +19,7 @@ public class FileChooserListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		JFileChooser fc =new JFileChooser("Procurar Ficheiro");
+		JFileChooser fc =new JFileChooser();
 		fc.showOpenDialog(null);
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		income = fc.getSelectedFile();
