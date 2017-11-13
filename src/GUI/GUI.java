@@ -1,31 +1,32 @@
 package GUI;
 
 import java.awt.BorderLayout;
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.io.File;
 
-import javax.swing.JPanel;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JCheckBox;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
 import javax.swing.JButton;
-import java.awt.Font;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class GUI {
 	private JFrame frame;
+	//JTEXTFIELDS para os caminhos dos ficheiros
 	private JTextField tf_rules;
 	private JTextField tf_ham;
 	private JTextField tf_spam;
-
-	private File rules = new File("rules");
-	private File ham = new File("ham");
-	private File spam = new File("spam");
-
+	//FICHEIROS
+	private File rules;
+	private File ham;
+	private File spam;
+	
+	//JTEXT avaliadores
 	private JTextField fp_manual;
 	private JTextField fn_manual;
 	private JTextField fp_automatico;
@@ -52,42 +53,72 @@ public class GUI {
 
 
 		//1.1. T√≠tulo do primeiro painel
-		JLabel lblCaminhosParaFicheiro = new JLabel("Caminhos para ficheiro de configura√ß√£o:");
-		lblCaminhosParaFicheiro.setFont(new Font(" ", Font.BOLD, 13));
-		ficheiros.add(lblCaminhosParaFicheiro, BorderLayout.WEST);
-
+		JLabel lblCaminhosParaFicheiro = new JLabel("Caminhos para ficheiros de configuraÁ„o:");
+		lblCaminhosParaFicheiro.setFont(new Font(" ", Font.BOLD, 15));
+		lblCaminhosParaFicheiro.setHorizontalAlignment(JLabel.CENTER);
+		ficheiros.add(lblCaminhosParaFicheiro, BorderLayout.NORTH);
+		
+		//CriaÁ„o das Labels referentes a cada tipo de ficheiro
+		JPanel TiTulosParaFicheiros = new JPanel();
+		TiTulosParaFicheiros.setLayout(new GridLayout(3,0));
+		JLabel rules= new JLabel(" Regras: ");
+		rules.setFont(new Font("", Font.BOLD,13));
+		rules.setHorizontalAlignment(JLabel.CENTER);
+		JLabel ham= new JLabel(" Ham: ");
+		ham.setFont(new Font("", Font.BOLD,13));
+		ham.setHorizontalAlignment(JLabel.CENTER);
+		JLabel spam= new JLabel(" Spam: ");
+		spam.setFont(new Font("", Font.BOLD,13));
+		spam.setHorizontalAlignment(JLabel.CENTER);
+		
+		TiTulosParaFicheiros.add(rules);
+		TiTulosParaFicheiros.add(ham);
+		TiTulosParaFicheiros.add(spam);
+		
+		ficheiros.add(TiTulosParaFicheiros,BorderLayout.WEST);
+	
 		//1.2. Cria√ß√£o de painel para a escolha de ficheiros rules.cf, ham.log e spam.log
 		JPanel caminhos_ficheiros = new JPanel();
 		caminhos_ficheiros.setLayout(new GridLayout(3, 0));
 		ficheiros.add(caminhos_ficheiros, BorderLayout.CENTER);
 
 		//1.2.1. Cria√ß√£o das JTextField com os caminhos para cada ficheiro
-		tf_rules = new JTextField(rules.getAbsolutePath());
+		tf_rules = new JTextField();
 		tf_rules.setEnabled(false);
 		caminhos_ficheiros.add(tf_rules);
 
-		tf_ham = new JTextField(ham.getAbsolutePath());
+		tf_ham = new JTextField();
 		tf_ham.setEnabled(false);
 		caminhos_ficheiros.add(tf_ham);
 
-		tf_spam = new JTextField(spam.getAbsolutePath());
+		tf_spam = new JTextField();
 		tf_spam.setEnabled(false);
 		caminhos_ficheiros.add(tf_spam);
 
-		//1.3. Cria√ß√£o de painel para as JCheckBox'es dos ficheiros rules.cf, ham.log e spam.log
-		JPanel checkbox_ficheiros = new JPanel();
-		ficheiros.add(checkbox_ficheiros, BorderLayout.EAST);
-		checkbox_ficheiros.setLayout(new GridLayout(0, 1));
+		//1.3. Cria√ß√£o de painel para o botıes de procura dos ficehiros rules.cf, ham.log e spam.log
+		JPanel Botıes_ficheiros = new JPanel();
+		ficheiros.add(Botıes_ficheiros, BorderLayout.EAST);
+		Botıes_ficheiros.setLayout(new GridLayout(0, 1));
 
-		//1.3.1. Cria√ß√£o das JCheckBox'es para cada tipo de ficheiro
-		JCheckBox chckbxRulescf = new JCheckBox("rules.cf");
-		checkbox_ficheiros.add(chckbxRulescf);
+		//1.3.1. Cria√ß√£o dos botıes para cada tipo de ficheiro
+		JButton rules_cf = new JButton("Procurar Ficheiro de Regras");
+		rules_cf.addActionListener(new FileChooserListener(tf_rules,this.rules));
+		Botıes_ficheiros.add(rules_cf);
+		
+		/*
+		 * Falta implementar uma thread que, quando se selecionar o ficheiro
+		 * esta rode e v· meter as regras todas no sitio em ambos os paineis
+		 * 
+		 */
+		
 
-		JCheckBox chckbxHamlog = new JCheckBox("ham.log");
-		checkbox_ficheiros.add(chckbxHamlog);
+		JButton ham_log = new JButton("Procurar Ficheiro de Ham");
+		ham_log.addActionListener(new FileChooserListener(tf_ham,this.ham));
+		Botıes_ficheiros.add(ham_log);
 
-		JCheckBox chckbxSpamlog = new JCheckBox("spam.log");
-		checkbox_ficheiros.add(chckbxSpamlog);
+		JButton spam_log = new JButton("Procurar Ficheiro de Spam");
+		spam_log.addActionListener(new FileChooserListener(tf_spam,this.spam));
+		Botıes_ficheiros.add(spam_log);
 
 		//1.4. Separador de paineis
 		JSeparator separator = new JSeparator();
