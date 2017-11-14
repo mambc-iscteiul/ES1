@@ -4,9 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,6 +19,28 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 public class GUI {
+
+	//NESTEDCLASS
+	private class FileChooserListener implements ActionListener {
+
+		private JTextField caminho;	
+		private File income;
+
+		public FileChooserListener(JTextField caminho,File income) {
+			this.caminho=caminho;
+			this.income=income;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			JFileChooser fc =new JFileChooser();
+			fc.showOpenDialog(null);
+			fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			income = fc.getSelectedFile();
+			caminho.setText(income.getAbsolutePath());
+		}
+	}
+
 	private JFrame frame;
 	//JTEXTFIELDS para os caminhos dos ficheiros
 	private JTextField tf_rules;
@@ -25,7 +50,7 @@ public class GUI {
 	private File rules;
 	private File ham;
 	private File spam;
-	
+
 	//JTEXT avaliadores
 	private JTextField fp_manual;
 	private JTextField fn_manual;
@@ -57,7 +82,7 @@ public class GUI {
 		lblCaminhosParaFicheiro.setFont(new Font(" ", Font.BOLD, 15));
 		lblCaminhosParaFicheiro.setHorizontalAlignment(JLabel.CENTER);
 		ficheiros.add(lblCaminhosParaFicheiro, BorderLayout.NORTH);
-		
+
 		//Criação das Labels referentes a cada tipo de ficheiro
 		JPanel TiTulosParaFicheiros = new JPanel();
 		TiTulosParaFicheiros.setLayout(new GridLayout(3,0));
@@ -70,13 +95,13 @@ public class GUI {
 		JLabel spam= new JLabel(" Spam: ");
 		spam.setFont(new Font("", Font.BOLD,13));
 		spam.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		TiTulosParaFicheiros.add(rules);
 		TiTulosParaFicheiros.add(ham);
 		TiTulosParaFicheiros.add(spam);
-		
+
 		ficheiros.add(TiTulosParaFicheiros,BorderLayout.WEST);
-	
+
 		//1.2. CriaÃ§Ã£o de painel para a escolha de ficheiros rules.cf, ham.log e spam.log
 		JPanel caminhos_ficheiros = new JPanel();
 		caminhos_ficheiros.setLayout(new GridLayout(3, 0));
@@ -104,13 +129,13 @@ public class GUI {
 		JButton rules_cf = new JButton("Procurar Ficheiro de Regras");
 		rules_cf.addActionListener(new FileChooserListener(tf_rules,this.rules));
 		Botões_ficheiros.add(rules_cf);
-		
+
 		/*
 		 * Falta implementar uma thread que, quando se selecionar o ficheiro
 		 * esta rode e vá meter as regras todas no sitio em ambos os paineis
 		 * 
 		 */
-		
+
 
 		JButton ham_log = new JButton("Procurar Ficheiro de Ham");
 		ham_log.addActionListener(new FileChooserListener(tf_ham,this.ham));
