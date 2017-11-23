@@ -119,17 +119,15 @@ public class GUI {
 		tf_spam = new JTextField();
 		tf_spam.setEnabled(false);
 		caminhos_ficheiros.add(tf_spam);
-
-		//1.3. Cria√ß√£o de painel para o botıes de procura dos ficehiros rules.cf, ham.log e spam.log
-		//cenas
-		JPanel Botıes_ficheiros = new JPanel();
-		ficheiros.add(Botıes_ficheiros, BorderLayout.EAST);
-		Botıes_ficheiros.setLayout(new GridLayout(0, 1));
-
-		//1.3.1. Cria√ß√£o dos botıes para cada tipo de ficheiro
+		
+		//1.3. Cria√ß√£o de painel para o botoes de procura dos ficehiros rules.cf, ham.log e spam.log
+		JPanel Botoes_ficheiros = new JPanel();
+		ficheiros.add(Botoes_ficheiros, BorderLayout.EAST);
+		Botoes_ficheiros.setLayout(new GridLayout(0, 1));
+		//1.3.1. Cria√ß√£o dos botoes para cada tipo de ficheiro
 		JButton rules_cf = new JButton("Procurar Ficheiro de Regras");
 		rules_cf.addActionListener(new FileChooserListener(tf_rules,this.rules));
-		Botıes_ficheiros.add(rules_cf);
+		Botoes_ficheiros.add(rules_cf);
 
 		/*
 		 * Falta implementar uma thread que, quando se selecionar o ficheiro
@@ -140,11 +138,11 @@ public class GUI {
 
 		JButton ham_log = new JButton("Procurar Ficheiro de Ham");
 		ham_log.addActionListener(new FileChooserListener(tf_ham,this.ham));
-		Botıes_ficheiros.add(ham_log);
+		Botoes_ficheiros.add(ham_log);
 
 		JButton spam_log = new JButton("Procurar Ficheiro de Spam");
 		spam_log.addActionListener(new FileChooserListener(tf_spam,this.spam));
-		Botıes_ficheiros.add(spam_log);
+		Botoes_ficheiros.add(spam_log);
 
 		//1.4. Separador de paineis
 		JSeparator separator = new JSeparator();
