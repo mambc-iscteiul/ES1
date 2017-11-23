@@ -78,12 +78,12 @@ public class GUI {
 
 
 		//1.1. TÃ­tulo do primeiro painel
-		JLabel lblCaminhosParaFicheiro = new JLabel("Caminhos para ficheiros de configuração:");
+		JLabel lblCaminhosParaFicheiro = new JLabel("Caminhos para ficheiros de configuraï¿½ï¿½o:");
 		lblCaminhosParaFicheiro.setFont(new Font(" ", Font.BOLD, 15));
 		lblCaminhosParaFicheiro.setHorizontalAlignment(JLabel.CENTER);
 		ficheiros.add(lblCaminhosParaFicheiro, BorderLayout.NORTH);
 
-		//Criação das Labels referentes a cada tipo de ficheiro
+		//Criaï¿½ï¿½o das Labels referentes a cada tipo de ficheiro
 		JPanel TiTulosParaFicheiros = new JPanel();
 		TiTulosParaFicheiros.setLayout(new GridLayout(3,0));
 		JLabel rules= new JLabel(" Regras: ");
@@ -120,30 +120,30 @@ public class GUI {
 		tf_spam.setEnabled(false);
 		caminhos_ficheiros.add(tf_spam);
 
-		//1.3. CriaÃ§Ã£o de painel para o botões de procura dos ficehiros rules.cf, ham.log e spam.log
-		JPanel Botões_ficheiros = new JPanel();
-		ficheiros.add(Botões_ficheiros, BorderLayout.EAST);
-		Botões_ficheiros.setLayout(new GridLayout(0, 1));
+		//1.3. CriaÃ§Ã£o de painel para o botoes de procura dos ficehiros rules.cf, ham.log e spam.log
+		JPanel Botoes_ficheiros = new JPanel();
+		ficheiros.add(Botoes_ficheiros, BorderLayout.EAST);
+		Botoes_ficheiros.setLayout(new GridLayout(0, 1));
 
-		//1.3.1. CriaÃ§Ã£o dos botões para cada tipo de ficheiro
+		//1.3.1. CriaÃ§Ã£o dos botoes para cada tipo de ficheiro
 		JButton rules_cf = new JButton("Procurar Ficheiro de Regras");
 		rules_cf.addActionListener(new FileChooserListener(tf_rules,this.rules));
-		Botões_ficheiros.add(rules_cf);
+		Botoes_ficheiros.add(rules_cf);
 
 		/*
 		 * Falta implementar uma thread que, quando se selecionar o ficheiro
-		 * esta rode e vá meter as regras todas no sitio em ambos os paineis
+		 * esta rode e vï¿½ meter as regras todas no sitio em ambos os paineis
 		 * 
 		 */
 
 
 		JButton ham_log = new JButton("Procurar Ficheiro de Ham");
 		ham_log.addActionListener(new FileChooserListener(tf_ham,this.ham));
-		Botões_ficheiros.add(ham_log);
+		Botoes_ficheiros.add(ham_log);
 
 		JButton spam_log = new JButton("Procurar Ficheiro de Spam");
 		spam_log.addActionListener(new FileChooserListener(tf_spam,this.spam));
-		Botões_ficheiros.add(spam_log);
+		Botoes_ficheiros.add(spam_log);
 
 		//1.4. Separador de paineis
 		JSeparator separator = new JSeparator();
