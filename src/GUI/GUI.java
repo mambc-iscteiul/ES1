@@ -121,6 +121,7 @@ public class GUI {
 		caminhos_ficheiros.add(tf_spam);
 
 		//1.3. Cria√ß√£o de painel para o botıes de procura dos ficehiros rules.cf, ham.log e spam.log
+		//cenas
 		JPanel Botıes_ficheiros = new JPanel();
 		ficheiros.add(Botıes_ficheiros, BorderLayout.EAST);
 		Botıes_ficheiros.setLayout(new GridLayout(0, 1));
