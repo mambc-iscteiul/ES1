@@ -124,6 +124,7 @@ public class GUI {
 		JPanel Botoes_ficheiros = new JPanel();
 		ficheiros.add(Botoes_ficheiros, BorderLayout.EAST);
 		Botoes_ficheiros.setLayout(new GridLayout(0, 1));
+		
 		//1.3.1. Criação dos botoes para cada tipo de ficheiro
 		JButton rules_cf = new JButton("Procurar Ficheiro de Regras");
 		rules_cf.addActionListener(new FileChooserListener(tf_rules,this.rules));
