@@ -8,10 +8,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,37 +19,19 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+
+import GUI.FileChooserListener.FileType;
 
 public class GUI {
 
 	//NESTEDCLASS
-	private class FileChooserListener implements ActionListener {
-
-		private JTextField caminho;	
-		private File income;
-
-		public FileChooserListener(JTextField caminho,File income) {
-			this.caminho=caminho;
-			this.income=income;
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			JFileChooser fc =new JFileChooser();
-			fc.showOpenDialog(null);
-			fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			income = fc.getSelectedFile();
-			caminho.setText(income.getAbsolutePath());
-			
-			
-			//inserir aqui THREAD QUE VAI LER O FICHEIRO E METER AS CENAS NAS CELULAS
-			System.out.println("Pop");
-		}
-	}
+	
 
 	private JFrame frame;
+
 	//JTEXTFIELDS para os caminhos dos ficheiros
 	private JTextField tf_rules;
 	private JTextField tf_ham;
@@ -74,7 +54,6 @@ public class GUI {
 
 	public GUI(int x, int y) {
 
-
 		frame = new JFrame("Configuração do serviço o de filtragem anti-spam");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("/Projeto_ES_2.0/src/GUI/ES.png"));
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -83,6 +62,7 @@ public class GUI {
 		frame.pack();
 		frame.setSize(x, y);
 		frame.setVisible(true);
+
 	}
 
 	private void addFrameContent() {
@@ -161,19 +141,19 @@ public class GUI {
 
 		//2.1.1Construção da tabela
 		String[] columnNames = {"Regras","Pesos"};
-		
+
 		lista_regras_pesos = new DefaultTableModel(columnNames,0);
 
 		for (int i = 0; i < 300; i++) {
 			lista_regras_pesos.addRow(columnNames);
 		}
-		
+
 		JTable tabela_regras_manual = new JTable(lista_regras_pesos);
 		tabela_regras_manual.setGridColor(Color.black);
 
 		JScrollPane scroll_tabela = new JScrollPane(tabela_regras_manual);
 		configuracao_manual.add(scroll_tabela, BorderLayout.CENTER);
-		
+
 		//2.1.2 Botão de expansão
 		JButton expansão = new JButton("Expandir");
 		expansão.addActionListener(new ActionListener() {
@@ -295,7 +275,7 @@ public class GUI {
 
 		//1.3.1. CriaÃ§Ã£o dos botoes para cada tipo de ficheiro
 		JButton rules_cf = new JButton("Procurar Ficheiro de Regras");
-		rules_cf.addActionListener(new FileChooserListener(tf_rules,this.rules));
+		rules_cf.addActionListener(new FileChooserListener(tf_rules,this.rules,FileType.RULES));
 		Botoes_ficheiros.add(rules_cf);
 
 		/*
@@ -306,11 +286,11 @@ public class GUI {
 
 
 		JButton ham_log = new JButton("Procurar Ficheiro de Ham");
-		ham_log.addActionListener(new FileChooserListener(tf_ham,this.ham));
+		ham_log.addActionListener(new FileChooserListener(tf_ham,this.ham,FileType.HAM));
 		Botoes_ficheiros.add(ham_log);
 
 		JButton spam_log = new JButton("Procurar Ficheiro de Spam");
-		spam_log.addActionListener(new FileChooserListener(tf_spam,this.spam));
+		spam_log.addActionListener(new FileChooserListener(tf_spam,this.spam,FileType.SPAM));
 		Botoes_ficheiros.add(spam_log);
 
 		//1.4. Separador de paineis
@@ -318,4 +298,5 @@ public class GUI {
 		ficheiros.add(separator, BorderLayout.SOUTH);
 
 	}
+
 }
