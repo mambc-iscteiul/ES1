@@ -17,6 +17,8 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class GUI {
 
@@ -56,6 +58,7 @@ public class GUI {
 	private JTextField fn_manual;
 	private JTextField fp_automatico;
 	private JTextField fn_automatico;
+
 
 	public GUI(int x, int y) {
 
@@ -111,7 +114,30 @@ public class GUI {
 		tf_rules = new JTextField();
 		tf_rules.setEnabled(false);
 		caminhos_ficheiros.add(tf_rules);
+		
+		
+		
+		tf_rules.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				Leitor leitor_rules = new Leitor(tf_rules.getText());
+				leitor_rules.start();
+				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				
+			}
+		});
 
+		
 		tf_ham = new JTextField();
 		tf_ham.setEnabled(false);
 		caminhos_ficheiros.add(tf_ham);
@@ -119,17 +145,18 @@ public class GUI {
 		tf_spam = new JTextField();
 		tf_spam.setEnabled(false);
 		caminhos_ficheiros.add(tf_spam);
-		
+
 		//1.3. Criação de painel para o botoes de procura dos ficehiros rules.cf, ham.log e spam.log
 		JPanel Botoes_ficheiros = new JPanel();
 		ficheiros.add(Botoes_ficheiros, BorderLayout.EAST);
 		Botoes_ficheiros.setLayout(new GridLayout(0, 1));
-		
+
 		//1.3.1. Criação dos botoes para cada tipo de ficheiro
 		JButton rules_cf = new JButton("Procurar Ficheiro de Regras");
 		rules_cf.addActionListener(new FileChooserListener(tf_rules,this.rules));
 		Botoes_ficheiros.add(rules_cf);
-
+		
+		
 		/*
 		 * Falta implementar uma thread que, quando se selecionar o ficheiro
 		 * esta rode e v� meter as regras todas no sitio em ambos os paineis
@@ -140,6 +167,7 @@ public class GUI {
 		JButton ham_log = new JButton("Procurar Ficheiro de Ham");
 		ham_log.addActionListener(new FileChooserListener(tf_ham,this.ham));
 		Botoes_ficheiros.add(ham_log);
+		
 
 		JButton spam_log = new JButton("Procurar Ficheiro de Spam");
 		spam_log.addActionListener(new FileChooserListener(tf_spam,this.spam));
