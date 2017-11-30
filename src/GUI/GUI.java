@@ -19,15 +19,13 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 import GUI.FileChooserListener.FileType;
 
 public class GUI {
 
-	//NESTEDCLASS
+	//NESTEDCLASS OFF
 	
 
 	private JFrame frame;
@@ -48,8 +46,9 @@ public class GUI {
 	private JTextField fn_automatico;
 
 	//static para ser acedida de uma forma paralela nas janelas de espansões
-	static DefaultTableModel lista_regras_pesos;
-
+	static DefaultTableModel lista_regras_pesos_manual;
+	
+	static DefaultTableModel lista_regras_pesos_automatico;
 
 
 	public GUI(int x, int y) {
@@ -82,7 +81,54 @@ public class GUI {
 		configuracao_automatica.setLayout(new BorderLayout());
 		automatico.add(configuracao_automatica, BorderLayout.CENTER);
 
-		//Retirou-se 3.1.1 e 3.1.1.1 para serem alterados
+		//2.1.1Construção da tabela
+				String[] columnNames = {"Regras","zzz"};
+				String[] columnNames1 = {"BAYES_00","1.2"};
+				String[] columnNames2 = {"FREEMAIL_FROM","3.3"};
+				String[] columnNames3 = {"RDNS_NONE","3.5"};
+				String[] columnNames4 = {"FREEMAIL_REPLYTO_END_DIGIT","4.6"};
+				String[] columnNames5 = {"MSOE_MID_WRONG_CASE","3.2"};
+				String[] columnNames6 = {"DATE_IN_PAST_24_48","1.1"};
+				String[] columnNames7 = {"T_LOTS_OF_MONEY","2.7"};
+				String[] columnNames8 = {"ALL_TRUSTED","0.1"};
+				String[] columnNames9 = {"SPF_HELO_FAIL","4.4"};
+
+				lista_regras_pesos_automatico = new DefaultTableModel(columnNames,0);
+				lista_regras_pesos_automatico.addRow(columnNames1);
+				lista_regras_pesos_automatico.addRow(columnNames2);
+				lista_regras_pesos_automatico.addRow(columnNames3);
+				lista_regras_pesos_automatico.addRow(columnNames4);
+				lista_regras_pesos_automatico.addRow(columnNames5);
+				lista_regras_pesos_automatico.addRow(columnNames6);
+				lista_regras_pesos_automatico.addRow(columnNames7);
+				lista_regras_pesos_automatico.addRow(columnNames8);
+				lista_regras_pesos_automatico.addRow(columnNames9);
+
+				JTable tabela_regras_automatico = new JTable(lista_regras_pesos_automatico);
+				tabela_regras_automatico.setGridColor(Color.black);
+				tabela_regras_automatico.setEnabled(false);
+
+				JScrollPane scroll_tabela2 = new JScrollPane(tabela_regras_automatico);
+				configuracao_automatica.add(scroll_tabela2, BorderLayout.CENTER);
+
+				//2.1.2 Botão de expansão
+				JButton expansão1 = new JButton("Expandir");
+				expansão1.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						JFrame frame_expandida = new JFrame("Tabela de configuração manual");
+						frame_expandida.setLayout(new BorderLayout());
+						frame_expandida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						JScrollPane scrool_tabela_expandida= new JScrollPane(new JTable(lista_regras_pesos_automatico));
+						frame_expandida.add(scrool_tabela_expandida,BorderLayout.CENTER);
+						frame_expandida.pack();
+						frame_expandida.setSize(1000,800);
+						frame_expandida.setVisible(true);
+					}
+				});
+				configuracao_automatica.add(expansão1,BorderLayout.WEST);
+				automatico.add(configuracao_automatica, BorderLayout.CENTER);
 
 		//3.1.2. CriaÃ§Ã£o de painel para falsos positivos e falsos negativos
 		JPanel falsos_automatico = new JPanel();
@@ -92,9 +138,9 @@ public class GUI {
 		JLabel lblFP_automatico = new JLabel("Falsos Positivos:");
 		falsos_automatico.add(lblFP_automatico);
 
-		fp_automatico = new JTextField();
+		fp_automatico = new JTextField();	
 		fp_automatico.setEnabled(false);
-		fp_automatico.setText("0");
+		fp_automatico.setText("2");
 		fp_automatico.setHorizontalAlignment(SwingConstants.CENTER);
 		fp_automatico.setColumns(2);
 		falsos_automatico.add(fp_automatico);
@@ -104,7 +150,7 @@ public class GUI {
 
 		fn_automatico = new JTextField();
 		fn_automatico.setEnabled(false);
-		fn_automatico.setText("0");
+		fn_automatico.setText("3");
 		fn_automatico.setHorizontalAlignment(SwingConstants.CENTER);
 		fn_automatico.setColumns(2);
 		falsos_automatico.add(fn_automatico);
@@ -138,17 +184,34 @@ public class GUI {
 		JPanel configuracao_manual = new JPanel();
 		configuracao_manual.setLayout(new BorderLayout());
 
-
+		
+	
+	
+		
 		//2.1.1Construção da tabela
 		String[] columnNames = {"Regras","Pesos"};
+		String[] columnNames1 = {"BAYES_00","0.2"};
+		String[] columnNames2 = {"FREEMAIL_FROM","0.3"};
+		String[] columnNames3 = {"RDNS_NONE","1.3"};
+		String[] columnNames4 = {"FREEMAIL_REPLYTO_END_DIGIT","1.2"};
+		String[] columnNames5 = {"MSOE_MID_WRONG_CASE","3.2"};
+		String[] columnNames6 = {"DATE_IN_PAST_24_48","3.1"};
+		String[] columnNames7 = {"T_LOTS_OF_MONEY","0.7"};
+		String[] columnNames8 = {"ALL_TRUSTED","3.1"};
+		String[] columnNames9 = {"SPF_HELO_FAIL","4.1"};
 
-		lista_regras_pesos = new DefaultTableModel(columnNames,0);
+		lista_regras_pesos_manual = new DefaultTableModel(columnNames,0);
+		lista_regras_pesos_manual.addRow(columnNames1);
+		lista_regras_pesos_manual.addRow(columnNames2);
+		lista_regras_pesos_manual.addRow(columnNames3);
+		lista_regras_pesos_manual.addRow(columnNames4);
+		lista_regras_pesos_manual.addRow(columnNames5);
+		lista_regras_pesos_manual.addRow(columnNames6);
+		lista_regras_pesos_manual.addRow(columnNames7);
+		lista_regras_pesos_manual.addRow(columnNames8);
+		lista_regras_pesos_manual.addRow(columnNames9);
 
-		for (int i = 0; i < 300; i++) {
-			lista_regras_pesos.addRow(columnNames);
-		}
-
-		JTable tabela_regras_manual = new JTable(lista_regras_pesos);
+		JTable tabela_regras_manual = new JTable(lista_regras_pesos_manual);
 		tabela_regras_manual.setGridColor(Color.black);
 
 		JScrollPane scroll_tabela = new JScrollPane(tabela_regras_manual);
@@ -163,7 +226,7 @@ public class GUI {
 				JFrame frame_expandida = new JFrame("Tabela de configuração manual");
 				frame_expandida.setLayout(new BorderLayout());
 				frame_expandida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				JScrollPane scrool_tabela_expandida= new JScrollPane(new JTable(lista_regras_pesos));
+				JScrollPane scrool_tabela_expandida= new JScrollPane(new JTable(lista_regras_pesos_manual));
 				frame_expandida.add(scrool_tabela_expandida,BorderLayout.CENTER);
 				frame_expandida.pack();
 				frame_expandida.setSize(1000,800);
@@ -186,7 +249,7 @@ public class GUI {
 
 		fp_manual = new JTextField();
 		fp_manual.setEnabled(false);
-		fp_manual.setText("0");
+		fp_manual.setText("4");
 		fp_manual.setHorizontalAlignment(SwingConstants.CENTER);
 		fp_manual.setColumns(2);
 		falsos_manual.add(fp_manual);
@@ -196,7 +259,7 @@ public class GUI {
 
 		fn_manual = new JTextField();
 		fn_manual.setEnabled(false);
-		fn_manual.setText("0");
+		fn_manual.setText("1");
 		fn_manual.setHorizontalAlignment(SwingConstants.CENTER);
 		fn_manual.setColumns(2);
 		falsos_manual.add(fn_manual);
