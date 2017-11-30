@@ -2,20 +2,15 @@ package GUI;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Vector;
 
 
 public class Leitor extends Thread{
 
-	private Vector<String> linha;
 	private String namefile;
-	private ArrayList<String> lista_de_linhas;
 
 	public Leitor(String namefile) {
 		this.namefile=namefile;
-
 	}
 
 	@Override
@@ -23,28 +18,15 @@ public class Leitor extends Thread{
 
 		try {
 			Scanner sc = new Scanner(new File(namefile));
-			String str;
-			lista_de_linhas = new ArrayList<>();
-
-
 			while(sc.hasNextLine()) {
-				str = sc.nextLine();
-				lista_de_linhas.add(str);
-				
-				for (String string : lista_de_linhas) {
-					linha.add(string);
-				}
-				
-				
-				
-			}
-			
+				String linha_lida = sc.nextLine();		
+				String[] vetor_lido = {linha_lida,"0.0"};
+				GUI.lista_regras_pesos_manual.addRow(vetor_lido);
+			}			
 			sc.close();
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }

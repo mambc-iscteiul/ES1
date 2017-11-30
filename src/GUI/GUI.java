@@ -142,19 +142,16 @@ public class GUI {
 
 		//2.1.1Construção da tabela
 		String[] columnNames = {"Regras","Pesos"};
-
 		lista_regras_pesos_manual = new DefaultTableModel(columnNames,0);
 
-		JTable tabela_regras_manual = new JTable(lista_regras_pesos_manual);
-//		for (int i = 0; i < 300; i++) {
-//			lista_regras_pesos.addRow(columnNames);
-//		}
+		
+
 
 	
-		JTable tabela_regras_manual1 = new JTable(lista_regras_pesos_manual);
-		tabela_regras_manual1.setGridColor(Color.black);
+		JTable tabela_regras_manual = new JTable(lista_regras_pesos_manual);
+		tabela_regras_manual.setGridColor(Color.black);
 
-		JScrollPane scroll_tabela = new JScrollPane(tabela_regras_manual1);
+		JScrollPane scroll_tabela = new JScrollPane(tabela_regras_manual);
 		configuracao_manual.add(scroll_tabela, BorderLayout.CENTER);
 
 		//2.1.2 Botão de expansão
