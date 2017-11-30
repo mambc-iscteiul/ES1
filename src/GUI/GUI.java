@@ -81,55 +81,7 @@ public class GUI {
 		configuracao_automatica.setLayout(new BorderLayout());
 		automatico.add(configuracao_automatica, BorderLayout.CENTER);
 
-		//2.1.1Construção da tabela
-				String[] columnNames = {"Regras","zzz"};
-				String[] columnNames1 = {"BAYES_00","1.2"};
-				String[] columnNames2 = {"FREEMAIL_FROM","3.3"};
-				String[] columnNames3 = {"RDNS_NONE","3.5"};
-				String[] columnNames4 = {"FREEMAIL_REPLYTO_END_DIGIT","4.6"};
-				String[] columnNames5 = {"MSOE_MID_WRONG_CASE","3.2"};
-				String[] columnNames6 = {"DATE_IN_PAST_24_48","1.1"};
-				String[] columnNames7 = {"T_LOTS_OF_MONEY","2.7"};
-				String[] columnNames8 = {"ALL_TRUSTED","0.1"};
-				String[] columnNames9 = {"SPF_HELO_FAIL","4.4"};
-
-				lista_regras_pesos_automatico = new DefaultTableModel(columnNames,0);
-				lista_regras_pesos_automatico.addRow(columnNames1);
-				lista_regras_pesos_automatico.addRow(columnNames2);
-				lista_regras_pesos_automatico.addRow(columnNames3);
-				lista_regras_pesos_automatico.addRow(columnNames4);
-				lista_regras_pesos_automatico.addRow(columnNames5);
-				lista_regras_pesos_automatico.addRow(columnNames6);
-				lista_regras_pesos_automatico.addRow(columnNames7);
-				lista_regras_pesos_automatico.addRow(columnNames8);
-				lista_regras_pesos_automatico.addRow(columnNames9);
-
-				JTable tabela_regras_automatico = new JTable(lista_regras_pesos_automatico);
-				tabela_regras_automatico.setGridColor(Color.black);
-				tabela_regras_automatico.setEnabled(false);
-
-				JScrollPane scroll_tabela2 = new JScrollPane(tabela_regras_automatico);
-				configuracao_automatica.add(scroll_tabela2, BorderLayout.CENTER);
-
-				//2.1.2 Botão de expansão
-				JButton expansão1 = new JButton("Expandir");
-				expansão1.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						JFrame frame_expandida = new JFrame("Tabela de configuração manual");
-						frame_expandida.setLayout(new BorderLayout());
-						frame_expandida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-						JScrollPane scrool_tabela_expandida= new JScrollPane(new JTable(lista_regras_pesos_automatico));
-						frame_expandida.add(scrool_tabela_expandida,BorderLayout.CENTER);
-						frame_expandida.pack();
-						frame_expandida.setSize(1000,800);
-						frame_expandida.setVisible(true);
-					}
-				});
-				configuracao_automatica.add(expansão1,BorderLayout.WEST);
-				automatico.add(configuracao_automatica, BorderLayout.CENTER);
-
+	
 		//3.1.2. CriaÃ§Ã£o de painel para falsos positivos e falsos negativos
 		JPanel falsos_automatico = new JPanel();
 		configuracao_automatica.add(falsos_automatico, BorderLayout.SOUTH);
