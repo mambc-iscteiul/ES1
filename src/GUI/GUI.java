@@ -25,8 +25,13 @@ import GUI.FileChooserListener.FileType;
 
 public class GUI {
 
+<<<<<<< HEAD
 	//NESTEDCLASS OFF
 	
+=======
+	//NESTEDCLASS
+
+>>>>>>> branch 'master' of https://github.com/mambc-iscteiul/ES1-2017-IC1-70.git
 
 	private JFrame frame;
 
@@ -44,6 +49,7 @@ public class GUI {
 	private JTextField fn_manual;
 	private JTextField fp_automatico;
 	private JTextField fn_automatico;
+
 
 	//static para ser acedida de uma forma paralela nas janelas de espansões
 	static DefaultTableModel lista_regras_pesos_manual;
@@ -163,7 +169,15 @@ public class GUI {
 		lista_regras_pesos_manual.addRow(columnNames8);
 		lista_regras_pesos_manual.addRow(columnNames9);
 
+<<<<<<< HEAD
 		JTable tabela_regras_manual = new JTable(lista_regras_pesos_manual);
+=======
+//		for (int i = 0; i < 300; i++) {
+//			lista_regras_pesos.addRow(columnNames);
+//		}
+
+		JTable tabela_regras_manual = new JTable(lista_regras_pesos);
+>>>>>>> branch 'master' of https://github.com/mambc-iscteiul/ES1-2017-IC1-70.git
 		tabela_regras_manual.setGridColor(Color.black);
 
 		JScrollPane scroll_tabela = new JScrollPane(tabela_regras_manual);
@@ -275,6 +289,29 @@ public class GUI {
 		tf_rules.setEnabled(false);
 		caminhos_ficheiros.add(tf_rules);
 
+
+
+		tf_rules.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				Leitor leitor_rules = new Leitor(tf_rules.getText());
+				leitor_rules.start();
+
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+
+			}
+		});
+
+
 		tf_ham = new JTextField();
 		tf_ham.setEnabled(false);
 		caminhos_ficheiros.add(tf_ham);
@@ -293,6 +330,7 @@ public class GUI {
 		rules_cf.addActionListener(new FileChooserListener(tf_rules,this.rules,FileType.RULES));
 		Botoes_ficheiros.add(rules_cf);
 
+
 		/*
 		 * Falta implementar uma thread que, quando se selecionar o ficheiro
 		 * esta rode e vá meter as regras todas no sitio em ambos os paineis
@@ -303,6 +341,7 @@ public class GUI {
 		JButton ham_log = new JButton("Procurar Ficheiro de Ham");
 		ham_log.addActionListener(new FileChooserListener(tf_ham,this.ham,FileType.HAM));
 		Botoes_ficheiros.add(ham_log);
+
 
 		JButton spam_log = new JButton("Procurar Ficheiro de Spam");
 		spam_log.addActionListener(new FileChooserListener(tf_spam,this.spam,FileType.SPAM));
