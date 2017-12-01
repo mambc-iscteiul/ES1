@@ -48,10 +48,18 @@ public class GUI {
 	private JTextField fn_automatico;
 
 	//static para ser acedida de uma forma paralela nas janelas de espansões
-	static DefaultTableModel lista_regras_pesos_manual;
+	private static DefaultTableModel lista_regras_pesos_manual;
 	
-	static DefaultTableModel lista_regras_pesos_automatico;
+	private static DefaultTableModel lista_regras_pesos_automatico;
 
+
+	public static DefaultTableModel getLista_regras_pesos_manual() {
+		return lista_regras_pesos_manual;
+	}
+
+	public static DefaultTableModel getLista_regras_pesos_automatico() {
+		return lista_regras_pesos_automatico;
+	}
 
 	public GUI(int x, int y) {
 

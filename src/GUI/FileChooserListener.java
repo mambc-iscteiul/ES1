@@ -49,7 +49,6 @@ public class FileChooserListener implements ActionListener {
 		}
 
 
-		//inserir aqui THREAD QUE VAI LER O FICHEIRO E METER AS CENAS NAS CELULAS
 
 	}
 	
