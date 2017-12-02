@@ -58,7 +58,7 @@ public class GUI {
 	 * Listas lógicas para base de representação gráfica, estáticas para serem acedidas livremente pelas tabelas de expansão
 	 */
 
-	private static DefaultTableModel lista_regras_pesos_manual;
+	private static DefTableModel lista_regras_pesos_manual;
 
 	private static DefaultTableModel lista_regras_pesos_automatico;
 
@@ -194,7 +194,7 @@ public class GUI {
 		//2.1.1. Construção da tabela
 
 		String[] columnNames = {"Regras","Pesos"};
-		lista_regras_pesos_manual = new DefaultTableModel(columnNames,0);
+		lista_regras_pesos_manual = new DefTableModel(columnNames,0);
 
 		JTable tabela_regras_manual = new JTable(lista_regras_pesos_manual);
 		tabela_regras_manual.setGridColor(Color.black);
