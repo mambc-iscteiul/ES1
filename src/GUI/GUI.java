@@ -27,40 +27,36 @@ import GUI.FileChooserListener.FileType;
 
 public class GUI {
 
-	//NESTEDCLASS OFF
-	
-
+	//Frame
 	private JFrame frame;
 
-	//JTEXTFIELDS para os caminhos dos ficheiros
+	//JTexfield para os caminhos dos ficheiros
 	private JTextField tf_rules;
 	private JTextField tf_ham;
 	private JTextField tf_spam;
-	//FICHEIROS
+	
+	//Ficheiros
 	private File rules;
 	private File ham;
 	private File spam;
 
-	//JTEXT avaliadores
+	//JTextfields avaliadores
 	private JTextField fp_manual;
 	private JTextField fn_manual;
 	private JTextField fp_automatico;
 	private JTextField fn_automatico;
 
-	//static para ser acedida de uma forma paralela nas janelas de espansões
+	
+	/*
+	 * Listas lógicas para base de representação gráfica, estáticas para serem acedidas livremente pelas tabelas de expansão
+	 */
+	
 	private static DefaultTableModel lista_regras_pesos_manual;
 	
 	private static DefaultTableModel lista_regras_pesos_automatico;
 
 
-	public static DefaultTableModel getLista_regras_pesos_manual() {
-		return lista_regras_pesos_manual;
-	}
-
-	public static DefaultTableModel getLista_regras_pesos_automatico() {
-		return lista_regras_pesos_automatico;
-	}
-
+	
 	public GUI(int x, int y) {
 
 		frame = new JFrame("Configuração do serviço o de filtragem anti-spam");
@@ -80,82 +76,117 @@ public class GUI {
 		addThirdPanel();
 	}
 
-	private void addThirdPanel() {
-		//3. CriaÃ§Ã£o de painel inicial dirigido Ã  configuraÃ§Ã£o automÃ¡tica
-		JPanel automatico = new JPanel();
-		automatico.setLayout(new BorderLayout());
-		frame.add(automatico);
+	private void addFirstPanel() {
+		//1. Criação de painel inicial dirigido aos ficheiros
+		JPanel ficheiros = new JPanel();
+		ficheiros.setLayout(new BorderLayout());
+		frame.add(ficheiros);
 
-		//3.1. CriaÃ§Ã£o de painel para tabela de regras e pesos, e falsos positivos e negativos
-		JPanel configuracao_automatica = new JPanel();
-		configuracao_automatica.setLayout(new BorderLayout());
-		automatico.add(configuracao_automatica, BorderLayout.CENTER);
+		//1.1. Titulo do primeiro painel
+		JLabel lblCaminhosParaFicheiro = new JLabel("Caminhos para ficheiros de configuração:");
+		lblCaminhosParaFicheiro.setFont(new Font(" ", Font.BOLD, 15));
+		lblCaminhosParaFicheiro.setHorizontalAlignment(JLabel.CENTER);
+		ficheiros.add(lblCaminhosParaFicheiro, BorderLayout.NORTH);
 
-		//Retirou-se 3.1.1 e 3.1.1.1 para serem alterados
+		//Criação das Labels referentes a cada tipo de ficheiro
+		JPanel TiTulosParaFicheiros = new JPanel();
+		TiTulosParaFicheiros.setLayout(new GridLayout(3,0));
+		JLabel rules= new JLabel(" Regras: ");
+		rules.setFont(new Font("", Font.BOLD,13));
+		rules.setHorizontalAlignment(JLabel.CENTER);
+		JLabel ham= new JLabel(" Ham: ");
+		ham.setFont(new Font("", Font.BOLD,13));
+		ham.setHorizontalAlignment(JLabel.CENTER);
+		JLabel spam= new JLabel(" Spam: ");
+		spam.setFont(new Font("", Font.BOLD,13));
+		spam.setHorizontalAlignment(JLabel.CENTER);
 
-		//3.1.2. CriaÃ§Ã£o de painel para falsos positivos e falsos negativos
-		JPanel falsos_automatico = new JPanel();
-		configuracao_automatica.add(falsos_automatico, BorderLayout.SOUTH);
+		TiTulosParaFicheiros.add(rules);
+		TiTulosParaFicheiros.add(ham);
+		TiTulosParaFicheiros.add(spam);
 
-		//3.1.2.1. Adicionar os falsos ao painel
-		JLabel lblFP_automatico = new JLabel("Falsos Positivos:");
-		falsos_automatico.add(lblFP_automatico);
+		ficheiros.add(TiTulosParaFicheiros,BorderLayout.WEST);
 
-		fp_automatico = new JTextField();
-		fp_automatico.setEnabled(false);
-		fp_automatico.setText("0");
-		fp_automatico.setHorizontalAlignment(SwingConstants.CENTER);
-		fp_automatico.setColumns(2);
-		falsos_automatico.add(fp_automatico);
+		//1.2. Criação de painel para a escolha de ficheiros rules.cf, ham.log e spam.log
+		JPanel caminhos_ficheiros = new JPanel();
+		caminhos_ficheiros.setLayout(new GridLayout(3, 0));
+		ficheiros.add(caminhos_ficheiros, BorderLayout.CENTER);
 
-		JLabel lblFN_automatico = new JLabel("Falsos Negativos:");
-		falsos_automatico.add(lblFN_automatico);
-
-		fn_automatico = new JTextField();
-		fn_automatico.setEnabled(false);
-		fn_automatico.setText("0");
-		fn_automatico.setHorizontalAlignment(SwingConstants.CENTER);
-		fn_automatico.setColumns(2);
-		falsos_automatico.add(fn_automatico);
-
-		//3.2. CriaÃ§Ã£o de painel para os botÃµes da configuraÃ§Ã£o manual
-		JPanel buttons_configuracao_automatica = new JPanel();
-		buttons_configuracao_automatica.setLayout(new GridLayout(3, 0));
-		automatico.add(buttons_configuracao_automatica, BorderLayout.EAST);
+		//1.2.1. Criação das JTextField com os caminhos para cada ficheiro
+		tf_rules = new JTextField();
+		tf_rules.setEnabled(false);
+		caminhos_ficheiros.add(tf_rules);
 
 
-		//3.2.1. Adicionar os botÃµes ao painel
-		JButton btnGerarConfigurcaoAutomtica = new JButton("Gerar Conf. Automática c/ JMetal");
-		btnGerarConfigurcaoAutomtica.setFont(new Font("", Font.PLAIN, 11));
-		buttons_configuracao_automatica.add(btnGerarConfigurcaoAutomtica);
+		tf_rules.getDocument().addDocumentListener(new DocumentListener() {
 
-		JButton btnGravarConfigurcaoRulescf_automatico = new JButton("Gravar Configuração");
-		buttons_configuracao_automatica.add(btnGravarConfigurcaoRulescf_automatico);
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				Leitor leitor_rules = new Leitor(tf_rules.getText());
+				leitor_rules.start();
+			}
 
-		//3.3. Separador de paineis
-		JSeparator separator_1 = new JSeparator();
-		automatico.add(separator_1, BorderLayout.NORTH);
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				//metodo somente necessário por ser import
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent arg0) {	
+				//metodo somente necessário por ser import
+			}
+		});
+
+
+		tf_ham = new JTextField();
+		tf_ham.setEnabled(false);
+		caminhos_ficheiros.add(tf_ham);
+
+		tf_spam = new JTextField();
+		tf_spam.setEnabled(false);
+		caminhos_ficheiros.add(tf_spam);
+
+		//1.3. Criação de painel para o botoes de procura dos ficehiros rules.cf, ham.log e spam.log
+		JPanel Botoes_ficheiros = new JPanel();
+		ficheiros.add(Botoes_ficheiros, BorderLayout.EAST);
+		Botoes_ficheiros.setLayout(new GridLayout(0, 1));
+
+		//1.3.1. Criação dos botões para cada tipo de ficheiro
+		JButton rules_cf = new JButton("Procurar Ficheiro de Regras");
+		rules_cf.addActionListener(new FileChooserListener(tf_rules,this.rules,FileType.RULES));
+		Botoes_ficheiros.add(rules_cf);
+
+
+		JButton ham_log = new JButton("Procurar Ficheiro de Ham");
+		ham_log.addActionListener(new FileChooserListener(tf_ham,this.ham,FileType.HAM));
+		Botoes_ficheiros.add(ham_log);
+
+
+		JButton spam_log = new JButton("Procurar Ficheiro de Spam");
+		spam_log.addActionListener(new FileChooserListener(tf_spam,this.spam,FileType.SPAM));
+		Botoes_ficheiros.add(spam_log);
+
+		//1.4. Separador de paineis
+		JSeparator separator = new JSeparator();
+		ficheiros.add(separator, BorderLayout.SOUTH);
 
 	}
+	
 	private void addSecondPanel() {
-		//2. CriaÃ§Ã£o de painel inicial dirigido Ã  configuraÃ§Ã£o manual
+		//2. Criação de painel inicial dirigido à configuração manual
 		JPanel manual = new JPanel();
 		frame.add(manual);
 		manual.setLayout(new BorderLayout());
 
-		//2.1. CriaÃ§Ã£o de painel para tabela de regras e pesos, e falsos positivos e negativos
+		//2.1. Criação de painel para tabela de regras e pesos, e falsos positivos e negativos
 		JPanel configuracao_manual = new JPanel();
 		configuracao_manual.setLayout(new BorderLayout());
 
-
-		//2.1.1Construção da tabela
+		//2.1.1. Construção da tabela
+		
 		String[] columnNames = {"Regras","Pesos"};
 		lista_regras_pesos_manual = new DefaultTableModel(columnNames,0);
 
-		
-
-
-	
 		JTable tabela_regras_manual = new JTable(lista_regras_pesos_manual);
 		tabela_regras_manual.setGridColor(Color.black);
 
@@ -171,6 +202,7 @@ public class GUI {
 				JFrame frame_expandida = new JFrame("Tabela de configuração manual");
 				frame_expandida.setLayout(new BorderLayout());
 				frame_expandida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				//Apresentação da lista na nova janela
 				JScrollPane scrool_tabela_expandida= new JScrollPane(new JTable(lista_regras_pesos_manual));
 				frame_expandida.add(scrool_tabela_expandida,BorderLayout.CENTER);
 				frame_expandida.pack();
@@ -178,12 +210,11 @@ public class GUI {
 				frame_expandida.setVisible(true);
 			}
 		});
+		
 		configuracao_manual.add(expansão,BorderLayout.WEST);
 		manual.add(configuracao_manual, BorderLayout.CENTER);
 
-
-
-		//2.1.3. CriaÃ§Ã£o de painel para falsos positivos e falsos negativos
+		//2.1.3. Criação de painel para falsos positivos e falsos negativos
 		JPanel falsos_manual = new JPanel();
 		configuracao_manual.add(falsos_manual, BorderLayout.SOUTH);
 
@@ -209,12 +240,12 @@ public class GUI {
 		fn_manual.setColumns(2);
 		falsos_manual.add(fn_manual);
 
-		//2.2. CriaÃ§Ã£o de painel para os botÃµes da configuraÃ§Ã£o manual
+		//2.2. Criação de painel para os botões da configuração manual
 		JPanel buttons_configuracao_manual = new JPanel();
 		buttons_configuracao_manual.setLayout(new GridLayout(3, 0));
 		manual.add(buttons_configuracao_manual, BorderLayout.EAST);
 
-		//2.2.1. Adicionar os botÃµes ao painel
+		//2.2.1. Adicionar os botões ao painel
 		JButton btnGerarConfigurcao = new JButton("Gerar Configuração");
 		buttons_configuracao_manual.add(btnGerarConfigurcao);
 
@@ -226,110 +257,83 @@ public class GUI {
 
 
 	}
-	private void addFirstPanel() {
-		//1. CriaÃ§Ã£o de painel inicial dirigido aos ficheiros
-		JPanel ficheiros = new JPanel();
-		ficheiros.setLayout(new BorderLayout());
-		frame.add(ficheiros);
+	
+	private void addThirdPanel() {
+		
+		//3. Criação de painel inicial dirigido à configuração automática
+		JPanel automatico = new JPanel();
+		automatico.setLayout(new BorderLayout());
+		frame.add(automatico);
 
-
-		//1.1. TÃ­tulo do primeiro painel
-		JLabel lblCaminhosParaFicheiro = new JLabel("Caminhos para ficheiros de configuração:");
-		lblCaminhosParaFicheiro.setFont(new Font(" ", Font.BOLD, 15));
-		lblCaminhosParaFicheiro.setHorizontalAlignment(JLabel.CENTER);
-		ficheiros.add(lblCaminhosParaFicheiro, BorderLayout.NORTH);
-
-		//Criação das Labels referentes a cada tipo de ficheiro
-		JPanel TiTulosParaFicheiros = new JPanel();
-		TiTulosParaFicheiros.setLayout(new GridLayout(3,0));
-		JLabel rules= new JLabel(" Regras: ");
-		rules.setFont(new Font("", Font.BOLD,13));
-		rules.setHorizontalAlignment(JLabel.CENTER);
-		JLabel ham= new JLabel(" Ham: ");
-		ham.setFont(new Font("", Font.BOLD,13));
-		ham.setHorizontalAlignment(JLabel.CENTER);
-		JLabel spam= new JLabel(" Spam: ");
-		spam.setFont(new Font("", Font.BOLD,13));
-		spam.setHorizontalAlignment(JLabel.CENTER);
-
-		TiTulosParaFicheiros.add(rules);
-		TiTulosParaFicheiros.add(ham);
-		TiTulosParaFicheiros.add(spam);
-
-		ficheiros.add(TiTulosParaFicheiros,BorderLayout.WEST);
-
-		//1.2. CriaÃ§Ã£o de painel para a escolha de ficheiros rules.cf, ham.log e spam.log
-		JPanel caminhos_ficheiros = new JPanel();
-		caminhos_ficheiros.setLayout(new GridLayout(3, 0));
-		ficheiros.add(caminhos_ficheiros, BorderLayout.CENTER);
-
-		//1.2.1. CriaÃ§Ã£o das JTextField com os caminhos para cada ficheiro
-		tf_rules = new JTextField();
-		tf_rules.setEnabled(false);
-		caminhos_ficheiros.add(tf_rules);
-
-
-
-		tf_rules.getDocument().addDocumentListener(new DocumentListener() {
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-
-			}
-
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				Leitor leitor_rules = new Leitor(tf_rules.getText());
-				leitor_rules.start();
-
-			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-
-			}
-		});
-
-
-		tf_ham = new JTextField();
-		tf_ham.setEnabled(false);
-		caminhos_ficheiros.add(tf_ham);
-
-		tf_spam = new JTextField();
-		tf_spam.setEnabled(false);
-		caminhos_ficheiros.add(tf_spam);
-
-		//1.3. CriaÃ§Ã£o de painel para o botoes de procura dos ficehiros rules.cf, ham.log e spam.log
-		JPanel Botoes_ficheiros = new JPanel();
-		ficheiros.add(Botoes_ficheiros, BorderLayout.EAST);
-		Botoes_ficheiros.setLayout(new GridLayout(0, 1));
-
-		//1.3.1. CriaÃ§Ã£o dos botoes para cada tipo de ficheiro
-		JButton rules_cf = new JButton("Procurar Ficheiro de Regras");
-		rules_cf.addActionListener(new FileChooserListener(tf_rules,this.rules,FileType.RULES));
-		Botoes_ficheiros.add(rules_cf);
-
+		//3.1. Criação de painel para tabela de regras e pesos, e falsos positivos e negativos
+		JPanel configuracao_automatica = new JPanel();
+		configuracao_automatica.setLayout(new BorderLayout());
+		automatico.add(configuracao_automatica, BorderLayout.CENTER);
 
 		/*
-		 * Falta implementar uma thread que, quando se selecionar o ficheiro
-		 * esta rode e vá meter as regras todas no sitio em ambos os paineis
+		 * 
+		 * CRIAR TABELAS
+		 * METER GUI
 		 * 
 		 */
 
+		//3.1.2. Criação de painel para falsos positivos e falsos negativos
+		JPanel falsos_automatico = new JPanel();
+		configuracao_automatica.add(falsos_automatico, BorderLayout.SOUTH);
 
-		JButton ham_log = new JButton("Procurar Ficheiro de Ham");
-		ham_log.addActionListener(new FileChooserListener(tf_ham,this.ham,FileType.HAM));
-		Botoes_ficheiros.add(ham_log);
+		//3.1.2.1. Adicionar os falsos ao painel
+		JLabel lblFP_automatico = new JLabel("Falsos Positivos:");
+		falsos_automatico.add(lblFP_automatico);
+
+		fp_automatico = new JTextField();
+		fp_automatico.setEnabled(false);
+		fp_automatico.setText("0");
+		fp_automatico.setHorizontalAlignment(SwingConstants.CENTER);
+		fp_automatico.setColumns(2);
+		falsos_automatico.add(fp_automatico);
+
+		JLabel lblFN_automatico = new JLabel("Falsos Negativos:");
+		falsos_automatico.add(lblFN_automatico);
+
+		fn_automatico = new JTextField();
+		fn_automatico.setEnabled(false);
+		fn_automatico.setText("0");
+		fn_automatico.setHorizontalAlignment(SwingConstants.CENTER);
+		fn_automatico.setColumns(2);
+		falsos_automatico.add(fn_automatico);
+
+		//3.2. Criação de painel para os botões da configuração manual
+		JPanel buttons_configuracao_automatica = new JPanel();
+		buttons_configuracao_automatica.setLayout(new GridLayout(3, 0));
+		automatico.add(buttons_configuracao_automatica, BorderLayout.EAST);
 
 
-		JButton spam_log = new JButton("Procurar Ficheiro de Spam");
-		spam_log.addActionListener(new FileChooserListener(tf_spam,this.spam,FileType.SPAM));
-		Botoes_ficheiros.add(spam_log);
+		//3.2.1. Adicionar os botões ao painel
+		JButton btnGerarConfigurcaoAutomtica = new JButton("Gerar Conf. Automática c/ JMetal");
+		btnGerarConfigurcaoAutomtica.setFont(new Font("", Font.PLAIN, 11));
+		buttons_configuracao_automatica.add(btnGerarConfigurcaoAutomtica);
 
-		//1.4. Separador de paineis
-		JSeparator separator = new JSeparator();
-		ficheiros.add(separator, BorderLayout.SOUTH);
+		JButton btnGravarConfigurcaoRulescf_automatico = new JButton("Gravar Configuração");
+		buttons_configuracao_automatica.add(btnGravarConfigurcaoRulescf_automatico);
+
+		//3.3. Separador de paineis
+		JSeparator separator_1 = new JSeparator();
+		automatico.add(separator_1, BorderLayout.NORTH);
 
 	}
+
+	
+	
+	/*
+	 * Acesso controlado das listas
+	 */
+	public static DefaultTableModel getLista_regras_pesos_manual() {
+		return lista_regras_pesos_manual;
+	}
+
+	public static DefaultTableModel getLista_regras_pesos_automatico() {
+		return lista_regras_pesos_automatico;
+	}
+
 
 }
