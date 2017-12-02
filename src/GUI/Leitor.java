@@ -23,7 +23,10 @@ public class Leitor extends Thread{
 				String[] vetor_lido = {linha_lida,"0.0"};
 				//Adicionar à lista as regras como primeira coluna e "0.0" na segunda
 				GUI.getLista_regras_pesos_manual().addRow(vetor_lido);
+				//Sem certeza, teste ONLY
+				GUI.getLista_regras_pesos_automatico().addRow(vetor_lido);
 			}			
+		GUI.ActivateButons();
 			sc.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

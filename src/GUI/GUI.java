@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,7 +35,7 @@ public class GUI {
 	private JTextField tf_rules;
 	private JTextField tf_ham;
 	private JTextField tf_spam;
-	
+
 	//Ficheiros
 	private File rules;
 	private File ham;
@@ -46,17 +47,23 @@ public class GUI {
 	private JTextField fp_automatico;
 	private JTextField fn_automatico;
 
-	
+	//Butões
+	private static ArrayList<JButton> lista_de_botoes;
+
+
+
+
+
 	/*
 	 * Listas lógicas para base de representação gráfica, estáticas para serem acedidas livremente pelas tabelas de expansão
 	 */
-	
+
 	private static DefaultTableModel lista_regras_pesos_manual;
-	
+
 	private static DefaultTableModel lista_regras_pesos_automatico;
 
 
-	
+
 	public GUI(int x, int y) {
 
 		frame = new JFrame("Configuração do serviço o de filtragem anti-spam");
@@ -71,6 +78,8 @@ public class GUI {
 	}
 
 	private void addFrameContent() {
+		lista_de_botoes	= new ArrayList<JButton>();
+
 		addFirstPanel();
 		addSecondPanel();
 		addThirdPanel();
@@ -171,7 +180,7 @@ public class GUI {
 		ficheiros.add(separator, BorderLayout.SOUTH);
 
 	}
-	
+
 	private void addSecondPanel() {
 		//2. Criação de painel inicial dirigido à configuração manual
 		JPanel manual = new JPanel();
@@ -183,7 +192,7 @@ public class GUI {
 		configuracao_manual.setLayout(new BorderLayout());
 
 		//2.1.1. Construção da tabela
-		
+
 		String[] columnNames = {"Regras","Pesos"};
 		lista_regras_pesos_manual = new DefaultTableModel(columnNames,0);
 
@@ -194,8 +203,11 @@ public class GUI {
 		configuracao_manual.add(scroll_tabela, BorderLayout.CENTER);
 
 		//2.1.2 Botão de expansão
-		JButton expansão = new JButton("Expandir");
-		expansão.addActionListener(new ActionListener() {
+		JButton expansão_manual = new JButton("Expandir");
+		//começar sem ser editável
+		expansão_manual.setEnabled(false);
+		lista_de_botoes.add(expansão_manual);
+		expansão_manual.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -210,8 +222,8 @@ public class GUI {
 				frame_expandida.setVisible(true);
 			}
 		});
-		
-		configuracao_manual.add(expansão,BorderLayout.WEST);
+
+		configuracao_manual.add(expansão_manual,BorderLayout.WEST);
 		manual.add(configuracao_manual, BorderLayout.CENTER);
 
 		//2.1.3. Criação de painel para falsos positivos e falsos negativos
@@ -248,18 +260,28 @@ public class GUI {
 		//2.2.1. Adicionar os botões ao painel
 		JButton btnGerarConfigurcao = new JButton("Gerar Configuração");
 		buttons_configuracao_manual.add(btnGerarConfigurcao);
+		//começar sem ser editável
+		btnGerarConfigurcao.setEnabled(false);
+		lista_de_botoes.add(btnGerarConfigurcao);
+
 
 		JButton btnAvaliarConfiguracao = new JButton("Avaliar Configuração");
 		buttons_configuracao_manual.add(btnAvaliarConfiguracao);
+		//começar sem ser editável
+		btnAvaliarConfiguracao.setEnabled(false);
+		lista_de_botoes.add(btnAvaliarConfiguracao);
 
-		JButton btnGravarConfigurcaoRulescf_manual = new JButton("Gravar Configuração rules.cf");
+		JButton btnGravarConfigurcaoRulescf_manual = new JButton("           Gravar Configuração          ");
 		buttons_configuracao_manual.add(btnGravarConfigurcaoRulescf_manual);
+		//começar sem ser editável
+		btnGravarConfigurcaoRulescf_manual.setEnabled(false);
+		lista_de_botoes.add(btnGravarConfigurcaoRulescf_manual);
 
 
 	}
-	
+
 	private void addThirdPanel() {
-		
+
 		//3. Criação de painel inicial dirigido à configuração automática
 		JPanel automatico = new JPanel();
 		automatico.setLayout(new BorderLayout());
@@ -270,12 +292,44 @@ public class GUI {
 		configuracao_automatica.setLayout(new BorderLayout());
 		automatico.add(configuracao_automatica, BorderLayout.CENTER);
 
-		/*
-		 * 
-		 * CRIAR TABELAS
-		 * METER GUI
-		 * 
-		 */
+		//2.1.1. Construção da tabela
+
+		String[] columnNames = {"Regras","Pesos"};
+		lista_regras_pesos_automatico= new DefaultTableModel(columnNames,0);
+
+
+		JTable tabela_regras_automatico = new JTable(lista_regras_pesos_automatico);
+		tabela_regras_automatico.setGridColor(Color.black);
+
+
+		JScrollPane scroll_tabela_automatica = new JScrollPane(tabela_regras_automatico);
+		configuracao_automatica.add(scroll_tabela_automatica, BorderLayout.CENTER);
+
+		//2.1.2 Botão de expansão
+		JButton expansão_automatico = new JButton("Expandir");
+		//começar sem ser editável
+		expansão_automatico.setEnabled(false);
+		lista_de_botoes.add(expansão_automatico);
+
+		expansão_automatico.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame_expandida = new JFrame("Tabela de configuração Automática");
+				frame_expandida.setLayout(new BorderLayout());
+				frame_expandida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				//Apresentação da lista na nova janela
+				JScrollPane scrool_tabela_expandida= new JScrollPane(new JTable(lista_regras_pesos_automatico));
+				frame_expandida.add(scrool_tabela_expandida,BorderLayout.CENTER);
+				frame_expandida.pack();
+				frame_expandida.setSize(1000,800);
+				frame_expandida.setVisible(true);
+			}
+		});
+
+		configuracao_automatica.add(expansão_automatico,BorderLayout.WEST);
+		automatico.add(configuracao_automatica, BorderLayout.CENTER);
+
 
 		//3.1.2. Criação de painel para falsos positivos e falsos negativos
 		JPanel falsos_automatico = new JPanel();
@@ -310,10 +364,16 @@ public class GUI {
 
 		//3.2.1. Adicionar os botões ao painel
 		JButton btnGerarConfigurcaoAutomtica = new JButton("Gerar Conf. Automática c/ JMetal");
-		btnGerarConfigurcaoAutomtica.setFont(new Font("", Font.PLAIN, 11));
+		//começar sem ser editável
+		btnGerarConfigurcaoAutomtica.setEnabled(false);
+		lista_de_botoes.add(btnGerarConfigurcaoAutomtica);
+		btnGerarConfigurcaoAutomtica.setFont(new Font("", Font.BOLD, 11));
 		buttons_configuracao_automatica.add(btnGerarConfigurcaoAutomtica);
 
 		JButton btnGravarConfigurcaoRulescf_automatico = new JButton("Gravar Configuração");
+		//começar sem ser editável
+		btnGravarConfigurcaoRulescf_automatico.setEnabled(false);
+		lista_de_botoes.add(btnGravarConfigurcaoRulescf_automatico);
 		buttons_configuracao_automatica.add(btnGravarConfigurcaoRulescf_automatico);
 
 		//3.3. Separador de paineis
@@ -322,8 +382,8 @@ public class GUI {
 
 	}
 
-	
-	
+
+
 	/*
 	 * Acesso controlado das listas
 	 */
@@ -335,5 +395,10 @@ public class GUI {
 		return lista_regras_pesos_automatico;
 	}
 
+	public static void ActivateButons() {
+		for (int i = 0; i < lista_de_botoes.size(); i++) {
+			lista_de_botoes.get(i).setEnabled(true);
+		}
 
+	}
 }
