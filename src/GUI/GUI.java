@@ -2,14 +2,14 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-
+import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,6 +24,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
+import GUI.ButtonOpListener.Option;
 import GUI.FileChooserListener.FileType;
 
 public class GUI {
@@ -46,11 +47,10 @@ public class GUI {
 	private JTextField fn_manual;
 	private JTextField fp_automatico;
 	private JTextField fn_automatico;
+	
 
 	//Butões
 	private static ArrayList<JButton> lista_de_botoes;
-
-
 
 
 
@@ -59,15 +59,14 @@ public class GUI {
 	 */
 
 	private static DefaultTableModel lista_regras_pesos_manual;
-
 	private static DefaultTableModel lista_regras_pesos_automatico;
-
+	
 
 
 	public GUI(int x, int y) {
 
-		frame = new JFrame("Configuração do serviço o de filtragem anti-spam");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("/Projeto_ES_2.0/src/GUI/ES.png"));
+		frame = new JFrame("Configuração do serviço de filtragem anti-spam");
+		//frame.setIconImage(Toolkit.getDefaultToolkit().getImage("/ES1-2017/Images/2814.png"));
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLayout(new GridLayout(3, 0));
 		addFrameContent();
@@ -202,35 +201,11 @@ public class GUI {
 		JScrollPane scroll_tabela = new JScrollPane(tabela_regras_manual);
 		configuracao_manual.add(scroll_tabela, BorderLayout.CENTER);
 
-		//2.1.2 Botão de expansão
-		JButton expansão_manual = new JButton("Expandir");
-		//começar sem ser editável
-		expansão_manual.setEnabled(false);
-		lista_de_botoes.add(expansão_manual);
-		expansão_manual.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JFrame frame_expandida = new JFrame("Tabela de configuração manual");
-				frame_expandida.setLayout(new BorderLayout());
-				frame_expandida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				//Apresentação da lista na nova janela
-				JScrollPane scrool_tabela_expandida= new JScrollPane(new JTable(lista_regras_pesos_manual));
-				frame_expandida.add(scrool_tabela_expandida,BorderLayout.CENTER);
-				frame_expandida.pack();
-				frame_expandida.setSize(1000,800);
-				frame_expandida.setVisible(true);
-			}
-		});
-
-		configuracao_manual.add(expansão_manual,BorderLayout.WEST);
-		manual.add(configuracao_manual, BorderLayout.CENTER);
-
-		//2.1.3. Criação de painel para falsos positivos e falsos negativos
+		//2.1.2. Criação de painel para falsos positivos e falsos negativos
 		JPanel falsos_manual = new JPanel();
 		configuracao_manual.add(falsos_manual, BorderLayout.SOUTH);
 
-		//2.1.3.1. Adicionar os falsos ao painel
+		//2.1.2.1. Adicionar os falsos ao painel
 		JLabel lblFP_manual = new JLabel("Falsos Positivos:");
 		lblFP_manual.setHorizontalAlignment(SwingConstants.CENTER);
 		falsos_manual.add(lblFP_manual);
@@ -254,7 +229,7 @@ public class GUI {
 
 		//2.2. Criação de painel para os botões da configuração manual
 		JPanel buttons_configuracao_manual = new JPanel();
-		buttons_configuracao_manual.setLayout(new GridLayout(3, 0));
+		buttons_configuracao_manual.setLayout(new GridLayout(4, 0));
 		manual.add(buttons_configuracao_manual, BorderLayout.EAST);
 
 		//2.2.1. Adicionar os botões ao painel
@@ -262,13 +237,14 @@ public class GUI {
 		buttons_configuracao_manual.add(btnGerarConfigurcao);
 		//começar sem ser editável
 		btnGerarConfigurcao.setEnabled(false);
+		btnGerarConfigurcao.addActionListener(new ButtonOpListener(Option.GERAR));
 		lista_de_botoes.add(btnGerarConfigurcao);
-
 
 		JButton btnAvaliarConfiguracao = new JButton("Avaliar Configuração");
 		buttons_configuracao_manual.add(btnAvaliarConfiguracao);
 		//começar sem ser editável
 		btnAvaliarConfiguracao.setEnabled(false);
+		btnAvaliarConfiguracao.addActionListener(new ButtonOpListener(Option.AVALIAR));
 		lista_de_botoes.add(btnAvaliarConfiguracao);
 
 		JButton btnGravarConfigurcaoRulescf_manual = new JButton("           Gravar Configuração          ");
@@ -276,7 +252,58 @@ public class GUI {
 		//começar sem ser editável
 		btnGravarConfigurcaoRulescf_manual.setEnabled(false);
 		lista_de_botoes.add(btnGravarConfigurcaoRulescf_manual);
+		btnGravarConfigurcaoRulescf_manual.addActionListener(new ButtonOpListener(Option.GRAVAR));
 
+		JButton btnResetValores = new JButton("Inicializar Configuração");
+		buttons_configuracao_manual.add(btnResetValores);
+		btnResetValores.setEnabled(false);
+		lista_de_botoes.add(btnResetValores);
+		btnResetValores.addActionListener(new ButtonOpListener(Option.INICIALIZAR));
+
+		//2.3 Botão de expansão
+		JButton expansão_manual = new JButton("Expandir");
+		//começar sem ser editável
+		expansão_manual.setEnabled(false);
+		lista_de_botoes.add(expansão_manual);
+		expansão_manual.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame_expandida = new JFrame("Tabela de configuração manual");
+				frame_expandida.setLayout(new BorderLayout());
+				frame_expandida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				//Apresentação da lista na nova janela
+				JScrollPane scrool_tabela_expandida= new JScrollPane(new JTable(lista_regras_pesos_manual));
+				frame_expandida.add(scrool_tabela_expandida,BorderLayout.CENTER);
+				//Apresentação dos botões
+				JPanel painel_botões_expandido= new JPanel(new GridLayout(1,4));
+				/*
+				 * Criação de botões replica, pois a própria implementação JButton, não
+				 * permite instanciação múltipla, como a DefaultModelList.
+				 * Ou seja, estes não podem existir em "2" lados ao emsmo tempo. 
+				 */
+				JButton btnGerarConfigurcao_expandido = new JButton("Gerar Configuração");
+				btnGerarConfigurcao_expandido.addActionListener(new ButtonOpListener(Option.GERAR));
+				painel_botões_expandido.add(btnGerarConfigurcao_expandido);
+				JButton btnAvaliarConfiguracao_expandido = new JButton("Avaliar Configuração");
+				btnAvaliarConfiguracao_expandido.addActionListener(new ButtonOpListener(Option.AVALIAR));
+				painel_botões_expandido.add(btnAvaliarConfiguracao_expandido);
+				JButton btnGravarConfigurcaoRulescf_manual_expandido = new JButton("Gravar Configuração");
+				btnGravarConfigurcaoRulescf_manual_expandido.addActionListener(new ButtonOpListener(Option.GRAVAR));
+				painel_botões_expandido.add(btnGravarConfigurcaoRulescf_manual_expandido);
+				JButton btnResetValores_expandido = new JButton("Inicializar Configuração");
+				btnResetValores_expandido.addActionListener(new ButtonOpListener(Option.INICIALIZAR));
+				painel_botões_expandido.add(btnResetValores_expandido);
+				
+				frame_expandida.add(painel_botões_expandido, BorderLayout.SOUTH);
+				frame_expandida.pack();
+				frame_expandida.setSize(1000,600);
+				frame_expandida.setVisible(true);
+			}
+		});
+
+		configuracao_manual.add(expansão_manual,BorderLayout.WEST);
+		manual.add(configuracao_manual, BorderLayout.CENTER);
 
 	}
 
@@ -322,7 +349,7 @@ public class GUI {
 				JScrollPane scrool_tabela_expandida= new JScrollPane(new JTable(lista_regras_pesos_automatico));
 				frame_expandida.add(scrool_tabela_expandida,BorderLayout.CENTER);
 				frame_expandida.pack();
-				frame_expandida.setSize(1000,800);
+				frame_expandida.setSize(1000,700);
 				frame_expandida.setVisible(true);
 			}
 		});
@@ -383,10 +410,10 @@ public class GUI {
 	}
 
 
-
 	/*
 	 * Acesso controlado das listas
 	 */
+
 	public static DefaultTableModel getLista_regras_pesos_manual() {
 		return lista_regras_pesos_manual;
 	}

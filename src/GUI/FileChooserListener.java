@@ -11,8 +11,8 @@ import javax.swing.JTextField;
 public class FileChooserListener implements ActionListener {
 	
 	//Enumerados para o FileChooser,como é generalista, perceber qual botão o chamou.
-	public enum FileType{RULES,SPAM,HAM}
-
+	protected enum FileType{RULES,SPAM,HAM};
+	
 	private JTextField caminho;	
 	private File income;
 	private FileType enu;
