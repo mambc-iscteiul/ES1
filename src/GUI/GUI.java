@@ -47,7 +47,6 @@ public class GUI {
 	private JTextField fn_manual;
 	private JTextField fp_automatico;
 	private JTextField fn_automatico;
-	
 
 	//Butões
 	private static ArrayList<JButton> lista_de_botoes;
