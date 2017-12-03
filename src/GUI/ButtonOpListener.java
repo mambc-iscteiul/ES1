@@ -34,7 +34,7 @@ public class ButtonOpListener implements ActionListener {
 		for (int i = 0; i < GUI.getLista_regras_pesos_manual().getRowCount(); i++) {
 			System.out.print(GUI.getLista_regras_pesos_manual().getValueAt(i, 0));
 			System.out.println(" "+ GUI.getLista_regras_pesos_manual().getValueAt(i, 1));
-			
+
 
 		}
 		break;

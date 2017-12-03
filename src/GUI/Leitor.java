@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 
 public class Leitor extends Thread{
-
+	
 	private String namefile;
 
 	public Leitor(String namefile) {
@@ -16,8 +16,8 @@ public class Leitor extends Thread{
 
 	@Override
 	public void run() {
-
 		try {
+			
 			Scanner sc = new Scanner(new File(namefile));
 			if(GUI.getLista_regras_pesos_manual().getRowCount()>0) {
 				//se a lista já tiver valores, apagá-los um a um e adicionar novos
