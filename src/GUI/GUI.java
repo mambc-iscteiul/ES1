@@ -22,6 +22,8 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import GUI.ButtonOpListener.Option;
@@ -57,8 +59,8 @@ public class GUI {
 	 * Listas lógicas para base de representação gráfica, estáticas para serem acedidas livremente pelas tabelas de expansão
 	 */
 
-	private static DefaultTableModel lista_regras_pesos_manual;
-	private static DefaultTableModel lista_regras_pesos_automatico;
+	private static DefTableModel lista_regras_pesos_manual;
+	private static DefTableModel lista_regras_pesos_automatico;
 	
 
 
@@ -77,7 +79,6 @@ public class GUI {
 
 	private void addFrameContent() {
 		lista_de_botoes	= new ArrayList<JButton>();
-
 		addFirstPanel();
 		addSecondPanel();
 		addThirdPanel();
@@ -192,7 +193,7 @@ public class GUI {
 		//2.1.1. Construção da tabela
 
 		String[] columnNames = {"Regras","Pesos"};
-		lista_regras_pesos_manual = new DefaultTableModel(columnNames,0);
+		lista_regras_pesos_manual = new DefTableModel(columnNames,0);
 
 		JTable tabela_regras_manual = new JTable(lista_regras_pesos_manual);
 		tabela_regras_manual.setGridColor(Color.black);
@@ -321,7 +322,8 @@ public class GUI {
 		//2.1.1. Construção da tabela
 
 		String[] columnNames = {"Regras","Pesos"};
-		lista_regras_pesos_automatico= new DefaultTableModel(columnNames,0);
+		lista_regras_pesos_automatico= new DefTableModel(columnNames,0);
+	
 
 
 		JTable tabela_regras_automatico = new JTable(lista_regras_pesos_automatico);

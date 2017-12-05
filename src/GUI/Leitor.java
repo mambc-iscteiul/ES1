@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 
 public class Leitor extends Thread{
-	
+
 	private String namefile;
 
 	public Leitor(String namefile) {
@@ -17,7 +17,7 @@ public class Leitor extends Thread{
 	@Override
 	public void run() {
 		try {
-			
+
 			Scanner sc = new Scanner(new File(namefile));
 			if(GUI.getLista_regras_pesos_manual().getRowCount()>0) {
 				//se a lista já tiver valores, apagá-los um a um e adicionar novos
@@ -27,12 +27,28 @@ public class Leitor extends Thread{
 					//tem de se remover a primeira posição o numero de vezes igual à 
 					//dimensão original da lista
 					GUI.getLista_regras_pesos_manual().removeRow(0);
+					GUI.getLista_regras_pesos_automatico().removeRow(0);
 				}
 			}
 			while(sc.hasNextLine()) {
-				String linha_lida = sc.nextLine();		
-				String[] vetor_lido = {linha_lida,"0.0"};
-				//Adicionar à lista as regras como primeira coluna e "0.0" na segunda
+				String linha_lida = sc.nextLine();	
+				String[] linha_dividida = linha_lida.split(" ");
+				//criar vetor com a regra na primeira coluna e "0.0" na segunda
+				String[] vetor_lido= {linha_dividida[0],"0.0"};
+				if(linha_dividida.length>1) {
+					//caso já exista um valor gravado sobrepõe
+					try {
+						//tenta converter a string lida em double
+						@SuppressWarnings("unused")
+						Double a = Double.parseDouble((String)linha_dividida[1]);
+						vetor_lido[1]=linha_dividida[1];
+					}catch(NumberFormatException e){
+						//não conseguindo não sobre põe o valor pois não é aceite	
+						System.out.println("Valor não aceite zerado");
+					}
+					
+					
+				}
 				GUI.getLista_regras_pesos_manual().addRow(vetor_lido);
 				//Sem certeza, teste ONLY
 				GUI.getLista_regras_pesos_automatico().addRow(vetor_lido);

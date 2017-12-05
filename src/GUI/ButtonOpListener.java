@@ -22,8 +22,9 @@ public class ButtonOpListener implements ActionListener {
 		case GERAR: 
 			for (int i = 0; i < GUI.getLista_regras_pesos_manual().getRowCount(); i++) {
 				Random r = new Random();
-				double randomValue = 0.0 + (5.0) * r.nextDouble();
-				GUI.getLista_regras_pesos_manual().setValueAt((float)randomValue, i, 1);
+				double randomValue = ((r.nextDouble()*10.0)-5.0);
+				
+				GUI.getLista_regras_pesos_manual().setValueAt(""+randomValue, i, 1);
 			}
 			break;
 
@@ -34,14 +35,12 @@ public class ButtonOpListener implements ActionListener {
 		for (int i = 0; i < GUI.getLista_regras_pesos_manual().getRowCount(); i++) {
 			System.out.print(GUI.getLista_regras_pesos_manual().getValueAt(i, 0));
 			System.out.println(" "+ GUI.getLista_regras_pesos_manual().getValueAt(i, 1));
-
-
 		}
 		break;
 
 		case INICIALIZAR:
 			for (int i = 0; i < GUI.getLista_regras_pesos_manual().getRowCount(); i++) {
-				GUI.getLista_regras_pesos_manual().setValueAt(0.0, i, 1);
+				GUI.getLista_regras_pesos_manual().setValueAt("0.0", i, 1);
 			}
 			break;
 
