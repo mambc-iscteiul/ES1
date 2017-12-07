@@ -2,14 +2,14 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Random;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,12 +22,11 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import GUI.ButtonOpListener.Option;
 import GUI.FileChooserListener.FileType;
+import InputOutput.Leitor;
 
 public class GUI {
 
@@ -35,7 +34,8 @@ public class GUI {
 	private JFrame frame;
 
 	//JTexfield para os caminhos dos ficheiros
-	private JTextField tf_rules;
+	private static JTextField tf_rules;
+
 	private JTextField tf_ham;
 	private JTextField tf_spam;
 
@@ -61,7 +61,7 @@ public class GUI {
 
 	private static DefTableModel lista_regras_pesos_manual;
 	private static DefTableModel lista_regras_pesos_automatico;
-	
+
 
 
 	public GUI(int x, int y) {
@@ -265,6 +265,7 @@ public class GUI {
 		//começar sem ser editável
 		expansão_manual.setEnabled(false);
 		lista_de_botoes.add(expansão_manual);
+
 		expansão_manual.addActionListener(new ActionListener() {
 
 			@Override
@@ -294,7 +295,7 @@ public class GUI {
 				JButton btnResetValores_expandido = new JButton("Inicializar Configuração");
 				btnResetValores_expandido.addActionListener(new ButtonOpListener(Option.INICIALIZAR));
 				painel_botões_expandido.add(btnResetValores_expandido);
-				
+
 				frame_expandida.add(painel_botões_expandido, BorderLayout.SOUTH);
 				frame_expandida.pack();
 				frame_expandida.setSize(1000,600);
@@ -323,7 +324,7 @@ public class GUI {
 
 		String[] columnNames = {"Regras","Pesos"};
 		lista_regras_pesos_automatico= new DefTableModel(columnNames,0);
-	
+
 
 
 		JTable tabela_regras_automatico = new JTable(lista_regras_pesos_automatico);
@@ -410,10 +411,11 @@ public class GUI {
 
 	}
 
-
 	/*
 	 * Acesso controlado das listas
 	 */
+
+
 
 	public static DefaultTableModel getLista_regras_pesos_manual() {
 		return lista_regras_pesos_manual;
@@ -423,10 +425,18 @@ public class GUI {
 		return lista_regras_pesos_automatico;
 	}
 
+	// Ativação dos butões inactivos até se escolher o ficheiro de regras
 	public static void ActivateButons() {
 		for (int i = 0; i < lista_de_botoes.size(); i++) {
 			lista_de_botoes.get(i).setEnabled(true);
 		}
+	}
 
+	public static JTextField getRules() {
+		return tf_rules;	
+	}
+
+	public ArrayList<JButton> getLista_de_botoes() {
+		return lista_de_botoes;
 	}
 }

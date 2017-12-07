@@ -9,17 +9,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class FileChooserListener implements ActionListener {
-	
+
 	//Enumerados para o FileChooser,como é generalista, perceber qual botão o chamou.
-	protected enum FileType{RULES,SPAM,HAM};
-	
+	public enum FileType{RULES,SPAM,HAM};
+
 	private JTextField caminho;	
 	private File income;
 	private FileType enu;
 
 
-	public FileChooserListener() {
-	}
+
 
 	public FileChooserListener(JTextField caminho,File income,FileType enu) {
 		this.caminho=caminho;
@@ -34,6 +33,7 @@ public class FileChooserListener implements ActionListener {
 			do {
 				JFileChooser fc =new JFileChooser();
 				fc.showOpenDialog(null);
+				fc.setDialogTitle("Jesus");
 				//selecionar somente ficheiros
 				fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				income = fc.getSelectedFile();
@@ -47,12 +47,11 @@ public class FileChooserListener implements ActionListener {
 					//Apresentar informação de ficheiro não suportado quando o tipo requerido é de SPAM e o ficheiro escolhido não coincide
 					JOptionPane.showMessageDialog(null,"Tipo de ficheiro não suportado, exprimente outro ficheiro do tipo '.spam.log' ");
 				}
-					//Estar ciclicamente a apresentar o FileChooser enquanto o documento selecionado não for o correto para cada caso 
+				//Estar ciclicamente a apresentar o FileChooser enquanto o documento selecionado não for o correto para cada caso 
 			} while(!income.getAbsolutePath().endsWith(".cf")&& enu.equals(FileType.RULES)|| !income.getName().startsWith("ham")&& enu.equals(FileType.HAM)|| !income.getName().startsWith("spam")&& enu.equals(FileType.SPAM));	
 			caminho.setText(income.getAbsolutePath());
-			
-		}catch(NullPointerException e){
 
+		}catch(NullPointerException e){
 		}
 
 	}

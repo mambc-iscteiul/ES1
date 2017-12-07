@@ -1,9 +1,11 @@
-package GUI;
+package InputOutput;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.Scanner;
+
+import GUI.GUI;
 
 
 public class Leitor extends Thread{
