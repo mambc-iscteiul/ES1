@@ -2,22 +2,23 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
+import Avaliators.FalsePositiveAvaliator;
 import InputOutput.Escritor;
 
 public class ButtonOpListener implements ActionListener {
 	//Listener dedicado aos butões, generalista,enumerado serve para decidir a funcionalidade
 	protected enum Option{GERAR,AVALIAR,GRAVAR,INICIALIZAR};
 	private Option op;
-	private Map<String,Double> mapa;
+
 
 	public ButtonOpListener(Option op) {
 		this.op=op;
-		mapa = new HashMap<String, Double>();
 	}
 
 
@@ -35,8 +36,20 @@ public class ButtonOpListener implements ActionListener {
 			break;
 
 		case AVALIAR: 
-			for (int i = 0; i < GUI.getLista_regras_pesos_manual().getRowCount(); i++) {
-				mapa.put((String) GUI.getLista_regras_pesos_manual().getValueAt(i, 0), Double.parseDouble((String) GUI.getLista_regras_pesos_manual().getValueAt(i, 1)));
+
+			if(!GUI.getHam().getText().equals("")&&!GUI.getSpam().getText().equals("")) {
+				for (int i = 0; i < GUI.getLista_regras_pesos_manual().getRowCount(); i++) {
+					GUI.getMapa().put((String) GUI.getLista_regras_pesos_manual().getValueAt(i, 0), Double.parseDouble((String) GUI.getLista_regras_pesos_manual().getValueAt(i, 1)));
+				}
+				
+				GUI.setHam(new File(GUI.getHam().getText()));
+				FalsePositiveAvaliator avaliator = new FalsePositiveAvaliator(GUI.GetHamFile());
+				avaliator.start();
+				
+				
+				//thread do rui
+			}else {
+				JOptionPane.showMessageDialog(null, "Insira os ficheiros de Spam e de Ham por favor");
 			}
 
 			break;
@@ -58,4 +71,5 @@ public class ButtonOpListener implements ActionListener {
 			break;
 		}
 	}
+
 }

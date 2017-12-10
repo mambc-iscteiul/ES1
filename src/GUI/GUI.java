@@ -4,11 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,20 +36,19 @@ public class GUI {
 
 	//JTexfield para os caminhos dos ficheiros
 	private static JTextField tf_rules;
-
-	private JTextField tf_ham;
-	private JTextField tf_spam;
+	private static JTextField tf_ham;
+	private static JTextField tf_spam;
 
 	//Ficheiros
-	private File rules;
-	private File ham;
-	private File spam;
+	private static File rules;
+	private static File ham;
+	private static File spam;
 
 	//JTextfields avaliadores
-	private JTextField fp_manual;
-	private JTextField fn_manual;
-	private JTextField fp_automatico;
-	private JTextField fn_automatico;
+	private static JTextField fp_manual;
+	private static JTextField fn_manual;
+	private static JTextField fp_automatico;
+	private static JTextField fn_automatico;
 
 	//Butões
 	private static ArrayList<JButton> lista_de_botoes;
@@ -62,6 +62,9 @@ public class GUI {
 	private static DefTableModel lista_regras_pesos_manual;
 	private static DefTableModel lista_regras_pesos_automatico;
 
+	private static Map<String,Double> mapa;
+
+
 
 
 	public GUI(int x, int y) {
@@ -70,6 +73,10 @@ public class GUI {
 		//frame.setIconImage(Toolkit.getDefaultToolkit().getImage("/ES1-2017/Images/2814.png"));
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLayout(new GridLayout(3, 0));
+		
+		lista_de_botoes	= new ArrayList<JButton>();
+		mapa = new HashMap<String, Double>();
+		
 		addFrameContent();
 		frame.pack();
 		frame.setSize(x, y);
@@ -78,7 +85,7 @@ public class GUI {
 	}
 
 	private void addFrameContent() {
-		lista_de_botoes	= new ArrayList<JButton>();
+
 		addFirstPanel();
 		addSecondPanel();
 		addThirdPanel();
@@ -133,16 +140,15 @@ public class GUI {
 				Leitor leitor_rules = new Leitor(tf_rules.getText());
 				leitor_rules.start();
 			}
-
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				//metodo somente necessário por ser import
 			}
-
 			@Override
-			public void removeUpdate(DocumentEvent arg0) {	
+			public void removeUpdate(DocumentEvent arg0) {
 				//metodo somente necessário por ser import
-			}
+
+			}	
 		});
 
 
@@ -150,9 +156,44 @@ public class GUI {
 		tf_ham.setEnabled(false);
 		caminhos_ficheiros.add(tf_ham);
 
+		tf_ham.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+
+				// coleção para ham
+			}
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub	
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub	
+			}
+		});
+
 		tf_spam = new JTextField();
 		tf_spam.setEnabled(false);
 		caminhos_ficheiros.add(tf_spam);
+
+		tf_spam.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// Tcoleção para spam
+			}
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub	
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub	
+			}
+		});
 
 		//1.3. Criação de painel para o botoes de procura dos ficehiros rules.cf, ham.log e spam.log
 		JPanel Botoes_ficheiros = new JPanel();
@@ -161,17 +202,17 @@ public class GUI {
 
 		//1.3.1. Criação dos botões para cada tipo de ficheiro
 		JButton rules_cf = new JButton("Procurar Ficheiro de Regras");
-		rules_cf.addActionListener(new FileChooserListener(tf_rules,this.rules,FileType.RULES));
+		rules_cf.addActionListener(new FileChooserListener(tf_rules,GUI.rules,FileType.RULES));
 		Botoes_ficheiros.add(rules_cf);
 
 
 		JButton ham_log = new JButton("Procurar Ficheiro de Ham");
-		ham_log.addActionListener(new FileChooserListener(tf_ham,this.ham,FileType.HAM));
+		ham_log.addActionListener(new FileChooserListener(tf_ham,GUI.ham,FileType.HAM));
 		Botoes_ficheiros.add(ham_log);
 
 
 		JButton spam_log = new JButton("Procurar Ficheiro de Spam");
-		spam_log.addActionListener(new FileChooserListener(tf_spam,this.spam,FileType.SPAM));
+		spam_log.addActionListener(new FileChooserListener(tf_spam,GUI.spam,FileType.SPAM));
 		Botoes_ficheiros.add(spam_log);
 
 		//1.4. Separador de paineis
@@ -244,8 +285,8 @@ public class GUI {
 		buttons_configuracao_manual.add(btnAvaliarConfiguracao);
 		//começar sem ser editável
 		btnAvaliarConfiguracao.setEnabled(false);
-		btnAvaliarConfiguracao.addActionListener(new ButtonOpListener(Option.AVALIAR));
 		lista_de_botoes.add(btnAvaliarConfiguracao);
+		btnAvaliarConfiguracao.addActionListener(new ButtonOpListener(Option.AVALIAR));
 
 		JButton btnGravarConfigurcaoRulescf_manual = new JButton("           Gravar Configuração          ");
 		buttons_configuracao_manual.add(btnGravarConfigurcaoRulescf_manual);
@@ -425,6 +466,14 @@ public class GUI {
 		return lista_regras_pesos_automatico;
 	}
 
+	//---------------------------------------
+
+	public static Map<String, Double> getMapa() {
+		return mapa;
+	}
+
+	
+	//---------------------------------------
 	// Ativação dos butões inactivos até se escolher o ficheiro de regras
 	public static void ActivateButons() {
 		for (int i = 0; i < lista_de_botoes.size(); i++) {
@@ -432,11 +481,73 @@ public class GUI {
 		}
 	}
 
+	
+	
+	
+	
+	//---------------------------------------
+	
+	public static  JTextField getFp_manual() {
+		return fp_manual;
+	}
+
+	public static JTextField getFn_manual() {
+		return fn_manual;
+	}
+
+	public static JTextField getFp_automatico() {
+		return fp_automatico;
+	}
+
+	public static JTextField getFn_automatico() {
+		return fn_automatico;
+	}
+
+	//---------------------------------------
+	
 	public static JTextField getRules() {
 		return tf_rules;	
 	}
+	public static JTextField getHam() {
+		return tf_ham;
+	}
 
+	public static JTextField getSpam() {
+		return tf_spam;
+	}
+
+	//---------------------------------------
 	public ArrayList<JButton> getLista_de_botoes() {
 		return lista_de_botoes;
 	}
+	
+	//---------------------------------------
+
+	public static File GetRulesFile() {
+		return rules;
+	}
+	public static File GetSpamFile() {
+		return spam;
+	}
+	
+	public static File GetHamFile() {
+		return ham;
+	}
+
+	
+	//---------------------------------------
+	protected static void setRules(File rules) {
+		GUI.rules = rules;
+	}
+
+	protected static void setHam(File ham) {
+		GUI.ham = ham;
+	}
+
+	protected static void setSpam(File spam) {
+		GUI.spam = spam;
+	}
+
+
+
 }

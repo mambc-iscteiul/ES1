@@ -28,6 +28,7 @@ public class AntiSpamFilterAutomaticConfiguration {
     String experimentBaseDirectory = "experimentBaseDirectory";
 
     List<ExperimentProblem<DoubleSolution>> problemList = new ArrayList<>();
+    
     problemList.add(new ExperimentProblem<>(new AntiSpamFilterProblem()));
 
     List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> algorithmList =

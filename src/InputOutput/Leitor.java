@@ -33,8 +33,7 @@ public class Leitor extends Thread{
 				}
 			}
 			while(sc.hasNextLine()) {
-				String linha_lida = sc.nextLine();	
-				String[] linha_dividida = linha_lida.split(" ");
+				String[] linha_dividida = sc.nextLine().split(" ");
 				//criar vetor com a regra na primeira coluna e "0.0" na segunda
 				String[] vetor_lido= {linha_dividida[0],"0.0"};
 				if(linha_dividida.length>1) {
@@ -46,7 +45,7 @@ public class Leitor extends Thread{
 						vetor_lido[1]=linha_dividida[1];
 					}catch(NumberFormatException e){
 						//não conseguindo não sobre põe o valor pois não é aceite	
-						System.out.println("Valor não aceite zerado");
+				
 					}
 					
 					

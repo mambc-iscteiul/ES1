@@ -18,8 +18,8 @@ public class DefTableModel extends DefaultTableModel {
 	public void fireTableCellUpdated(int row, int column) {
 		super.fireTableCellUpdated(row, column);
 		try {
+			@SuppressWarnings("unused")
 			Double a = Double.parseDouble((String) this.getValueAt(row, column));
-			System.out.println(a);
 		}catch(NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,"Valor não aceite, insira somente decimais");
 			this.setValueAt("0.0", row, column);
