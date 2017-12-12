@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import Avaliators.FalseNegativeAvaliator;
 import Avaliators.FalsePositiveAvaliator;
 import InputOutput.Escritor;
 
@@ -43,11 +44,14 @@ public class ButtonOpListener implements ActionListener {
 				}
 				
 				GUI.setHam(new File(GUI.getHam().getText()));
-				FalsePositiveAvaliator avaliator = new FalsePositiveAvaliator(GUI.GetHamFile());
-				avaliator.start();
+				FalsePositiveAvaliator avaliatorPos = new FalsePositiveAvaliator(GUI.GetHamFile());
+				avaliatorPos.start();
+				
+				GUI.setSpam(new File(GUI.getSpam().getText()));
+				FalseNegativeAvaliator avaliatorNeg = new FalseNegativeAvaliator(GUI.GetSpamFile());
+				avaliatorNeg.start();
 				
 				
-				//thread do rui
 			}else {
 				JOptionPane.showMessageDialog(null, "Insira os ficheiros de Spam e de Ham por favor");
 			}
