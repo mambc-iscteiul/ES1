@@ -11,10 +11,7 @@ public class FalsePositiveAvaliator extends Thread {
 
 	private int FalsePositives;
 	private File HamFile;
-
 	private Map<String, Double> mapa;
-
-
 
 	public FalsePositiveAvaliator(File HamFile) {
 		FalsePositives=0;
