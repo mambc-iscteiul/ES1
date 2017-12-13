@@ -26,16 +26,17 @@ public class FalsePositiveAvaliator extends Thread {
 			while(scan.hasNextLine()) {
 				String[] line = scan.nextLine().split("	");		
 				double veredict = calculate(line);
-				if(veredict>5.0)FalsePositives++; 	
+				if(veredict>5.0) {System.out.println("CRLH");FalsePositives++; 	}
 			}
 			GUI.getFp_manual().setText(""+FalsePositives);			
 			scan.close();
+			System.out.println("-------------->"+FalsePositives);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
-
+		
 	}
+
 
 	private double calculate (String [] line) {
 		double counter =0;
@@ -45,7 +46,16 @@ public class FalsePositiveAvaliator extends Thread {
 		}
 		return counter;
 	}
-	
+
+
+	public int getFalsePositives() {
+		return FalsePositives;
+	}
+
+	public Map<String, Double> getMapa() {
+		return mapa;
+	}
+
 }
 
 

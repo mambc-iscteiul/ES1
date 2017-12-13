@@ -23,6 +23,7 @@ public class ButtonOpListener implements ActionListener {
 	}
 
 
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
@@ -37,7 +38,7 @@ public class ButtonOpListener implements ActionListener {
 			break;
 
 		case AVALIAR: 
-
+			
 			if(!GUI.getHam().getText().equals("")&&!GUI.getSpam().getText().equals("")) {
 				for (int i = 0; i < GUI.getLista_regras_pesos_manual().getRowCount(); i++) {
 					GUI.getMapa().put((String) GUI.getLista_regras_pesos_manual().getValueAt(i, 0), Double.parseDouble((String) GUI.getLista_regras_pesos_manual().getValueAt(i, 1)));

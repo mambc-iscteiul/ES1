@@ -25,10 +25,9 @@ class TesteGUI {
 	private GUI gui = new GUI(100, 100);
 	private Leitor leitor = new Leitor("C:/Users/Filipe/Documents/rules.cf");
 	private Escritor escritor;
-	private FileChooserListener fc;
 	JButton tester;
 
-
+	
 
 	@Test
 	void testGUI() {
@@ -45,7 +44,7 @@ class TesteGUI {
 			gui.getLista_de_botoes().get(i).doClick();
 			assertTrue(gui.getLista_de_botoes().get(i).isEnabled());
 		}
-		
+
 		//writer
 		try {
 			escritor= new Escritor("C:/Users/Filipe/Documents/rules.cf");
@@ -55,40 +54,23 @@ class TesteGUI {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-
 	}
 
 
 	@Test
 	void testFileChooser() {
-		JTextField j = new JTextField();
-		File f_rules = new File("C:/Users/Filipe/Documents/rules.cf");
-		File f_spam = new File("C:/Users/Filipe/Documents/ham.cf");
-		File f_ham = new File("C:/Users/Filipe/Documents/spam.cf");
-		FileType ft_rules = FileType.RULES;
-		FileType ft_ham = FileType.HAM;
-		FileType ft_spam = FileType.SPAM;
 
-		fc = new FileChooserListener(j, f_rules, ft_rules);
-		System.out.println(fc.getClass().getPackage());
-		assertTrue(fc.getClass().getPackage().getName().equals("GUI"));
+			//clicar so nos primeiros 3 botões(procurar ficheiros)
+			//desta forma cria o jfilechooser
+		
+		for (int i = 0; i < 3; i++) {
+			gui.getLista_de_botoes().get(i).doClick();
+			System.out.println(gui.getLista_de_botoes().get(i).getText());
+			assertTrue(gui.getLista_de_botoes().get(i).isEnabled());
+		}
+		
 
-		tester = new JButton();
-		tester.addActionListener(fc);
-		tester.doClick();
 
-		fc = new FileChooserListener(j, f_ham, ft_ham);
-
-		tester = new JButton();
-		tester.addActionListener(fc);
-		tester.doClick();
-
-		fc = new FileChooserListener(j, f_spam, ft_spam);
-
-		tester = new JButton();
-		tester.addActionListener(fc);
-		tester.doClick();
 
 		//FALTA ASSERTS
 	}

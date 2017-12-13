@@ -54,7 +54,6 @@ public class GUI {
 	private static ArrayList<JButton> lista_de_botoes;
 
 
-
 	/*
 	 * Listas lógicas para base de representação gráfica, estáticas para serem acedidas livremente pelas tabelas de expansão
 	 */
@@ -204,16 +203,22 @@ public class GUI {
 		JButton rules_cf = new JButton("Procurar Ficheiro de Regras");
 		rules_cf.addActionListener(new FileChooserListener(tf_rules,GUI.rules,FileType.RULES));
 		Botoes_ficheiros.add(rules_cf);
+		//teste
+		lista_de_botoes.add(rules_cf);
 
 
 		JButton ham_log = new JButton("Procurar Ficheiro de Ham");
 		ham_log.addActionListener(new FileChooserListener(tf_ham,GUI.ham,FileType.HAM));
 		Botoes_ficheiros.add(ham_log);
+		//teste
+				lista_de_botoes.add(ham_log);
 
 
 		JButton spam_log = new JButton("Procurar Ficheiro de Spam");
 		spam_log.addActionListener(new FileChooserListener(tf_spam,GUI.spam,FileType.SPAM));
 		Botoes_ficheiros.add(spam_log);
+		//teste
+				lista_de_botoes.add(spam_log);
 
 		//1.4. Separador de paineis
 		JSeparator separator = new JSeparator();

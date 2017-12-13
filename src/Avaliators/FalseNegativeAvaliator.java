@@ -16,6 +16,8 @@ public class FalseNegativeAvaliator extends Thread {
 
 
 
+
+
 	public FalseNegativeAvaliator(File SpamFile) {
 		FalseNegatives=0;
 		this.SpamFile = SpamFile;
@@ -29,9 +31,11 @@ public class FalseNegativeAvaliator extends Thread {
 			while(scan.hasNextLine()) {
 				String[] line = scan.nextLine().split("	");		
 				double veredict = calculate(line);
-				if(veredict<-5.0)FalseNegatives++; 	
+				if(veredict<-5.0) {System.out.println("CRLH");FalseNegatives++;} 	
 			}
-			GUI.getFn_manual().setText(""+FalseNegatives);			
+
+			GUI.getFn_manual().setText(""+FalseNegatives);	
+			System.out.println("-------------->"+FalseNegatives);
 			scan.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -48,7 +52,16 @@ public class FalseNegativeAvaliator extends Thread {
 		}
 		return counter;
 	}
-	
+
+
+	public int getFalseNegatives() {
+		return FalseNegatives;
+	}
+
+	public Map<String, Double> getMapa() {
+		return mapa;
+	}
+
 }
 
 
