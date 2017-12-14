@@ -30,7 +30,6 @@ class TesteAvaliators {
 			assertTrue(gui.getLista_de_botoes().get(i).isEnabled());
 		}
 
-
 		for (int i = 0; i < GUI.getLista_regras_pesos_manual().getRowCount(); i++) {
 			gui.getMapa().put((String) gui.getLista_regras_pesos_manual().getValueAt(i, 0), Double.parseDouble((String) gui.getLista_regras_pesos_manual().getValueAt(i, 1)));
 		}

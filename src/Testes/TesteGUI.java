@@ -1,36 +1,36 @@
 package Testes;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
-import javax.swing.JTextField;
 
 import org.junit.jupiter.api.Test;
 
-import GUI.FileChooserListener;
-import GUI.FileChooserListener.FileType;
 import GUI.GUI;
 import InputOutput.Escritor;
 import InputOutput.Leitor;
+import Launch.Launch;
 
 class TesteGUI {
 
-
+	
+	Launch l = new Launch();
 	private GUI gui = new GUI(100, 100);
 	private Leitor leitor = new Leitor("C:/Users/Filipe/Documents/rules.cf");
 	private Escritor escritor;
 	JButton tester;
 
-	
 
+	
 	@Test
 	void testGUI() {
+		assertNotNull(l);
 		//gui e lista
 		assertNotNull(gui);
 		leitor.run();
@@ -69,10 +69,10 @@ class TesteGUI {
 			assertTrue(gui.getLista_de_botoes().get(i).isEnabled());
 		}
 		
-
-
-
 		//FALTA ASSERTS
 	}
+	
+	
+	// falta teste de butoplistener
 
 }

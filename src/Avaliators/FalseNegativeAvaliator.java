@@ -15,9 +15,6 @@ public class FalseNegativeAvaliator extends Thread {
 	private Map<String, Double> mapa;
 
 
-
-
-
 	public FalseNegativeAvaliator(File SpamFile) {
 		FalseNegatives=0;
 		this.SpamFile = SpamFile;
