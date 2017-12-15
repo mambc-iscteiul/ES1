@@ -5,9 +5,13 @@ import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 public class DefTableModel extends DefaultTableModel {
+	
+	protected enum Options{MANUAL, AUTOMATIC};
+	private Options option;
 
-	public DefTableModel(Object[] arg0, int arg1) {
+	public DefTableModel(Object[] arg0, int arg1, Options option) {
 		super(arg0, arg1);
+		this.option = option;
 	}
 
 	public void addRow(Object[] rowData) {
@@ -17,17 +21,37 @@ public class DefTableModel extends DefaultTableModel {
 	@Override
 	public void fireTableCellUpdated(int row, int column) {
 		super.fireTableCellUpdated(row, column);
-		try {
-			@SuppressWarnings("unused")
-			Double a = Double.parseDouble((String) this.getValueAt(row, column));
-		}catch(NumberFormatException e) {
-			JOptionPane.showMessageDialog(null,"Valor não aceite, insira somente decimais");
-			this.setValueAt("0.0", row, column);
-		}		
+		
+		switch (option) {
+		case MANUAL:
+			try {
+				@SuppressWarnings("unused")
+				Double a = Double.parseDouble((String) this.getValueAt(row, column));
+			}catch(NumberFormatException e) {
+				JOptionPane.showMessageDialog(null,"Valor não aceite, insira somente decimais");
+				this.setValueAt("0.0", row, column);
+			}			
+			
+			break;
+
+		default:
+			break;
+		}
+		
+		
+		
 	}
 
 	@Override
 	public boolean isCellEditable(int r, int c) {
-		return c==1;
+		if(option == Options.MANUAL) {
+			return c==1;
+		}else {
+			return false;
+		}
+		
 	}
+	
+	
+	
 }

@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.security.cert.PKIXRevocationChecker.Option;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 
 import GUI.ButtonOpListener.AutomaticOptions;
 import GUI.ButtonOpListener.ManualOptions;
+import GUI.DefTableModel.Options;
 import GUI.FileChooserListener.FileType;
 import InputOutput.Leitor;
 
@@ -240,7 +242,7 @@ public class GUI {
 		//2.1.1. Construcao da tabela
 
 		String[] columnNames = {"Regras","Pesos"};
-		lista_regras_pesos_manual = new DefTableModel(columnNames,0);
+		lista_regras_pesos_manual = new DefTableModel(columnNames,0, Options.MANUAL);
 
 		JTable tabela_regras_manual = new JTable(lista_regras_pesos_manual);
 		tabela_regras_manual.setGridColor(Color.black);
@@ -370,7 +372,7 @@ public class GUI {
 		//2.1.1. Construcao da tabela
 
 		String[] columnNames = {"Regras","Pesos"};
-		lista_regras_pesos_automatico= new DefTableModel(columnNames,0);
+		lista_regras_pesos_automatico= new DefTableModel(columnNames,0, Options.AUTOMATIC);
 
 
 
