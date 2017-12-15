@@ -25,7 +25,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
-import GUI.ButtonOpListener.Option;
+import GUI.ButtonOpListener.AutomaticOptions;
+import GUI.ButtonOpListener.ManualOptions;
 import GUI.FileChooserListener.FileType;
 import InputOutput.Leitor;
 
@@ -283,7 +284,7 @@ public class GUI {
 		buttons_configuracao_manual.add(btnGerarConfigurcao);
 		//comeaar sem ser editavel
 		btnGerarConfigurcao.setEnabled(false);
-		btnGerarConfigurcao.addActionListener(new ButtonOpListener(Option.GERAR));
+		btnGerarConfigurcao.addActionListener(new ButtonOpListener(ManualOptions.GERAR,null));
 		lista_de_botoes.add(btnGerarConfigurcao);
 
 		JButton btnAvaliarConfiguracao = new JButton("Avaliar Configuracao");
@@ -291,20 +292,20 @@ public class GUI {
 		//comecar sem ser editavel
 		btnAvaliarConfiguracao.setEnabled(false);
 		lista_de_botoes.add(btnAvaliarConfiguracao);
-		btnAvaliarConfiguracao.addActionListener(new ButtonOpListener(Option.AVALIAR));
+		btnAvaliarConfiguracao.addActionListener(new ButtonOpListener(ManualOptions.AVALIAR,null));
 
 		JButton btnGravarConfigurcaoRulescf_manual = new JButton("           Gravar Configuracao          ");
 		buttons_configuracao_manual.add(btnGravarConfigurcaoRulescf_manual);
 		//comecar sem ser editavel
 		btnGravarConfigurcaoRulescf_manual.setEnabled(false);
 		lista_de_botoes.add(btnGravarConfigurcaoRulescf_manual);
-		btnGravarConfigurcaoRulescf_manual.addActionListener(new ButtonOpListener(Option.GRAVAR));
+		btnGravarConfigurcaoRulescf_manual.addActionListener(new ButtonOpListener(ManualOptions.GRAVAR,null));
 
 		JButton btnResetValores = new JButton("Inicializar Configuracao");
 		buttons_configuracao_manual.add(btnResetValores);
 		btnResetValores.setEnabled(false);
 		lista_de_botoes.add(btnResetValores);
-		btnResetValores.addActionListener(new ButtonOpListener(Option.INICIALIZAR));
+		btnResetValores.addActionListener(new ButtonOpListener(ManualOptions.INICIALIZAR,null));
 
 		//2.3 Botao de expansao
 		JButton expansao_manual = new JButton("Expandir");
@@ -330,16 +331,16 @@ public class GUI {
 				 * Ou seja, estes nao podem existir em "2" lados ao emsmo tempo. 
 				 */
 				JButton btnGerarConfigurcao_expandido = new JButton("Gerar Configuracao");
-				btnGerarConfigurcao_expandido.addActionListener(new ButtonOpListener(Option.GERAR));
+				btnGerarConfigurcao_expandido.addActionListener(new ButtonOpListener(ManualOptions.GERAR,null));
 				painel_botoes_expandido.add(btnGerarConfigurcao_expandido);
 				JButton btnAvaliarConfiguracao_expandido = new JButton("Avaliar Configuracao");
-				btnAvaliarConfiguracao_expandido.addActionListener(new ButtonOpListener(Option.AVALIAR));
+				btnAvaliarConfiguracao_expandido.addActionListener(new ButtonOpListener(ManualOptions.AVALIAR,null));
 				painel_botoes_expandido.add(btnAvaliarConfiguracao_expandido);
 				JButton btnGravarConfigurcaoRulescf_manual_expandido = new JButton("Gravar Configuracao");
-				btnGravarConfigurcaoRulescf_manual_expandido.addActionListener(new ButtonOpListener(Option.GRAVAR));
+				btnGravarConfigurcaoRulescf_manual_expandido.addActionListener(new ButtonOpListener(ManualOptions.GRAVAR,null));
 				painel_botoes_expandido.add(btnGravarConfigurcaoRulescf_manual_expandido);
 				JButton btnResetValores_expandido = new JButton("Inicializar Configuracao");
-				btnResetValores_expandido.addActionListener(new ButtonOpListener(Option.INICIALIZAR));
+				btnResetValores_expandido.addActionListener(new ButtonOpListener(ManualOptions.INICIALIZAR,null));
 				painel_botoes_expandido.add(btnResetValores_expandido);
 
 				frame_expandida.add(painel_botoes_expandido, BorderLayout.SOUTH);
@@ -393,9 +394,21 @@ public class GUI {
 				JFrame frame_expandida = new JFrame("Tabela de configuracao Automatica");
 				frame_expandida.setLayout(new BorderLayout());
 				frame_expandida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				JPanel painel_botoes_expandido= new JPanel(new GridLayout(1,2));
+				
+				JButton btnGerarConfigurcaoAutomtica_expandido = new JButton("Gerar Conf. Automatica c/ JMetal");
+				btnGerarConfigurcaoAutomtica_expandido.addActionListener(new ButtonOpListener(null,AutomaticOptions.GERAR_AUTO));
+				painel_botoes_expandido.add(btnGerarConfigurcaoAutomtica_expandido);
+				
+				JButton btnGravarConfigurcaoAutomtica_rulescf_expandido = new JButton("Gravar Conf. Automatica");
+				btnGerarConfigurcaoAutomtica_expandido.addActionListener(new ButtonOpListener(null,AutomaticOptions.GRAVAR_AUTO));
+				painel_botoes_expandido.add(btnGravarConfigurcaoAutomtica_rulescf_expandido);
+				
+				
 				//Apresentacao da lista na nova janela
 				JScrollPane scrool_tabela_expandida= new JScrollPane(new JTable(lista_regras_pesos_automatico));
 				frame_expandida.add(scrool_tabela_expandida,BorderLayout.CENTER);
+				frame_expandida.add(painel_botoes_expandido,BorderLayout.SOUTH);
 				frame_expandida.pack();
 				frame_expandida.setSize(1000,700);
 				frame_expandida.setVisible(true);
@@ -441,6 +454,7 @@ public class GUI {
 		JButton btnGerarConfigurcaoAutomtica = new JButton("Gerar Conf. Automatica c/ JMetal");
 		//comecar sem ser editavel
 		btnGerarConfigurcaoAutomtica.setEnabled(false);
+		btnGerarConfigurcaoAutomtica.addActionListener(new ButtonOpListener(null, AutomaticOptions.GERAR_AUTO));
 		lista_de_botoes.add(btnGerarConfigurcaoAutomtica);
 		btnGerarConfigurcaoAutomtica.setFont(new Font("", Font.BOLD, 11));
 		buttons_configuracao_automatica.add(btnGerarConfigurcaoAutomtica);
@@ -448,6 +462,7 @@ public class GUI {
 		JButton btnGravarConfigurcaoRulescf_automatico = new JButton("Gravar Configuracao");
 		//comecar sem ser editavel
 		btnGravarConfigurcaoRulescf_automatico.setEnabled(false);
+		btnGravarConfigurcaoRulescf_automatico.addActionListener(new ButtonOpListener(null, AutomaticOptions.GRAVAR_AUTO));
 		lista_de_botoes.add(btnGravarConfigurcaoRulescf_automatico);
 		buttons_configuracao_automatica.add(btnGravarConfigurcaoRulescf_automatico);
 
