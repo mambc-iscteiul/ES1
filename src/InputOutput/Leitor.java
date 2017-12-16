@@ -45,14 +45,11 @@ public class Leitor extends Thread{
 						vetor_lido[1]=linha_dividida[1];
 					}catch(NumberFormatException e){
 						//não conseguindo não sobre põe o valor pois não é aceite	
-				
-					}
-					
-					
+					}					
 				}
 				GUI.getLista_regras_pesos_manual().addRow(vetor_lido);
 				//Sem certeza, teste ONLY
-				GUI.getLista_regras_pesos_automatico().addRow(vetor_lido);
+				GUI.getLista_regras_pesos_automatico().addRow(new String[]{vetor_lido[0],"0.0"});
 			}			
 			GUI.ActivateButons();
 			sc.close();

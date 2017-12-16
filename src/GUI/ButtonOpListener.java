@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import Avaliators.FalseNegativeAvaliator;
 import Avaliators.FalsePositiveAvaliator;
 import InputOutput.Escritor;
+import InputOutput.LeitorSpam;
 
 public class ButtonOpListener implements ActionListener {
 	//Listener dedicado aos butões, generalista,enumerado serve para decidir a funcionalidade
@@ -87,8 +88,25 @@ public class ButtonOpListener implements ActionListener {
 				System.out.println("GERAR AUTOMÁTICO");
 				if(!GUI.getHam().getText().equals("")&&!GUI.getSpam().getText().equals("")) {
 
+					//Criar Mapa de Rules a 0.0 (Aproveitar as lista manual)
+
+
+					//criar a estrutura de dados de HAM
+
+					GUI.setHam(new File(GUI.getHam().getText()));
+					
+
+					//	criar a estrutura de dados de SPAM
+
+					GUI.setSpam(new File(GUI.getSpam().getText()));
+					LeitorSpam leitorSpam = new LeitorSpam(GUI.GetSpamFile()); 
+					leitorSpam.start();
+
+
 
 					//iniciar antispamautom
+
+
 				}else {
 					JOptionPane.showMessageDialog(null, "Insira os ficheiros de Spam e de Ham por favor");
 				}
@@ -110,8 +128,6 @@ public class ButtonOpListener implements ActionListener {
 
 			default:
 				break;
-
-
 			}
 		}
 

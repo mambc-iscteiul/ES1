@@ -37,9 +37,6 @@ public class DefTableModel extends DefaultTableModel {
 		default:
 			break;
 		}
-		
-		
-		
 	}
 
 	@Override

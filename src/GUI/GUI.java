@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.security.cert.PKIXRevocationChecker.Option;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -64,12 +63,15 @@ public class GUI {
 	private static DefTableModel lista_regras_pesos_manual;
 	private static DefTableModel lista_regras_pesos_automatico;
 
-	private static Map<String,Double> mapa;
+	private static Map<String,Double> mapa_rules;
+	private static Map<Integer, ArrayList<String>> mapa_Spam;
+
 
 
 
 
 	public GUI(int x, int y) {
+		long r = System.currentTimeMillis();
 
 		frame = new JFrame("Configuracao do servico de filtragem anti-spam");
 		//frame.setIconImage(Toolkit.getDefaultToolkit().getImage("/ES1-2017/Images/2814.png"));
@@ -77,20 +79,24 @@ public class GUI {
 		frame.setLayout(new GridLayout(3, 0));
 		
 		lista_de_botoes	= new ArrayList<JButton>();
-		mapa = new HashMap<String, Double>();
-		
+		mapa_rules = new HashMap<String, Double>();
+		mapa_Spam= new HashMap<Integer,ArrayList<String>>();
+	
 		addFrameContent();
 		frame.pack();
 		frame.setSize(x, y);
 		frame.setVisible(true);
+		long g = System.currentTimeMillis();
+		System.out.println(g-r);
 
 	}
 
 	private void addFrameContent() {
-
+	
 		addFirstPanel();
 		addSecondPanel();
 		addThirdPanel();
+	
 	}
 
 	private void addFirstPanel() {
@@ -491,7 +497,11 @@ public class GUI {
 	//---------------------------------------
 
 	public static Map<String, Double> getMapa() {
-		return mapa;
+		return mapa_rules;
+	}
+
+	public static Map<Integer, ArrayList<String>> getMapa_Spam() {
+		return mapa_Spam;
 	}
 
 	

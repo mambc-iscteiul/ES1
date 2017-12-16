@@ -8,14 +8,12 @@ import org.uma.jmetal.solution.DoubleSolution;
 
 
 public class AntiSpamFilterProblem extends AbstractDoubleProblem {
+	
+	public AntiSpamFilterProblem() {
+		this(10);
+	}
 
 	
-	//construtor por defeito
-	  public AntiSpamFilterProblem() {
-	    // 10 variables (anti-spam filter rules) by default 
-	    this(10);
-	  }
-
 	  public AntiSpamFilterProblem(Integer numberOfVariables) {
 	    //numero de regras
 		setNumberOfVariables(numberOfVariables);
@@ -64,6 +62,8 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	    for (int var = 0; var < solution.getNumberOfVariables(); var++) {
 	    	fx[1] += Math.abs(x[1]); // Example for testing
 	    }
+	    
+	   
 
 	    solution.setObjective(0, fx[0]);
 	    solution.setObjective(1, fx[1]);
