@@ -65,7 +65,7 @@ public class GUI {
 
 	private static Map<String,Double> mapa_rules;
 	private static Map<Integer, ArrayList<String>> mapa_Spam;
-
+	private static Map<Integer, ArrayList<String>> hamMap;
 
 
 
@@ -81,7 +81,8 @@ public class GUI {
 		lista_de_botoes	= new ArrayList<JButton>();
 		mapa_rules = new HashMap<String, Double>();
 		mapa_Spam= new HashMap<Integer,ArrayList<String>>();
-	
+		hamMap = new HashMap<Integer, ArrayList<String>>();
+		
 		addFrameContent();
 		frame.pack();
 		frame.setSize(x, y);
@@ -503,6 +504,12 @@ public class GUI {
 	public static Map<Integer, ArrayList<String>> getMapa_Spam() {
 		return mapa_Spam;
 	}
+	
+	public static Map<Integer, ArrayList<String>> getHamMap(){
+		return hamMap;
+	}
+	
+	
 
 	
 	//---------------------------------------
