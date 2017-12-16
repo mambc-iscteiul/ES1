@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.security.cert.PKIXRevocationChecker.Option;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,7 +64,7 @@ public class GUI {
 	private static DefTableModel lista_regras_pesos_automatico;
 
 	private static Map<String,Double> mapa;
-
+	private static Map<Integer, ArrayList<String>> hamMap;
 
 
 
@@ -78,6 +77,7 @@ public class GUI {
 		
 		lista_de_botoes	= new ArrayList<JButton>();
 		mapa = new HashMap<String, Double>();
+		hamMap = new HashMap<Integer, ArrayList<String>>();
 		
 		addFrameContent();
 		frame.pack();
@@ -493,6 +493,12 @@ public class GUI {
 	public static Map<String, Double> getMapa() {
 		return mapa;
 	}
+	
+	public static Map<Integer, ArrayList<String>> getHamMap(){
+		return hamMap;
+	}
+	
+	
 
 	
 	//---------------------------------------
