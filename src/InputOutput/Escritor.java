@@ -1,21 +1,25 @@
 package InputOutput;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import GUI.DefTableModel;
 import GUI.GUI;
 
 public class Escritor extends Thread{
 
 	private BufferedWriter writer;
 	private FileWriter fileWriter;
+	private DefTableModel model;
 
 
 
-	public Escritor(String path) throws IOException {
-		fileWriter= new FileWriter(path);
+	public Escritor(File file,DefTableModel model) throws IOException {
+		fileWriter= new FileWriter(file);
 		writer= new BufferedWriter(fileWriter);
+		this.model=model;
 	}
 
 
@@ -25,7 +29,7 @@ public class Escritor extends Thread{
 		try {
 			writer.flush();
 			for (int i = 0; i < GUI.getLista_regras_pesos_manual().getRowCount(); i++) {
-				writer.write(GUI.getLista_regras_pesos_manual().getValueAt(i, 0)+" "+GUI.getLista_regras_pesos_manual().getValueAt(i, 1)+"\n");
+				writer.write(model.getValueAt(i, 0)+" "+model.getValueAt(i, 1)+"\n");
 			}
 			writer.close();
 		} catch (IOException e) {

@@ -1,11 +1,11 @@
 package Testes;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -47,7 +47,8 @@ class TesteGUI {
 
 		//writer
 		try {
-			escritor= new Escritor("C:/Users/Filipe/Documents/rules.cf");
+			GUI.setRules(new File("C:/Users/Filipe/Documents/rules.cf"));
+			escritor= new Escritor(GUI.GetRulesFile(),GUI.getLista_regras_pesos_manual());
 			escritor.start();
 			assertNotNull(escritor.getWriter());
 			assertNotNull(escritor.getFileWriter());

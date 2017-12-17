@@ -7,12 +7,12 @@ import java.util.Scanner;
 
 import GUI.GUI;
 
-public class LeitorSpam extends Thread {
+public class SpamReader extends Thread {
 
 	private File spam_file;
-	private int iterator;
+	private int keyValue;
 
-	public LeitorSpam(File SpamFile) {
+	public SpamReader(File SpamFile) {
 		spam_file= SpamFile;
 
 	}
@@ -20,28 +20,16 @@ public class LeitorSpam extends Thread {
 	public void run() {
 		try {
 			Scanner scan = new Scanner(spam_file);
-			iterator=0;
-			
+			keyValue=0;
 			while(scan.hasNextLine()) {
-				
 				String [] linha_lida = scan.nextLine().split("	");
-
 				ArrayList<String> intermidiate = new ArrayList<>(); 
 				for (int i = 1; i < linha_lida.length; i++) {
 					intermidiate.add(linha_lida[i]);
 				}
-				GUI.getMapa_Spam().put(iterator, intermidiate);
-				iterator++;
+				GUI.getMapa_Spam().put(keyValue, intermidiate);
+				keyValue++;
 			}	
-			
-
-			//			for (int i = 0; i <GUI.getMapa_Spam().size(); i++) {
-			//				ArrayList<String> m =GUI.getMapa_Spam().get(i);			
-			//				for (int j = 0; j < m.size(); j++) {
-			//					System.out.print(m.get(j)+" ");
-			//					if(j==m.size()-1) System.out.println(" ");
-			//				}
-			//			}
 			scan.close();
 		} catch (FileNotFoundException e) {
 		}

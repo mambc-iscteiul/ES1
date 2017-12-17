@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -11,7 +12,8 @@ import javax.swing.JOptionPane;
 import Avaliators.FalseNegativeAvaliator;
 import Avaliators.FalsePositiveAvaliator;
 import InputOutput.Escritor;
-import InputOutput.LeitorSpam;
+import InputOutput.HamReader;
+import InputOutput.SpamReader;
 
 public class ButtonOpListener implements ActionListener {
 	//Listener dedicado aos butões, generalista,enumerado serve para decidir a funcionalidade
@@ -65,7 +67,8 @@ public class ButtonOpListener implements ActionListener {
 			case GRAVAR	:
 				Escritor Writer = null;
 				try {
-					Writer = new Escritor(GUI.getRules().getText());
+					GUI.setRules(new File(GUI.getRules().getText()));
+					Writer = new Escritor(GUI.GetRulesFile(),GUI.getLista_regras_pesos_manual());
 					Writer.start();
 				} catch (IOException e1) {
 					e1.printStackTrace();
@@ -94,13 +97,14 @@ public class ButtonOpListener implements ActionListener {
 					//criar a estrutura de dados de HAM
 
 					GUI.setHam(new File(GUI.getHam().getText()));
-					
+					HamReader hamReader = new HamReader (GUI.GetHamFile());
+					hamReader.start();
 
 					//	criar a estrutura de dados de SPAM
 
 					GUI.setSpam(new File(GUI.getSpam().getText()));
-					LeitorSpam leitorSpam = new LeitorSpam(GUI.GetSpamFile()); 
-					leitorSpam.start();
+					SpamReader spamReader = new SpamReader(GUI.GetSpamFile()); 
+					spamReader.start();
 
 
 
@@ -116,14 +120,16 @@ public class ButtonOpListener implements ActionListener {
 
 				System.out.println("GRAVAR AUTOMÁTICO");
 				//  E SE A LISTA AINDA NÃO ESTIVER LÁ NAO FAZ NADA TB
-				if(!GUI.getHam().getText().equals("")&&!GUI.getSpam().getText().equals("")) {
 
-
-					//gravar  a lista no ficheirorules
-
-				}else {
-					JOptionPane.showMessageDialog(null, "Insira os ficheiros de Spam e de Ham por favor");
+				try {
+					GUI.setRules(new File(GUI.getRules().getText()));
+					Escritor writer = new Escritor(GUI.GetRulesFile(), GUI.getLista_regras_pesos_automatico());
+					writer.start();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
+
+
 				break;
 
 			default:
