@@ -28,7 +28,7 @@ public class FalseNegativeAvaliator extends Thread {
 			while(scan.hasNextLine()) {
 				String[] line = scan.nextLine().split("	");		
 				double veredict = calculate(line);
-				if(veredict<-5.0) {System.out.println("CRLH");FalseNegatives++;} 	
+				if(veredict<-5.0)FalseNegatives++;
 			}
 
 			GUI.getFn_manual().setText(""+FalseNegatives);	

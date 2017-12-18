@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import GUI.GUI;
 import InputOutput.Escritor;
-import InputOutput.Leitor;
+import InputOutput.LeitorRules;
 import Launch.Launch;
 
 class TesteGUI {
@@ -22,7 +22,7 @@ class TesteGUI {
 	
 	Launch l = new Launch();
 	private GUI gui = new GUI(100, 100);
-	private Leitor leitor = new Leitor("C:/Users/Filipe/Documents/rules.cf");
+	private LeitorRules leitor = new LeitorRules("C:/Users/Filipe/Documents/rules.cf");
 	private Escritor escritor;
 	JButton tester;
 

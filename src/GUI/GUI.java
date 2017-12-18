@@ -28,7 +28,7 @@ import GUI.ButtonOpListener.AutomaticOptions;
 import GUI.ButtonOpListener.ManualOptions;
 import GUI.DefTableModel.Options;
 import GUI.FileChooserListener.FileType;
-import InputOutput.Leitor;
+import InputOutput.LeitorRules;
 
 public class GUI {
 
@@ -70,6 +70,7 @@ public class GUI {
 
 
 	public GUI(int x, int y) {
+
 		long r = System.currentTimeMillis();
 
 		frame = new JFrame("Configuracao do servico de filtragem anti-spam");
@@ -145,7 +146,7 @@ public class GUI {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				Leitor leitor_rules = new Leitor(tf_rules.getText());
+				LeitorRules leitor_rules = new LeitorRules(tf_rules.getText());
 				leitor_rules.start();
 			}
 			@Override

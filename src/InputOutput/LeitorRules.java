@@ -8,11 +8,11 @@ import java.util.Scanner;
 import GUI.GUI;
 
 
-public class Leitor extends Thread{
+public class LeitorRules extends Thread{
 
 	private String namefile;
 
-	public Leitor(String namefile) {
+	public LeitorRules(String namefile) {
 		this.namefile=namefile;
 	}
 

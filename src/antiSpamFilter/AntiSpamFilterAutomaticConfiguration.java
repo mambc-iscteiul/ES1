@@ -22,14 +22,26 @@ import org.uma.jmetal.util.experiment.util.ExperimentAlgorithm;
 import org.uma.jmetal.util.experiment.util.ExperimentProblem;
 
 public class AntiSpamFilterAutomaticConfiguration {
-	private static final int INDEPENDENT_RUNS = 5 ;
+	private static final int INDEPENDENT_RUNS = 5 ; //estava 5
+	private static AntiSpamFilterProblem problem;
+	private static int maxEvaluations;
+
+	public AntiSpamFilterAutomaticConfiguration(AntiSpamFilterProblem antiSpamProblem, int maxEvaluations) {
+		problem= antiSpamProblem;
+		AntiSpamFilterAutomaticConfiguration.maxEvaluations=maxEvaluations;
+		try {
+			main(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) throws IOException {
 		String experimentBaseDirectory = "experimentBaseDirectory";
 
 		List<ExperimentProblem<DoubleSolution>> problemList = new ArrayList<>();
 
-		problemList.add(new ExperimentProblem<>(new AntiSpamFilterProblem()));
+		problemList.add(new ExperimentProblem<>(problem));
 
 		List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> algorithmList =
 				configureAlgorithmList(problemList);
@@ -64,8 +76,8 @@ public class AntiSpamFilterAutomaticConfiguration {
 					problemList.get(i).getProblem(),
 					new SBXCrossover(1.0, 5),
 					new PolynomialMutation(1.0 / problemList.get(i).getProblem().getNumberOfVariables(), 10.0))
-					.setMaxEvaluations(2500) //alterei estava 25000
-					.setPopulationSize(100)
+					.setMaxEvaluations(maxEvaluations)
+					.setPopulationSize(100) 
 					.build();
 			algorithms.add(new ExperimentAlgorithm<>(algorithm, "NSGAII", problemList.get(i).getTag()));
 		}

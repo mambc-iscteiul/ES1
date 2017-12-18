@@ -3,17 +3,23 @@ package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.Writer;
+import java.nio.channels.ShutdownChannelGroupException;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
+
+import org.uma.jmetal.util.JMetalException;
 
 import Avaliators.FalseNegativeAvaliator;
 import Avaliators.FalsePositiveAvaliator;
 import InputOutput.Escritor;
 import InputOutput.HamReader;
+import InputOutput.LeitorExperimental;
 import InputOutput.SpamReader;
+import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
+import antiSpamFilter.AntiSpamFilterProblem;
 
 public class ButtonOpListener implements ActionListener {
 	//Listener dedicado aos butões, generalista,enumerado serve para decidir a funcionalidade
@@ -50,6 +56,10 @@ public class ButtonOpListener implements ActionListener {
 					for (int i = 0; i < GUI.getLista_regras_pesos_manual().getRowCount(); i++) {
 						GUI.getMapa().put((String) GUI.getLista_regras_pesos_manual().getValueAt(i, 0), Double.parseDouble((String) GUI.getLista_regras_pesos_manual().getValueAt(i, 1)));
 					}
+					//					for (String key : GUI.getMapa().keySet()) {
+					//						   System.out.println("------------------------------------------------");
+					//						   System.out.println("key: " + key + " value: " + GUI.getMapa().get(key));
+					//						}
 
 					GUI.setHam(new File(GUI.getHam().getText()));
 					FalsePositiveAvaliator avaliatorPos = new FalsePositiveAvaliator(GUI.GetHamFile());
@@ -88,11 +98,13 @@ public class ButtonOpListener implements ActionListener {
 		}else {
 			switch(op_aut) {
 			case GERAR_AUTO: 
-				System.out.println("GERAR AUTOMÁTICO");
 				if(!GUI.getHam().getText().equals("")&&!GUI.getSpam().getText().equals("")) {
 
 					//Criar Mapa de Rules a 0.0 (Aproveitar as lista manual)
+					for (int i = 0; i < GUI.getLista_regras_pesos_automatico().getRowCount(); i++) {
+						GUI.getMapa().put((String) GUI.getLista_regras_pesos_automatico().getValueAt(i, 0), 0.0);
 
+					}
 
 					//criar a estrutura de dados de HAM
 
@@ -106,10 +118,29 @@ public class ButtonOpListener implements ActionListener {
 					SpamReader spamReader = new SpamReader(GUI.GetSpamFile()); 
 					spamReader.start();
 
+					boolean done=false;
+					int maxEvaluations=0;
+					do {		
+						try {
+							String str=JOptionPane.showInputDialog("Quanto maior o numero de avaliações mais lento será o algoritmo!\n Qual o máximo de avaliações que deseja? (máximo recomendado 450)");
+							maxEvaluations = Integer.parseInt(str);
+							done=true;
+						}catch(NumberFormatException e) {
+							JOptionPane.showMessageDialog(null,"Por favor, insira valores numéricos válidos");
+						}
+					} while (!done);
 
+					AntiSpamFilterProblem antiSpamProblem = new AntiSpamFilterProblem(GUI.getMapa(),GUI.getMapa_Spam(),GUI.getHamMap());
 
-					//iniciar antispamautom
-
+					try {
+						@SuppressWarnings("unused")
+						AntiSpamFilterAutomaticConfiguration l = new AntiSpamFilterAutomaticConfiguration(antiSpamProblem,maxEvaluations);
+					}catch(JMetalException e) {
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(null, "O algoritmo encontrou a otimização máxima!");
+					}
+					LeitorExperimental le = new LeitorExperimental();
+					le.start();
 
 				}else {
 					JOptionPane.showMessageDialog(null, "Insira os ficheiros de Spam e de Ham por favor");
@@ -117,10 +148,6 @@ public class ButtonOpListener implements ActionListener {
 				break;
 
 			case GRAVAR_AUTO:
-
-				System.out.println("GRAVAR AUTOMÁTICO");
-				//  E SE A LISTA AINDA NÃO ESTIVER LÁ NAO FAZ NADA TB
-
 				try {
 					GUI.setRules(new File(GUI.getRules().getText()));
 					Escritor writer = new Escritor(GUI.GetRulesFile(), GUI.getLista_regras_pesos_automatico());
@@ -128,14 +155,10 @@ public class ButtonOpListener implements ActionListener {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
-
 				break;
-
 			default:
 				break;
 			}
 		}
-
 	}
 }
