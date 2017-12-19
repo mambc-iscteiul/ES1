@@ -9,51 +9,51 @@ import GUI.GUI;
 
 public class FalsePositiveAvaliator extends Thread {
 
-	private int FalsePositives;
-	private File HamFile;
-	private Map<String, Double> mapa;
+	private int falsePositivesCount;
+	private File hamFile;
+	private Map<String, Double> rulesMap;
 
-	public FalsePositiveAvaliator(File HamFile) {
-		FalsePositives=0;
-		this.HamFile = HamFile;
-		mapa = GUI.getMapa();
+	public FalsePositiveAvaliator(File hamFile) {
+		falsePositivesCount = 0;
+		this.hamFile = hamFile;
+		rulesMap = GUI.getRulesMap();
 	}
 
 	@Override
 	public void run() {
 		try {
-			Scanner scan = new Scanner(HamFile);
-			while(scan.hasNextLine()) {
-				String[] line = scan.nextLine().split("	");		
+			Scanner scanner = new Scanner(hamFile);
+			while(scanner.hasNextLine()) {
+				String[] line = scanner.nextLine().split("	");		
 				double veredict = calculate(line);
-				if(veredict>5.0)FalsePositives++; 	
+				if(veredict>5.0)falsePositivesCount++; 	
 			}
-			GUI.getFp_manual().setText(""+FalsePositives);			
-			scan.close();
-			System.out.println("-------------->"+FalsePositives);
+			GUI.getTextFieldManualFalsePositive().setText(""+falsePositivesCount);			
+			scanner.close();
+			System.out.println("-------------->"+falsePositivesCount);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 
 	private double calculate (String [] line) {
-		double counter =0;
+		double counter = 0;
 		for (int i = 1; i < line.length; i++) {
-			if(mapa.get(line[i])!=null)
-				counter += mapa.get(line[i]);				
+			if(rulesMap.get(line[i])!=null)
+				counter += rulesMap.get(line[i]);				
 		}
 		return counter;
 	}
 
 
-	public int getFalsePositives() {
-		return FalsePositives;
+	public int getFalsePositivesCount() {
+		return falsePositivesCount;
 	}
 
-	public Map<String, Double> getMapa() {
-		return mapa;
+	public Map<String, Double> getRulesMap() {
+		return rulesMap;
 	}
 
 }

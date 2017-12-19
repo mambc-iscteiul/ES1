@@ -2,17 +2,16 @@ package InputOutput;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Iterator;
 import java.util.Scanner;
 
 import GUI.GUI;
 
 
-public class LeitorRules extends Thread{
+public class RulesReader extends Thread{
 
 	private String namefile;
 
-	public LeitorRules(String namefile) {
+	public RulesReader(String namefile) {
 		this.namefile=namefile;
 	}
 
@@ -20,39 +19,39 @@ public class LeitorRules extends Thread{
 	public void run() {
 		try {
 
-			Scanner sc = new Scanner(new File(namefile));
-			if(GUI.getLista_regras_pesos_manual().getRowCount()>0) {
+			Scanner scanner = new Scanner(new File(namefile));
+			if(GUI.getManualRulesWeightList().getRowCount()>0) {
 				//se a lista já tiver valores, apagá-los um a um e adicionar novos
-				int number_of_lines =GUI.getLista_regras_pesos_manual().getRowCount();
-				for (int i = 0; i < number_of_lines; i++) {
+				int numberOfLines =GUI.getManualRulesWeightList().getRowCount();
+				for (int i = 0; i < numberOfLines; i++) {
 					//como o removeRow provoca um ajustamento de numeração da lista
 					//tem de se remover a primeira posição o numero de vezes igual à 
 					//dimensão original da lista
-					GUI.getLista_regras_pesos_manual().removeRow(0);
-					GUI.getLista_regras_pesos_automatico().removeRow(0);
+					GUI.getManualRulesWeightList().removeRow(0);
+					GUI.getAutomaticRulesWeightList().removeRow(0);
 				}
 			}
-			while(sc.hasNextLine()) {
-				String[] linha_dividida = sc.nextLine().split(" ");
+			while(scanner.hasNextLine()) {
+				String[] splittedLine = scanner.nextLine().split(" ");
 				//criar vetor com a regra na primeira coluna e "0.0" na segunda
-				String[] vetor_lido= {linha_dividida[0],"0.0"};
-				if(linha_dividida.length>1) {
+				String[] readedLine= {splittedLine[0],"0.0"};
+				if(splittedLine.length>1) {
 					//caso já exista um valor gravado sobrepõe
 					try {
 						//tenta converter a string lida em double
 						@SuppressWarnings("unused")
-						Double a = Double.parseDouble((String)linha_dividida[1]);
-						vetor_lido[1]=linha_dividida[1];
+						Double a = Double.parseDouble((String)splittedLine[1]);
+						readedLine[1]=splittedLine[1];
 					}catch(NumberFormatException e){
 						//não conseguindo não sobre põe o valor pois não é aceite	
 					}					
 				}
-				GUI.getLista_regras_pesos_manual().addRow(vetor_lido);
+				GUI.getManualRulesWeightList().addRow(readedLine);
 				//Sem certeza, teste ONLY
-				GUI.getLista_regras_pesos_automatico().addRow(new String[]{vetor_lido[0],"0.0"});
+				GUI.getAutomaticRulesWeightList().addRow(new String[]{readedLine[0],"0.0"});
 			}			
 			GUI.ActivateButons();
-			sc.close();
+			scanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

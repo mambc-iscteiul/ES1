@@ -9,28 +9,28 @@ import GUI.GUI;
 
 public class SpamReader extends Thread {
 
-	private File spam_file;
+	private File spamFile;
 	private int keyValue;
 
-	public SpamReader(File SpamFile) {
-		spam_file= SpamFile;
+	public SpamReader(File spamfile) {
+		spamFile= spamfile;
 
 	}
 	@Override
 	public void run() {
 		try {
-			Scanner scan = new Scanner(spam_file);
-			keyValue=0;
-			while(scan.hasNextLine()) {
-				String [] linha_lida = scan.nextLine().split("	");
+			Scanner scanner = new Scanner(spamFile);
+			keyValue = 0;
+			while(scanner.hasNextLine()) {
+				String [] readedLine = scanner.nextLine().split("	");
 				ArrayList<String> intermidiate = new ArrayList<>(); 
-				for (int i = 1; i < linha_lida.length; i++) {
-					intermidiate.add(linha_lida[i]);
+				for (int i = 1; i < readedLine.length; i++) {
+					intermidiate.add(readedLine[i]);
 				}
-				GUI.getMapa_Spam().put(keyValue, intermidiate);
+				GUI.getSpamMap().put(keyValue, intermidiate);
 				keyValue++;
 			}	
-			scan.close();
+			scanner.close();
 		} catch (FileNotFoundException e) {
 		}
 	}

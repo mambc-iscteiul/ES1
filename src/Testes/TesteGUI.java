@@ -13,45 +13,45 @@ import javax.swing.JButton;
 import org.junit.jupiter.api.Test;
 
 import GUI.GUI;
-import InputOutput.Escritor;
-import InputOutput.LeitorRules;
+import InputOutput.Writer;
+import InputOutput.RulesReader;
 import Launch.Launch;
 
 class TesteGUI {
 
 	
-	Launch l = new Launch();
+	Launch launch = new Launch();
 	private GUI gui = new GUI(100, 100);
-	private LeitorRules leitor = new LeitorRules("C:/Users/Filipe/Documents/rules.cf");
-	private Escritor escritor;
+	private RulesReader rulesReader = new RulesReader("C:/Users/Filipe/Documents/rules.cf");
+	private Writer writer;
 	JButton tester;
 
 
 	
 	@Test
 	void testGUI() {
-		assertNotNull(l);
+		assertNotNull(launch);
 		//gui e lista
 		assertNotNull(gui);
-		leitor.run();
-		assertNotNull(GUI.getLista_regras_pesos_manual());
-		assertEquals(335, GUI.getLista_regras_pesos_manual().getRowCount());
-		assertFalse(GUI.getLista_regras_pesos_manual().isCellEditable(0, 0));
+		rulesReader.run();
+		assertNotNull(GUI.getManualRulesWeightList());
+		assertEquals(335, GUI.getManualRulesWeightList().getRowCount());
+		assertFalse(GUI.getManualRulesWeightList().isCellEditable(0, 0));
 
 		//botoes
 		GUI.ActivateButons();	
-		for (int i = 0; i < gui.getLista_de_botoes().size(); i++) {
-			gui.getLista_de_botoes().get(i).doClick();
-			assertTrue(gui.getLista_de_botoes().get(i).isEnabled());
+		for (int i = 0; i < gui.getButtonList().size(); i++) {
+			gui.getButtonList().get(i).doClick();
+			assertTrue(gui.getButtonList().get(i).isEnabled());
 		}
 
 		//writer
 		try {
-			GUI.setRules(new File("C:/Users/Filipe/Documents/rules.cf"));
-			escritor= new Escritor(GUI.GetRulesFile(),GUI.getLista_regras_pesos_manual());
-			escritor.start();
-			assertNotNull(escritor.getWriter());
-			assertNotNull(escritor.getFileWriter());
+			GUI.setRulesFile(new File("C:/Users/Filipe/Documents/rules.cf"));
+			writer = new Writer(GUI.getRulesFile(),GUI.getManualRulesWeightList());
+			writer.start();
+			assertNotNull(writer.getWriter());
+			assertNotNull(writer.getFileWriter());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -65,9 +65,9 @@ class TesteGUI {
 			//desta forma cria o jfilechooser
 		
 		for (int i = 0; i < 3; i++) {
-			gui.getLista_de_botoes().get(i).doClick();
-			System.out.println(gui.getLista_de_botoes().get(i).getText());
-			assertTrue(gui.getLista_de_botoes().get(i).isEnabled());
+			gui.getButtonList().get(i).doClick();
+			System.out.println(gui.getButtonList().get(i).getText());
+			assertTrue(gui.getButtonList().get(i).isEnabled());
 		}
 		
 		//FALTA ASSERTS

@@ -23,11 +23,11 @@ import org.uma.jmetal.util.experiment.util.ExperimentProblem;
 
 public class AntiSpamFilterAutomaticConfiguration {
 	private static final int INDEPENDENT_RUNS = 5 ; //estava 5
-	private static AntiSpamFilterProblem problem;
+	private static AntiSpamFilterProblem antiSpamFilterProblem;
 	private static int maxEvaluations;
 
 	public AntiSpamFilterAutomaticConfiguration(AntiSpamFilterProblem antiSpamProblem, int maxEvaluations) {
-		problem= antiSpamProblem;
+		antiSpamFilterProblem = antiSpamProblem;
 		AntiSpamFilterAutomaticConfiguration.maxEvaluations=maxEvaluations;
 		try {
 			main(null);
@@ -41,7 +41,7 @@ public class AntiSpamFilterAutomaticConfiguration {
 
 		List<ExperimentProblem<DoubleSolution>> problemList = new ArrayList<>();
 
-		problemList.add(new ExperimentProblem<>(problem));
+		problemList.add(new ExperimentProblem<>(antiSpamFilterProblem));
 
 		List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> algorithmList =
 				configureAlgorithmList(problemList);

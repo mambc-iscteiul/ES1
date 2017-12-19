@@ -24,11 +24,11 @@ import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import GUI.ButtonOpListener.AutomaticOptions;
-import GUI.ButtonOpListener.ManualOptions;
-import GUI.DefTableModel.Options;
+import GUI.ButtonOptionListener.AutomaticOptions;
+import GUI.ButtonOptionListener.ManualOptions;
+import GUI.DefaultTableModelEdited.Options;
 import GUI.FileChooserListener.FileType;
-import InputOutput.LeitorRules;
+import InputOutput.RulesReader;
 
 public class GUI {
 
@@ -36,40 +36,40 @@ public class GUI {
 	private JFrame frame;
 
 	//JTexfield para os caminhos dos ficheiros
-	private static JTextField tf_rules;
-	private static JTextField tf_ham;
-	private static JTextField tf_spam;
+	private static JTextField textFieldRules;
+	private static JTextField textFieldHam;
+	private static JTextField textFieldSpam;
 
 	//Ficheiros
-	private static File rules;
-	private static File ham;
-	private static File spam;
+	private static File rulesFile;
+	private static File hamFile;
+	private static File spamFile;
 
 	//JTextfields avaliadores
-	private static JTextField fp_manual;
-	private static JTextField fn_manual;
-	private static JTextField fp_automatico;
-	private static JTextField fn_automatico;
+	private static JTextField textFieldManualFalsePositive;
+	private static JTextField textFieldManualFalseNegative;
+	private static JTextField textFieldAutomaticFalsePositive;
+	private static JTextField textFieldAutomaticFalseNegative;
 
 	//Butoes
-	private static ArrayList<JButton> lista_de_botoes;
+	private static ArrayList<JButton> buttonList;
 
 
 	/*
 	 * Listas logicas para base de representacao grafica, estaticas para serem acedidas livremente pelas tabelas de expansao
 	 */
 
-	private static DefTableModel lista_regras_pesos_manual;
-	private static DefTableModel lista_regras_pesos_automatico;
+	private static DefaultTableModelEdited manualRulesWeightList;
+	private static DefaultTableModelEdited automaticRulesWeightList;
 
-	private static Map<String,Double> mapa_rules;
-	private static Map<Integer, ArrayList<String>> mapa_Spam;
+	private static Map<String,Double> rulesMap;
+	private static Map<Integer, ArrayList<String>> spamMap;
 	private static Map<Integer, ArrayList<String>> hamMap;
 
 
 
 
-	public GUI(int x, int y) {
+	public GUI(int width, int height) {
 
 		long r = System.currentTimeMillis();
 
@@ -78,14 +78,14 @@ public class GUI {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLayout(new GridLayout(3, 0));
 
-		lista_de_botoes	= new ArrayList<JButton>();
-		mapa_rules = new HashMap<String, Double>();
-		mapa_Spam= new HashMap<Integer,ArrayList<String>>();
+		buttonList = new ArrayList<JButton>();
+		rulesMap = new HashMap<String, Double>();
+		spamMap = new HashMap<Integer,ArrayList<String>>();
 		hamMap = new HashMap<Integer, ArrayList<String>>();
 
 		addFrameContent();
 		frame.pack();
-		frame.setSize(x, y);
+		frame.setSize(width, height);
 		frame.setVisible(true);
 		long g = System.currentTimeMillis();
 		System.out.println(g-r);
@@ -102,52 +102,52 @@ public class GUI {
 
 	private void addFirstPanel() {
 		//1. Criacao de painel inicial dirigido aos ficheiros
-		JPanel ficheiros = new JPanel();
-		ficheiros.setLayout(new BorderLayout());
-		frame.add(ficheiros);
+		JPanel filesPanel = new JPanel();
+		filesPanel.setLayout(new BorderLayout());
+		frame.add(filesPanel);
 
 		//1.1. Titulo do primeiro painel
-		JLabel lblCaminhosParaFicheiro = new JLabel("Caminhos para ficheiros de configuracao:");
-		lblCaminhosParaFicheiro.setFont(new Font(" ", Font.BOLD, 15));
-		lblCaminhosParaFicheiro.setHorizontalAlignment(JLabel.CENTER);
-		ficheiros.add(lblCaminhosParaFicheiro, BorderLayout.NORTH);
+		JLabel filesPathLabel = new JLabel("Caminhos para ficheiros de configuracao:");
+		filesPathLabel.setFont(new Font(" ", Font.BOLD, 15));
+		filesPathLabel.setHorizontalAlignment(JLabel.CENTER);
+		filesPanel.add(filesPathLabel, BorderLayout.NORTH);
 
 		//Criacao das Labels referentes a cada tipo de ficheiro
-		JPanel TiTulosParaFicheiros = new JPanel();
-		TiTulosParaFicheiros.setLayout(new GridLayout(3,0));
-		JLabel rules= new JLabel(" Regras: ");
-		rules.setFont(new Font("", Font.BOLD,13));
-		rules.setHorizontalAlignment(JLabel.CENTER);
-		JLabel ham= new JLabel(" Ham: ");
-		ham.setFont(new Font("", Font.BOLD,13));
-		ham.setHorizontalAlignment(JLabel.CENTER);
-		JLabel spam= new JLabel(" Spam: ");
-		spam.setFont(new Font("", Font.BOLD,13));
-		spam.setHorizontalAlignment(JLabel.CENTER);
+		JPanel fileTitlesPanel = new JPanel();
+		fileTitlesPanel.setLayout(new GridLayout(3,0));
+		JLabel rulesLabel= new JLabel(" Regras: ");
+		rulesLabel.setFont(new Font("", Font.BOLD,13));
+		rulesLabel.setHorizontalAlignment(JLabel.CENTER);
+		JLabel hamLabel= new JLabel(" Ham: ");
+		hamLabel.setFont(new Font("", Font.BOLD,13));
+		hamLabel.setHorizontalAlignment(JLabel.CENTER);
+		JLabel spamLabel= new JLabel(" Spam: ");
+		spamLabel.setFont(new Font("", Font.BOLD,13));
+		spamLabel.setHorizontalAlignment(JLabel.CENTER);
 
-		TiTulosParaFicheiros.add(rules);
-		TiTulosParaFicheiros.add(ham);
-		TiTulosParaFicheiros.add(spam);
+		fileTitlesPanel.add(rulesLabel);
+		fileTitlesPanel.add(hamLabel);
+		fileTitlesPanel.add(spamLabel);
 
-		ficheiros.add(TiTulosParaFicheiros,BorderLayout.WEST);
+		filesPanel.add(fileTitlesPanel,BorderLayout.WEST);
 
 		//1.2. Criacao de painel para a escolha de ficheiros rules.cf, ham.log e spam.log
-		JPanel caminhos_ficheiros = new JPanel();
-		caminhos_ficheiros.setLayout(new GridLayout(3, 0));
-		ficheiros.add(caminhos_ficheiros, BorderLayout.CENTER);
+		JPanel filesPathPanel = new JPanel();
+		filesPathPanel.setLayout(new GridLayout(3, 0));
+		filesPanel.add(filesPathPanel, BorderLayout.CENTER);
 
 		//1.2.1. Criacao das JTextField com os caminhos para cada ficheiro
-		tf_rules = new JTextField();
-		tf_rules.setEnabled(false);
-		caminhos_ficheiros.add(tf_rules);
+		textFieldRules = new JTextField();
+		textFieldRules.setEnabled(false);
+		filesPathPanel.add(textFieldRules);
 
 
-		tf_rules.getDocument().addDocumentListener(new DocumentListener() {
+		textFieldRules.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				LeitorRules leitor_rules = new LeitorRules(tf_rules.getText());
-				leitor_rules.start();
+				RulesReader rulesReader = new RulesReader(textFieldRules.getText());
+				rulesReader.start();
 			}
 			@Override
 			public void changedUpdate(DocumentEvent e) {
@@ -161,289 +161,289 @@ public class GUI {
 		});
 
 
-		tf_ham = new JTextField();
-		tf_ham.setEnabled(false);
-		caminhos_ficheiros.add(tf_ham);
+		textFieldHam = new JTextField();
+		textFieldHam.setEnabled(false);
+		filesPathPanel.add(textFieldHam);
 
 
-		tf_spam = new JTextField();
-		tf_spam.setEnabled(false);
-		caminhos_ficheiros.add(tf_spam);
+		textFieldSpam = new JTextField();
+		textFieldSpam.setEnabled(false);
+		filesPathPanel.add(textFieldSpam);
 
 		//1.3. Criacao de painel para o botoes de procura dos ficehiros rules.cf, ham.log e spam.log
-		JPanel Botoes_ficheiros = new JPanel();
-		ficheiros.add(Botoes_ficheiros, BorderLayout.EAST);
-		Botoes_ficheiros.setLayout(new GridLayout(0, 1));
+		JPanel fileButtonsPanel = new JPanel();
+		filesPanel.add(fileButtonsPanel, BorderLayout.EAST);
+		fileButtonsPanel.setLayout(new GridLayout(0, 1));
 
 		//1.3.1. Criacao dos botoes para cada tipo de ficheiro
-		JButton rules_cf = new JButton("Procurar Ficheiro de Regras");
-		rules_cf.addActionListener(new FileChooserListener(tf_rules,GUI.rules,FileType.RULES));
-		Botoes_ficheiros.add(rules_cf);
+		JButton rulesSearchButton = new JButton("Procurar Ficheiro de Regras");
+		rulesSearchButton.addActionListener(new FileChooserListener(textFieldRules,GUI.rulesFile,FileType.RULES));
+		fileButtonsPanel.add(rulesSearchButton);
 		//teste
-		lista_de_botoes.add(rules_cf);
+		buttonList.add(rulesSearchButton);
 
 
-		JButton ham_log = new JButton("Procurar Ficheiro de Ham");
-		ham_log.addActionListener(new FileChooserListener(tf_ham,GUI.ham,FileType.HAM));
-		Botoes_ficheiros.add(ham_log);
+		JButton hamSearchButton = new JButton("Procurar Ficheiro de Ham");
+		hamSearchButton.addActionListener(new FileChooserListener(textFieldHam,GUI.hamFile,FileType.HAM));
+		fileButtonsPanel.add(hamSearchButton);
 		//teste
-		lista_de_botoes.add(ham_log);
+		buttonList.add(hamSearchButton);
 
 
-		JButton spam_log = new JButton("Procurar Ficheiro de Spam");
-		spam_log.addActionListener(new FileChooserListener(tf_spam,GUI.spam,FileType.SPAM));
-		Botoes_ficheiros.add(spam_log);
+		JButton spamSearchButton = new JButton("Procurar Ficheiro de Spam");
+		spamSearchButton.addActionListener(new FileChooserListener(textFieldSpam,GUI.spamFile,FileType.SPAM));
+		fileButtonsPanel.add(spamSearchButton);
 		//teste
-		lista_de_botoes.add(spam_log);
+		buttonList.add(spamSearchButton);
 
 		//1.4. Separador de paineis
 		JSeparator separator = new JSeparator();
-		ficheiros.add(separator, BorderLayout.SOUTH);
+		filesPanel.add(separator, BorderLayout.SOUTH);
 
 	}
 
 	private void addSecondPanel() {
 		//2. Criacao de painel inicial dirigido a configuracao manual
-		JPanel manual = new JPanel();
-		frame.add(manual);
-		manual.setLayout(new BorderLayout());
+		JPanel manualPanel = new JPanel();
+		frame.add(manualPanel);
+		manualPanel.setLayout(new BorderLayout());
 
 		//2.1. Criacao de painel para tabela de regras e pesos, e falsos positivos e negativos
-		JPanel configuracao_manual = new JPanel();
-		configuracao_manual.setLayout(new BorderLayout());
+		JPanel manualConfigurationPanel = new JPanel();
+		manualConfigurationPanel.setLayout(new BorderLayout());
 
 		//2.1.1. Construcao da tabela
 
-		String[] columnNames = {"Regras","Pesos"};
-		lista_regras_pesos_manual = new DefTableModel(columnNames,0, Options.MANUAL);
+		String[] columnNamesVector = {"Regras","Pesos"};
+		manualRulesWeightList = new DefaultTableModelEdited(columnNamesVector,0, Options.MANUAL);
 
-		JTable tabela_regras_manual = new JTable(lista_regras_pesos_manual);
-		tabela_regras_manual.setGridColor(Color.black);
+		JTable manualRulesTable = new JTable(manualRulesWeightList);
+		manualRulesTable.setGridColor(Color.black);
 
-		JScrollPane scroll_tabela = new JScrollPane(tabela_regras_manual);
-		configuracao_manual.add(scroll_tabela, BorderLayout.CENTER);
+		JScrollPane scroll = new JScrollPane(manualRulesTable);
+		manualConfigurationPanel.add(scroll, BorderLayout.CENTER);
 
 		//2.1.2. Criacao de painel para falsos positivos e falsos negativos
-		JPanel falsos_manual = new JPanel();
-		configuracao_manual.add(falsos_manual, BorderLayout.SOUTH);
+		JPanel manualFalseResultsPanel = new JPanel();
+		manualConfigurationPanel.add(manualFalseResultsPanel, BorderLayout.SOUTH);
 
 		//2.1.2.1. Adicionar os falsos ao painel
-		JLabel lblFP_manual = new JLabel("Falsos Positivos:");
-		lblFP_manual.setHorizontalAlignment(SwingConstants.CENTER);
-		falsos_manual.add(lblFP_manual);
+		JLabel manualFalsePositiveLabel = new JLabel("Falsos Positivos:");
+		manualFalsePositiveLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		manualFalseResultsPanel.add(manualFalsePositiveLabel);
 
-		fp_manual = new JTextField();
-		fp_manual.setEnabled(false);
-		fp_manual.setText("0");
-		fp_manual.setHorizontalAlignment(SwingConstants.CENTER);
-		fp_manual.setColumns(2);
-		falsos_manual.add(fp_manual);
+		textFieldManualFalsePositive = new JTextField();
+		textFieldManualFalsePositive.setEnabled(false);
+		textFieldManualFalsePositive.setText("0");
+		textFieldManualFalsePositive.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldManualFalsePositive.setColumns(2);
+		manualFalseResultsPanel.add(textFieldManualFalsePositive);
 
-		JLabel lblFN_manual = new JLabel("Falsos Negativos:");
-		falsos_manual.add(lblFN_manual);
+		JLabel manualFalseNegativeLabel = new JLabel("Falsos Negativos:");
+		manualFalseResultsPanel.add(manualFalseNegativeLabel);
 
-		fn_manual = new JTextField();
-		fn_manual.setEnabled(false);
-		fn_manual.setText("0");
-		fn_manual.setHorizontalAlignment(SwingConstants.CENTER);
-		fn_manual.setColumns(2);
-		falsos_manual.add(fn_manual);
+		textFieldManualFalseNegative = new JTextField();
+		textFieldManualFalseNegative.setEnabled(false);
+		textFieldManualFalseNegative.setText("0");
+		textFieldManualFalseNegative.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldManualFalseNegative.setColumns(2);
+		manualFalseResultsPanel.add(textFieldManualFalseNegative);
 
 		//2.2. Criacao de painel para os botoes da configuracao manual
-		JPanel buttons_configuracao_manual = new JPanel();
-		buttons_configuracao_manual.setLayout(new GridLayout(4, 0));
-		manual.add(buttons_configuracao_manual, BorderLayout.EAST);
+		JPanel manualConfigurationButtons = new JPanel();
+		manualConfigurationButtons.setLayout(new GridLayout(4, 0));
+		manualPanel.add(manualConfigurationButtons, BorderLayout.EAST);
 
 		//2.2.1. Adicionar os botoes ao painel
-		JButton btnGerarConfigurcao = new JButton("Gerar Configuracao");
-		buttons_configuracao_manual.add(btnGerarConfigurcao);
+		JButton generateConfigurationButton = new JButton("Gerar Configuracao");
+		manualConfigurationButtons.add(generateConfigurationButton);
 		//comeaar sem ser editavel
-		btnGerarConfigurcao.setEnabled(false);
-		btnGerarConfigurcao.addActionListener(new ButtonOpListener(ManualOptions.GERAR,null));
-		lista_de_botoes.add(btnGerarConfigurcao);
+		generateConfigurationButton.setEnabled(false);
+		generateConfigurationButton.addActionListener(new ButtonOptionListener(ManualOptions.GENERATEMANUAL,null));
+		buttonList.add(generateConfigurationButton);
 
-		JButton btnAvaliarConfiguracao = new JButton("Avaliar Configuracao");
-		buttons_configuracao_manual.add(btnAvaliarConfiguracao);
+		JButton evaluateConfigurationButton = new JButton("Avaliar Configuracao");
+		manualConfigurationButtons.add(evaluateConfigurationButton);
 		//comecar sem ser editavel
-		btnAvaliarConfiguracao.setEnabled(false);
-		lista_de_botoes.add(btnAvaliarConfiguracao);
-		btnAvaliarConfiguracao.addActionListener(new ButtonOpListener(ManualOptions.AVALIAR,null));
+		evaluateConfigurationButton.setEnabled(false);
+		buttonList.add(evaluateConfigurationButton);
+		evaluateConfigurationButton.addActionListener(new ButtonOptionListener(ManualOptions.EVALUATE,null));
 
-		JButton btnGravarConfigurcaoRulescf_manual = new JButton("           Gravar Configuracao          ");
-		buttons_configuracao_manual.add(btnGravarConfigurcaoRulescf_manual);
+		JButton manualRulesConfigurationSaveButton = new JButton("           Gravar Configuracao          ");
+		manualConfigurationButtons.add(manualRulesConfigurationSaveButton);
 		//comecar sem ser editavel
-		btnGravarConfigurcaoRulescf_manual.setEnabled(false);
-		lista_de_botoes.add(btnGravarConfigurcaoRulescf_manual);
-		btnGravarConfigurcaoRulescf_manual.addActionListener(new ButtonOpListener(ManualOptions.GRAVAR,null));
+		manualRulesConfigurationSaveButton.setEnabled(false);
+		buttonList.add(manualRulesConfigurationSaveButton);
+		manualRulesConfigurationSaveButton.addActionListener(new ButtonOptionListener(ManualOptions.SAVEMANUAL,null));
 
-		JButton btnResetValores = new JButton("Inicializar Configuracao");
-		buttons_configuracao_manual.add(btnResetValores);
-		btnResetValores.setEnabled(false);
-		lista_de_botoes.add(btnResetValores);
-		btnResetValores.addActionListener(new ButtonOpListener(ManualOptions.INICIALIZAR,null));
+		JButton resetValuesButton = new JButton("Inicializar Configuracao");
+		manualConfigurationButtons.add(resetValuesButton);
+		resetValuesButton.setEnabled(false);
+		buttonList.add(resetValuesButton);
+		resetValuesButton.addActionListener(new ButtonOptionListener(ManualOptions.INITIALIZE,null));
 
 		//2.3 Botao de expansao
-		JButton expansao_manual = new JButton("Expandir");
+		JButton expansionButtonOnManualPanel = new JButton("Expandir");
 		//comecar sem ser editavel
-		expansao_manual.setEnabled(false);
-		lista_de_botoes.add(expansao_manual);
+		expansionButtonOnManualPanel.setEnabled(false);
+		buttonList.add(expansionButtonOnManualPanel);
 
-		expansao_manual.addActionListener(new ActionListener() {
+		expansionButtonOnManualPanel.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame_expandida = new JFrame("Tabela de configuracao manual");
-				frame_expandida.setLayout(new BorderLayout());
-				frame_expandida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				JFrame expandedManualFrame = new JFrame("Tabela de configuracao manual");
+				expandedManualFrame.setLayout(new BorderLayout());
+				expandedManualFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				//Apresentacao da lista na nova janela
-				JScrollPane scrool_tabela_expandida= new JScrollPane(new JTable(lista_regras_pesos_manual));
-				frame_expandida.add(scrool_tabela_expandida,BorderLayout.CENTER);
+				JScrollPane expandedManualTableScroll = new JScrollPane(new JTable(manualRulesWeightList));
+				expandedManualFrame.add(expandedManualTableScroll,BorderLayout.CENTER);
 				//Apresentacao dos botoes
-				JPanel painel_botoes_expandido= new JPanel(new GridLayout(1,4));
+				JPanel expandedManualButtonsPanel = new JPanel(new GridLayout(1,4));
 				/*
 				 * Criacao de botoes replica, pois a propria implementacao JButton, nao
 				 * permite instanciacao multipla, como a DefaultModelList.
 				 * Ou seja, estes nao podem existir em "2" lados ao emsmo tempo. 
 				 */
-				JButton btnGerarConfigurcao_expandido = new JButton("Gerar Configuracao");
-				btnGerarConfigurcao_expandido.addActionListener(new ButtonOpListener(ManualOptions.GERAR,null));
-				painel_botoes_expandido.add(btnGerarConfigurcao_expandido);
-				JButton btnAvaliarConfiguracao_expandido = new JButton("Avaliar Configuracao");
-				btnAvaliarConfiguracao_expandido.addActionListener(new ButtonOpListener(ManualOptions.AVALIAR,null));
-				painel_botoes_expandido.add(btnAvaliarConfiguracao_expandido);
-				JButton btnGravarConfigurcaoRulescf_manual_expandido = new JButton("Gravar Configuracao");
-				btnGravarConfigurcaoRulescf_manual_expandido.addActionListener(new ButtonOpListener(ManualOptions.GRAVAR,null));
-				painel_botoes_expandido.add(btnGravarConfigurcaoRulescf_manual_expandido);
-				JButton btnResetValores_expandido = new JButton("Inicializar Configuracao");
-				btnResetValores_expandido.addActionListener(new ButtonOpListener(ManualOptions.INICIALIZAR,null));
-				painel_botoes_expandido.add(btnResetValores_expandido);
+				JButton expandedGenerateConfigurationButton = new JButton("Gerar Configuracao");
+				expandedGenerateConfigurationButton.addActionListener(new ButtonOptionListener(ManualOptions.GENERATEMANUAL,null));
+				expandedManualButtonsPanel.add(expandedGenerateConfigurationButton);
+				JButton expandedEvaluateConfigurationButton = new JButton("Avaliar Configuracao");
+				expandedEvaluateConfigurationButton.addActionListener(new ButtonOptionListener(ManualOptions.EVALUATE,null));
+				expandedManualButtonsPanel.add(expandedEvaluateConfigurationButton);
+				JButton expandedSaveManualRulesConfigurationButton = new JButton("Gravar Configuracao");
+				expandedSaveManualRulesConfigurationButton.addActionListener(new ButtonOptionListener(ManualOptions.SAVEMANUAL,null));
+				expandedManualButtonsPanel.add(expandedSaveManualRulesConfigurationButton);
+				JButton expandedResetValuesButton = new JButton("Inicializar Configuracao");
+				expandedResetValuesButton.addActionListener(new ButtonOptionListener(ManualOptions.INITIALIZE,null));
+				expandedManualButtonsPanel.add(expandedResetValuesButton);
 
-				frame_expandida.add(painel_botoes_expandido, BorderLayout.SOUTH);
-				frame_expandida.pack();
-				frame_expandida.setSize(1000,600);
-				frame_expandida.setVisible(true);
+				expandedManualFrame.add(expandedManualButtonsPanel, BorderLayout.SOUTH);
+				expandedManualFrame.pack();
+				expandedManualFrame.setSize(1000,600);
+				expandedManualFrame.setVisible(true);
 			}
 		});
 
-		configuracao_manual.add(expansao_manual,BorderLayout.WEST);
-		manual.add(configuracao_manual, BorderLayout.CENTER);
+		manualConfigurationPanel.add(expansionButtonOnManualPanel,BorderLayout.WEST);
+		manualPanel.add(manualConfigurationPanel, BorderLayout.CENTER);
 
 	}
 
 	private void addThirdPanel() {
 
 		//3. Criacao de painel inicial dirigido a configuracao automatica
-		JPanel automatico = new JPanel();
-		automatico.setLayout(new BorderLayout());
-		frame.add(automatico);
+		JPanel automaticPanel = new JPanel();
+		automaticPanel.setLayout(new BorderLayout());
+		frame.add(automaticPanel);
 
 		//3.1. Criacao de painel para tabela de regras e pesos, e falsos positivos e negativos
-		JPanel configuracao_automatica = new JPanel();
-		configuracao_automatica.setLayout(new BorderLayout());
-		automatico.add(configuracao_automatica, BorderLayout.CENTER);
+		JPanel automaticConfigurationPanel = new JPanel();
+		automaticConfigurationPanel.setLayout(new BorderLayout());
+		automaticPanel.add(automaticConfigurationPanel, BorderLayout.CENTER);
 
 		//2.1.1. Construcao da tabela
 
 		String[] columnNames = {"Regras","Pesos"};
-		lista_regras_pesos_automatico= new DefTableModel(columnNames,0, Options.AUTOMATIC);
+		automaticRulesWeightList= new DefaultTableModelEdited(columnNames,0, Options.AUTOMATIC);
 
 
 
-		JTable tabela_regras_automatico = new JTable(lista_regras_pesos_automatico);
-		tabela_regras_automatico.setGridColor(Color.black);
+		JTable automaticRulesTable = new JTable(automaticRulesWeightList);
+		automaticRulesTable.setGridColor(Color.black);
 
 
-		JScrollPane scroll_tabela_automatica = new JScrollPane(tabela_regras_automatico);
-		configuracao_automatica.add(scroll_tabela_automatica, BorderLayout.CENTER);
+		JScrollPane automaticTableScroll = new JScrollPane(automaticRulesTable);
+		automaticConfigurationPanel.add(automaticTableScroll, BorderLayout.CENTER);
 
 		//2.1.2 Botao de expansao
-		JButton expansao_automatico = new JButton("Expandir");
+		JButton automaticExpansionButton = new JButton("Expandir");
 		//comecar sem ser editavel
-		expansao_automatico.setEnabled(false);
-		lista_de_botoes.add(expansao_automatico);
+		automaticExpansionButton.setEnabled(false);
+		buttonList.add(automaticExpansionButton);
 
-		expansao_automatico.addActionListener(new ActionListener() {
+		automaticExpansionButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame_expandida = new JFrame("Tabela de configuracao Automatica");
-				frame_expandida.setLayout(new BorderLayout());
-				frame_expandida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				JPanel painel_botoes_expandido= new JPanel(new GridLayout(1,2));
+				JFrame expandedAutomaticFrame = new JFrame("Tabela de configuracao Automatica");
+				expandedAutomaticFrame.setLayout(new BorderLayout());
+				expandedAutomaticFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				JPanel expandedAutomaticButtonsPanel= new JPanel(new GridLayout(1,2));
 
-				JButton btnGerarConfigurcaoAutomtica_expandido = new JButton("Gerar Conf. Automatica c/ JMetal");
-				btnGerarConfigurcaoAutomtica_expandido.addActionListener(new ButtonOpListener(null,AutomaticOptions.GERAR_AUTO));
-				painel_botoes_expandido.add(btnGerarConfigurcaoAutomtica_expandido);
+				JButton expandedGenerateAutomaticConfigurationButton = new JButton("Gerar Conf. Automatica c/ JMetal");
+				expandedGenerateAutomaticConfigurationButton.addActionListener(new ButtonOptionListener(null,AutomaticOptions.GENERATEAUTOMATIC));
+				expandedAutomaticButtonsPanel.add(expandedGenerateAutomaticConfigurationButton);
 
-				JButton btnGravarConfigurcaoAutomtica_rulescf_expandido = new JButton("Gravar Conf. Automatica");
-				btnGerarConfigurcaoAutomtica_expandido.addActionListener(new ButtonOpListener(null,AutomaticOptions.GRAVAR_AUTO));
-				painel_botoes_expandido.add(btnGravarConfigurcaoAutomtica_rulescf_expandido);
+				JButton expandedSaveAutomaticConfigurationButton = new JButton("Gravar Conf. Automatica");
+				expandedGenerateAutomaticConfigurationButton.addActionListener(new ButtonOptionListener(null,AutomaticOptions.SAVEAUTOMATIC));
+				expandedAutomaticButtonsPanel.add(expandedSaveAutomaticConfigurationButton);
 
 
 				//Apresentacao da lista na nova janela
-				JScrollPane scrool_tabela_expandida= new JScrollPane(new JTable(lista_regras_pesos_automatico));
-				frame_expandida.add(scrool_tabela_expandida,BorderLayout.CENTER);
-				frame_expandida.add(painel_botoes_expandido,BorderLayout.SOUTH);
-				frame_expandida.pack();
-				frame_expandida.setSize(1000,700);
-				frame_expandida.setVisible(true);
+				JScrollPane expandedAutomaticTableScroll= new JScrollPane(new JTable(automaticRulesWeightList));
+				expandedAutomaticFrame.add(expandedAutomaticTableScroll,BorderLayout.CENTER);
+				expandedAutomaticFrame.add(expandedAutomaticButtonsPanel,BorderLayout.SOUTH);
+				expandedAutomaticFrame.pack();
+				expandedAutomaticFrame.setSize(1000,700);
+				expandedAutomaticFrame.setVisible(true);
 			}
 		});
 
-		configuracao_automatica.add(expansao_automatico,BorderLayout.WEST);
-		automatico.add(configuracao_automatica, BorderLayout.CENTER);
+		automaticConfigurationPanel.add(automaticExpansionButton,BorderLayout.WEST);
+		automaticPanel.add(automaticConfigurationPanel, BorderLayout.CENTER);
 
 
 		//3.1.2. Criacao de painel para falsos positivos e falsos negativos
-		JPanel falsos_automatico = new JPanel();
-		configuracao_automatica.add(falsos_automatico, BorderLayout.SOUTH);
+		JPanel automaticFalseResultsPanel = new JPanel();
+		automaticConfigurationPanel.add(automaticFalseResultsPanel, BorderLayout.SOUTH);
 
 		//3.1.2.1. Adicionar os falsos ao painel
-		JLabel lblFP_automatico = new JLabel("Falsos Positivos:");
-		falsos_automatico.add(lblFP_automatico);
+		JLabel automaticFalsePositiveLabel = new JLabel("Falsos Positivos:");
+		automaticFalseResultsPanel.add(automaticFalsePositiveLabel);
 
-		fp_automatico = new JTextField();
-		fp_automatico.setEnabled(false);
-		fp_automatico.setText("0");
-		fp_automatico.setHorizontalAlignment(SwingConstants.CENTER);
-		fp_automatico.setColumns(2);
-		falsos_automatico.add(fp_automatico);
+		textFieldAutomaticFalsePositive = new JTextField();
+		textFieldAutomaticFalsePositive.setEnabled(false);
+		textFieldAutomaticFalsePositive.setText("0");
+		textFieldAutomaticFalsePositive.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldAutomaticFalsePositive.setColumns(2);
+		automaticFalseResultsPanel.add(textFieldAutomaticFalsePositive);
 
-		JLabel lblFN_automatico = new JLabel("Falsos Negativos:");
-		falsos_automatico.add(lblFN_automatico);
+		JLabel automaticFalseNegativesLabel = new JLabel("Falsos Negativos:");
+		automaticFalseResultsPanel.add(automaticFalseNegativesLabel);
 
-		fn_automatico = new JTextField();
-		fn_automatico.setEnabled(false);
-		fn_automatico.setText("0");
-		fn_automatico.setHorizontalAlignment(SwingConstants.CENTER);
-		fn_automatico.setColumns(2);
-		falsos_automatico.add(fn_automatico);
+		textFieldAutomaticFalseNegative = new JTextField();
+		textFieldAutomaticFalseNegative.setEnabled(false);
+		textFieldAutomaticFalseNegative.setText("0");
+		textFieldAutomaticFalseNegative.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldAutomaticFalseNegative.setColumns(2);
+		automaticFalseResultsPanel.add(textFieldAutomaticFalseNegative);
 
 		//3.2. Criacao de painel para os botoes da configuracao manual
-		JPanel buttons_configuracao_automatica = new JPanel();
-		buttons_configuracao_automatica.setLayout(new GridLayout(3, 0));
-		automatico.add(buttons_configuracao_automatica, BorderLayout.EAST);
+		JPanel automaticConfigurationButtonsPanel = new JPanel();
+		automaticConfigurationButtonsPanel.setLayout(new GridLayout(3, 0));
+		automaticPanel.add(automaticConfigurationButtonsPanel, BorderLayout.EAST);
 
 
 		//3.2.1. Adicionar os botoes ao painel
-		JButton btnGerarConfigurcaoAutomtica = new JButton("Gerar Conf. Automatica c/ JMetal");
+		JButton generateAutomaticConfigurationButton = new JButton("Gerar Conf. Automatica c/ JMetal");
 		//comecar sem ser editavel
-		btnGerarConfigurcaoAutomtica.setEnabled(false);
-		btnGerarConfigurcaoAutomtica.addActionListener(new ButtonOpListener(null, AutomaticOptions.GERAR_AUTO));
-		lista_de_botoes.add(btnGerarConfigurcaoAutomtica);
-		btnGerarConfigurcaoAutomtica.setFont(new Font("", Font.BOLD, 11));
-		buttons_configuracao_automatica.add(btnGerarConfigurcaoAutomtica);
+		generateAutomaticConfigurationButton.setEnabled(false);
+		generateAutomaticConfigurationButton.addActionListener(new ButtonOptionListener(null, AutomaticOptions.GENERATEAUTOMATIC));
+		buttonList.add(generateAutomaticConfigurationButton);
+		generateAutomaticConfigurationButton.setFont(new Font("", Font.BOLD, 11));
+		automaticConfigurationButtonsPanel.add(generateAutomaticConfigurationButton);
 
-		JButton btnGravarConfigurcaoRulescf_automatico = new JButton("Gravar Configuracao");
+		JButton saveAutomaticRulesConfigurationButton = new JButton("Gravar Configuracao");
 		//comecar sem ser editavel
-		btnGravarConfigurcaoRulescf_automatico.setEnabled(false);
-		btnGravarConfigurcaoRulescf_automatico.addActionListener(new ButtonOpListener(null, AutomaticOptions.GRAVAR_AUTO));
-		lista_de_botoes.add(btnGravarConfigurcaoRulescf_automatico);
-		buttons_configuracao_automatica.add(btnGravarConfigurcaoRulescf_automatico);
+		saveAutomaticRulesConfigurationButton.setEnabled(false);
+		saveAutomaticRulesConfigurationButton.addActionListener(new ButtonOptionListener(null, AutomaticOptions.SAVEAUTOMATIC));
+		buttonList.add(saveAutomaticRulesConfigurationButton);
+		automaticConfigurationButtonsPanel.add(saveAutomaticRulesConfigurationButton);
 
 		//3.3. Separador de paineis
-		JSeparator separator_1 = new JSeparator();
-		automatico.add(separator_1, BorderLayout.NORTH);
+		JSeparator panelSeparator = new JSeparator();
+		automaticPanel.add(panelSeparator, BorderLayout.NORTH);
 
 	}
 
@@ -453,22 +453,22 @@ public class GUI {
 
 
 
-	public static DefTableModel getLista_regras_pesos_manual() {
-		return lista_regras_pesos_manual;
+	public static DefaultTableModelEdited getManualRulesWeightList() {
+		return manualRulesWeightList;
 	}
 
-	public static DefTableModel getLista_regras_pesos_automatico() {
-		return lista_regras_pesos_automatico;
+	public static DefaultTableModelEdited getAutomaticRulesWeightList() {
+		return automaticRulesWeightList;
 	}
 
 	//---------------------------------------
 
-	public static Map<String, Double> getMapa() {
-		return mapa_rules;
+	public static Map<String, Double> getRulesMap() {
+		return rulesMap;
 	}
 
-	public static Map<Integer, ArrayList<String>> getMapa_Spam() {
-		return mapa_Spam;
+	public static Map<Integer, ArrayList<String>> getSpamMap() {
+		return spamMap;
 	}
 
 	public static Map<Integer, ArrayList<String>> getHamMap(){
@@ -481,8 +481,8 @@ public class GUI {
 	//---------------------------------------
 	// Ativacao dos butoes inactivos ate se escolher o ficheiro de regras
 	public static void ActivateButons() {
-		for (int i = 0; i < lista_de_botoes.size(); i++) {
-			lista_de_botoes.get(i).setEnabled(true);
+		for (int i = 0; i < buttonList.size(); i++) {
+			buttonList.get(i).setEnabled(true);
 		}
 	}
 
@@ -492,65 +492,65 @@ public class GUI {
 
 	//---------------------------------------
 
-	public static  JTextField getFp_manual() {
-		return fp_manual;
+	public static  JTextField getTextFieldManualFalsePositive() {
+		return textFieldManualFalsePositive;
 	}
 
-	public static JTextField getFn_manual() {
-		return fn_manual;
+	public static JTextField getTextFieldManualFalseNegative() {
+		return textFieldManualFalseNegative;
 	}
 
-	public static JTextField getFp_automatico() {
-		return fp_automatico;
+	public static JTextField getTextFieldAutomaticFalsePositive() {
+		return textFieldAutomaticFalsePositive;
 	}
 
-	public static JTextField getFn_automatico() {
-		return fn_automatico;
-	}
-
-	//---------------------------------------
-
-	public static JTextField getRules() {
-		return tf_rules;	
-	}
-	public static JTextField getHam() {
-		return tf_ham;
-	}
-
-	public static JTextField getSpam() {
-		return tf_spam;
-	}
-
-	//---------------------------------------
-	public ArrayList<JButton> getLista_de_botoes() {
-		return lista_de_botoes;
+	public static JTextField getTextFieldAutomaticFalseNegative() {
+		return textFieldAutomaticFalseNegative;
 	}
 
 	//---------------------------------------
 
-	public static File GetRulesFile() {
-		return rules;
+	public static JTextField getTextFieldRules() {
+		return textFieldRules;	
 	}
-	public static File GetSpamFile() {
-		return spam;
+	public static JTextField getTextFieldHam() {
+		return textFieldHam;
 	}
 
-	public static File GetHamFile() {
-		return ham;
+	public static JTextField getTextFieldSpam() {
+		return textFieldSpam;
+	}
+
+	//---------------------------------------
+	public ArrayList<JButton> getButtonList() {
+		return buttonList;
+	}
+
+	//---------------------------------------
+
+	public static File getRulesFile() {
+		return rulesFile;
+	}
+	public static File getSpamFile() {
+		return spamFile;
+	}
+
+	public static File getHamFile() {
+		return hamFile;
 	}
 
 
 	//---------------------------------------
-	public static void setRules(File rules) {
-		GUI.rules = rules;
+	public static void setRulesFile(File rules) {
+		GUI.rulesFile = rules;
 	}
 
-	public  static void setHam(File ham) {
-		GUI.ham = ham;
+	public  static void setHamFile(File ham) {
+		GUI.hamFile = ham;
 	}
 
-	public  static void setSpam(File spam) {
-		GUI.spam = spam;
+	public  static void setSpamFile(File spam) {
+		GUI.spamFile = spam;
 	}
 
 

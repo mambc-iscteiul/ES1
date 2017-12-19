@@ -3,7 +3,6 @@ package Testes;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.io.File;
 
@@ -16,8 +15,8 @@ import GUI.GUI;
 class TesteAvaliators {
 
 	GUI gui; 
-	FalsePositiveAvaliator positive;
-	FalseNegativeAvaliator negative;
+	FalsePositiveAvaliator falsePositiveAvaliator;
+	FalseNegativeAvaliator falseNegativeAvaliator;
 
 	@SuppressWarnings("static-access")
 	@Test
@@ -25,39 +24,39 @@ class TesteAvaliators {
 		gui = new GUI(100, 100);
 
 		for (int i = 0; i < 3; i++) {
-			gui.getLista_de_botoes().get(i).doClick();
-			System.out.println(gui.getLista_de_botoes().get(i).getText());
-			assertTrue(gui.getLista_de_botoes().get(i).isEnabled());
+			gui.getButtonList().get(i).doClick();
+			System.out.println(gui.getButtonList().get(i).getText());
+			assertTrue(gui.getButtonList().get(i).isEnabled());
 		}
 
-		for (int i = 0; i < GUI.getLista_regras_pesos_manual().getRowCount(); i++) {
-			gui.getMapa().put((String) gui.getLista_regras_pesos_manual().getValueAt(i, 0), Double.parseDouble((String) gui.getLista_regras_pesos_manual().getValueAt(i, 1)));
+		for (int i = 0; i < GUI.getManualRulesWeightList().getRowCount(); i++) {
+			gui.getRulesMap().put((String) gui.getManualRulesWeightList().getValueAt(i, 0), Double.parseDouble((String) gui.getManualRulesWeightList().getValueAt(i, 1)));
 		}
 
-		gui.getMapa().replace("BAYES_00", 50.0);
-		gui.getMapa().replace("BAYES_99", -60.0);
+		gui.getRulesMap().replace("BAYES_00", 50.0);
+		gui.getRulesMap().replace("BAYES_99", -60.0);
 
 
-		File HAM_test = new File(gui.getHam().getText());
-		File SPAM_test = new File(gui.getSpam().getText());
+		File HAM_test = new File(gui.getTextFieldHam().getText());
+		File SPAM_test = new File(gui.getTextFieldSpam().getText());
 
-		positive= new FalsePositiveAvaliator(HAM_test);
-		negative= new FalseNegativeAvaliator(SPAM_test);
-		assertNotNull(negative);
-		assertNotNull(positive);
+		falsePositiveAvaliator= new FalsePositiveAvaliator(HAM_test);
+		falseNegativeAvaliator= new FalseNegativeAvaliator(SPAM_test);
+		assertNotNull(falseNegativeAvaliator);
+		assertNotNull(falsePositiveAvaliator);
 
-		positive.start();
+		falsePositiveAvaliator.start();
 		try {
-			positive.join();
+			falsePositiveAvaliator.join();
 		} catch (InterruptedException e1) {
 		}
-		assertEquals(692, positive.getFalsePositives());
-		negative.start();
+		assertEquals(692, falsePositiveAvaliator.getFalsePositivesCount());
+		falseNegativeAvaliator.start();
 		try {
-			negative.join();
+			falseNegativeAvaliator.join();
 		} catch (InterruptedException e1) {
 		}
-		assertEquals(227, negative.getFalseNegatives());
+		assertEquals(227, falseNegativeAvaliator.getFalseNegativesCount());
 
 	}
 }

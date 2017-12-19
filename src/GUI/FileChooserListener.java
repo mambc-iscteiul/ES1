@@ -11,19 +11,19 @@ import javax.swing.JTextField;
 public class FileChooserListener implements ActionListener {
 
 	//Enumerados para o FileChooser,como é generalista, perceber qual botão o chamou.
-	public enum FileType{RULES,SPAM,HAM};
+	public enum FileType {RULES,SPAM,HAM};
 
-	private JTextField caminho;	
-	private File income;
-	private FileType enu;
-
-
+	private JTextField path;	
+	private File file;
+	private FileType fileType;
 
 
-	public FileChooserListener(JTextField caminho,File income,FileType enu) {
-		this.caminho=caminho;
-		this.income=income;
-		this.enu=enu;
+
+
+	public FileChooserListener(JTextField path, File file, FileType fileType) {
+		this.path = path;
+		this.file = file;
+		this.fileType = fileType;
 
 	}
 
@@ -31,25 +31,25 @@ public class FileChooserListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		try{
 			do {
-				JFileChooser fc =new JFileChooser();
-				fc.showOpenDialog(null);
-				fc.setDialogTitle("Jesus");
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.showOpenDialog(null);
+				fileChooser.setDialogTitle("Jesus");
 				//selecionar somente ficheiros
-				fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				income = fc.getSelectedFile();
-				if (!income.getAbsolutePath().endsWith(".cf")&& enu.equals(FileType.RULES)){
+				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				file = fileChooser.getSelectedFile();
+				if (!file.getAbsolutePath().endsWith(".cf")&& fileType.equals(FileType.RULES)){
 					//Apresentar informação de ficheiro não suportado quando o tipo requerido é de REGRAS e o ficheiro escolhido não coincide
 					JOptionPane.showMessageDialog(null,"Tipo de ficheiro não suportado, exprimente outro ficheiro do tipo '.cf' ");
-				}else if(!income.getName().startsWith("ham")&& enu.equals(FileType.HAM)){
+				}else if(!file.getName().startsWith("ham")&& fileType.equals(FileType.HAM)){
 					//Apresentar informação de ficheiro não suportado quando o tipo requerido é de HAM e o ficheiro escolhido não coincide
 					JOptionPane.showMessageDialog(null,"Tipo de ficheiro não suportado, exprimente outro ficheiro do tipo 'ham.log' ");
-				}else if(!income.getName().startsWith("spam")&& enu.equals(FileType.SPAM)){
+				}else if(!file.getName().startsWith("spam")&& fileType.equals(FileType.SPAM)){
 					//Apresentar informação de ficheiro não suportado quando o tipo requerido é de SPAM e o ficheiro escolhido não coincide
 					JOptionPane.showMessageDialog(null,"Tipo de ficheiro não suportado, exprimente outro ficheiro do tipo '.spam.log' ");
 				}
 				//Estar ciclicamente a apresentar o FileChooser enquanto o documento selecionado não for o correto para cada caso 
-			} while(!income.getAbsolutePath().endsWith(".cf")&& enu.equals(FileType.RULES)|| !income.getName().startsWith("ham")&& enu.equals(FileType.HAM)|| !income.getName().startsWith("spam")&& enu.equals(FileType.SPAM));	
-			caminho.setText(income.getAbsolutePath());
+			} while(!file.getAbsolutePath().endsWith(".cf")&& fileType.equals(FileType.RULES)|| !file.getName().startsWith("ham")&& fileType.equals(FileType.HAM)|| !file.getName().startsWith("spam")&& fileType.equals(FileType.SPAM));	
+			path.setText(file.getAbsolutePath());
 
 		}catch(NullPointerException e){
 		}
