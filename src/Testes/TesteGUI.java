@@ -61,7 +61,7 @@ class TesteGUI {
 	@Test
 	void testFileChooser() {
 
-			//clicar so nos primeiros 3 botões(procurar ficheiros)
+			//clicar so nos primeiros 3 botoes(procurar ficheiros)
 			//desta forma cria o jfilechooser
 		
 		for (int i = 0; i < 3; i++) {

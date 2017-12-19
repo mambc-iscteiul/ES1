@@ -1,543 +1,719 @@
-<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2017-12-18T17:41:16</date>
-  <millis>1513618876146</millis>
+  <date>2017-12-19T14:12:05</date>
+  <millis>1513692725674</millis>
   <sequence>0</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.JMetalLogger</class>
   <method>configureLoggers</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>Loggers configured with null</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:16</date>
-  <millis>1513618876224</millis>
+  <date>2017-12-19T14:12:05</date>
+  <millis>1513692725696</millis>
   <sequence>1</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ExecuteAlgorithms</class>
   <method>run</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>ExecuteAlgorithms: Preparing output directory</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:16</date>
-  <millis>1513618876252</millis>
+  <date>2017-12-19T14:12:05</date>
+  <millis>1513692725707</millis>
   <sequence>2</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 0, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN0.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:17</date>
-  <millis>1513618877732</millis>
+  <date>2017-12-19T14:12:05</date>
+  <millis>1513692725837</millis>
   <sequence>3</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 1, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN1.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:18</date>
-  <millis>1513618878529</millis>
+  <date>2017-12-19T14:12:05</date>
+  <millis>1513692725886</millis>
   <sequence>4</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 2, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN2.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:19</date>
-  <millis>1513618879002</millis>
+  <date>2017-12-19T14:12:05</date>
+  <millis>1513692725944</millis>
   <sequence>5</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 3, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN3.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:19</date>
-  <millis>1513618879440</millis>
+  <date>2017-12-19T14:12:05</date>
+  <millis>1513692725994</millis>
   <sequence>6</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 4, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN4.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:20</date>
-  <millis>1513618880293</millis>
+  <date>2017-12-19T14:12:06</date>
+  <millis>1513692726123</millis>
   <sequence>7</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>Computing indicator: HV</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:20</date>
-  <millis>1513618880297</millis>
+  <date>2017-12-19T14:12:06</date>
+  <millis>1513692726124</millis>
   <sequence>8</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>RF: experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.rf</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:20</date>
-  <millis>1513618880338</millis>
+  <date>2017-12-19T14:12:06</date>
+  <millis>1513692726127</millis>
   <sequence>9</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>resetFile</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>File experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/HV exist.</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:20</date>
-  <millis>1513618880344</millis>
+  <date>2017-12-19T14:12:06</date>
+  <millis>1513692726128</millis>
   <sequence>10</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>resetFile</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>File experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/HV is a file. Deleting file.</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:20</date>
-  <millis>1513618880350</millis>
+  <date>2017-12-19T14:12:06</date>
+  <millis>1513692726128</millis>
   <sequence>11</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>resetFile</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>File succesfully deleted.</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:20</date>
-  <millis>1513618880358</millis>
+  <date>2017-12-19T14:12:06</date>
+  <millis>1513692726131</millis>
   <sequence>12</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
-  <message>HV: 0.0</message>
+  <thread>13</thread>
+  <message>HV: 0.8671875</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:20</date>
-  <millis>1513618880366</millis>
+  <date>2017-12-19T14:12:06</date>
+  <millis>1513692726132</millis>
   <sequence>13</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
-  <message>HV: 0.0</message>
+  <thread>13</thread>
+  <message>HV: 0.7181919642857142</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:20</date>
-  <millis>1513618880372</millis>
+  <date>2017-12-19T14:12:06</date>
+  <millis>1513692726133</millis>
   <sequence>14</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
-  <message>HV: 0.0</message>
+  <thread>13</thread>
+  <message>HV: 0.4732142857142857</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:20</date>
-  <millis>1513618880378</millis>
+  <date>2017-12-19T14:12:06</date>
+  <millis>1513692726135</millis>
   <sequence>15</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
-  <message>HV: 0.0</message>
+  <thread>13</thread>
+  <message>HV: 0.47488839285714285</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:20</date>
-  <millis>1513618880386</millis>
+  <date>2017-12-19T14:12:06</date>
+  <millis>1513692726136</millis>
   <sequence>16</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
-  <message>HV: 0.0</message>
+  <thread>13</thread>
+  <message>HV: 0.8030133928571429</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:29</date>
-  <millis>1513618889514</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760708</millis>
   <sequence>17</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ExecuteAlgorithms</class>
   <method>run</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>ExecuteAlgorithms: Preparing output directory</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:29</date>
-  <millis>1513618889526</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760709</millis>
   <sequence>18</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 0, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN0.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:30</date>
-  <millis>1513618890817</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760763</millis>
   <sequence>19</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 1, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN1.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:31</date>
-  <millis>1513618891842</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760815</millis>
   <sequence>20</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 2, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN2.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:32</date>
-  <millis>1513618892761</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760851</millis>
   <sequence>21</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 3, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN3.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:33</date>
-  <millis>1513618893708</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760890</millis>
   <sequence>22</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 4, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN4.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:34</date>
-  <millis>1513618894773</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760959</millis>
   <sequence>23</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>Computing indicator: HV</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:34</date>
-  <millis>1513618894776</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760959</millis>
   <sequence>24</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>RF: experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.rf</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:34</date>
-  <millis>1513618894783</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760960</millis>
   <sequence>25</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>resetFile</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>File experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/HV exist.</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:34</date>
-  <millis>1513618894787</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760961</millis>
   <sequence>26</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>resetFile</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>File experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/HV is a file. Deleting file.</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:34</date>
-  <millis>1513618894793</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760965</millis>
   <sequence>27</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>resetFile</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>File succesfully deleted.</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:34</date>
-  <millis>1513618894801</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760966</millis>
   <sequence>28</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
-  <message>HV: 0.0</message>
+  <thread>13</thread>
+  <message>HV: 0.7758620689655172</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:34</date>
-  <millis>1513618894808</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760967</millis>
   <sequence>29</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
-  <message>HV: 0.0</message>
+  <thread>13</thread>
+  <message>HV: 0.7577132486388385</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:34</date>
-  <millis>1513618894814</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760969</millis>
   <sequence>30</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
-  <message>HV: 0.0</message>
+  <thread>13</thread>
+  <message>HV: 0.8647912885662432</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:34</date>
-  <millis>1513618894823</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760970</millis>
   <sequence>31</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
-  <message>HV: 0.0</message>
+  <thread>13</thread>
+  <message>HV: 0.8584392014519057</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:34</date>
-  <millis>1513618894829</millis>
+  <date>2017-12-19T14:12:40</date>
+  <millis>1513692760972</millis>
   <sequence>32</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
-  <message>HV: 0.0</message>
+  <thread>13</thread>
+  <message>HV: 0.676043557168784</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:39</date>
-  <millis>1513618899692</millis>
+  <date>2017-12-19T14:12:47</date>
+  <millis>1513692767864</millis>
   <sequence>33</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ExecuteAlgorithms</class>
   <method>run</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>ExecuteAlgorithms: Preparing output directory</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:39</date>
-  <millis>1513618899697</millis>
+  <date>2017-12-19T14:12:47</date>
+  <millis>1513692767865</millis>
   <sequence>34</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 0, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN0.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:41</date>
-  <millis>1513618901166</millis>
+  <date>2017-12-19T14:12:47</date>
+  <millis>1513692767911</millis>
   <sequence>35</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 1, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN1.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:42</date>
-  <millis>1513618902476</millis>
+  <date>2017-12-19T14:12:47</date>
+  <millis>1513692767949</millis>
   <sequence>36</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 2, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN2.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:43</date>
-  <millis>1513618903776</millis>
+  <date>2017-12-19T14:12:47</date>
+  <millis>1513692767987</millis>
   <sequence>37</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 3, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN3.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:45</date>
-  <millis>1513618905081</millis>
+  <date>2017-12-19T14:12:48</date>
+  <millis>1513692768039</millis>
   <sequence>38</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 4, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN4.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:46</date>
-  <millis>1513618906448</millis>
+  <date>2017-12-19T14:12:48</date>
+  <millis>1513692768101</millis>
   <sequence>39</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>Computing indicator: HV</message>
 </record>
 <record>
-  <date>2017-12-18T17:41:46</date>
-  <millis>1513618906450</millis>
+  <date>2017-12-19T14:12:48</date>
+  <millis>1513692768102</millis>
   <sequence>40</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
+  <thread>13</thread>
   <message>RF: experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.rf</message>
 </record>
 <record>
-  <date>2017-12-18T17:42:00</date>
-  <millis>1513618920797</millis>
+  <date>2017-12-19T14:12:48</date>
+  <millis>1513692768103</millis>
   <sequence>41</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
-  <class>org.uma.jmetal.util.experiment.component.ExecuteAlgorithms</class>
-  <method>run</method>
-  <thread>14</thread>
-  <message>ExecuteAlgorithms: Preparing output directory</message>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>resetFile</method>
+  <thread>13</thread>
+  <message>File experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/HV exist.</message>
 </record>
 <record>
-  <date>2017-12-18T17:42:00</date>
-  <millis>1513618920803</millis>
+  <date>2017-12-19T14:12:48</date>
+  <millis>1513692768103</millis>
   <sequence>42</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
-  <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>14</thread>
-  <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 0, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN0.tsv</message>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>resetFile</method>
+  <thread>13</thread>
+  <message>File experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/HV is a file. Deleting file.</message>
 </record>
 <record>
-  <date>2017-12-18T17:42:02</date>
-  <millis>1513618922246</millis>
+  <date>2017-12-19T14:12:48</date>
+  <millis>1513692768104</millis>
   <sequence>43</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
-  <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>14</thread>
-  <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 1, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN1.tsv</message>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>resetFile</method>
+  <thread>13</thread>
+  <message>File succesfully deleted.</message>
 </record>
 <record>
-  <date>2017-12-18T17:42:03</date>
-  <millis>1513618923562</millis>
+  <date>2017-12-19T14:12:48</date>
+  <millis>1513692768105</millis>
   <sequence>44</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
-  <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>14</thread>
-  <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 2, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN2.tsv</message>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>13</thread>
+  <message>HV: 0.0</message>
 </record>
 <record>
-  <date>2017-12-18T17:42:04</date>
-  <millis>1513618924872</millis>
+  <date>2017-12-19T14:12:48</date>
+  <millis>1513692768107</millis>
   <sequence>45</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
-  <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>14</thread>
-  <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 3, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN3.tsv</message>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>13</thread>
+  <message>HV: 0.0</message>
 </record>
 <record>
-  <date>2017-12-18T17:42:06</date>
-  <millis>1513618926189</millis>
+  <date>2017-12-19T14:12:48</date>
+  <millis>1513692768108</millis>
   <sequence>46</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
-  <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>14</thread>
-  <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 4, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN4.tsv</message>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>13</thread>
+  <message>HV: 0.14285714285714282</message>
 </record>
 <record>
-  <date>2017-12-18T17:42:07</date>
-  <millis>1513618927573</millis>
+  <date>2017-12-19T14:12:48</date>
+  <millis>1513692768109</millis>
   <sequence>47</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
-  <message>Computing indicator: HV</message>
+  <thread>13</thread>
+  <message>HV: 0.1714285714285714</message>
 </record>
 <record>
-  <date>2017-12-18T17:42:07</date>
-  <millis>1513618927575</millis>
+  <date>2017-12-19T14:12:48</date>
+  <millis>1513692768110</millis>
   <sequence>48</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
-  <thread>14</thread>
+  <thread>13</thread>
+  <message>HV: 0.0</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:55</date>
+  <millis>1513692775355</millis>
+  <sequence>49</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.component.ExecuteAlgorithms</class>
+  <method>run</method>
+  <thread>13</thread>
+  <message>ExecuteAlgorithms: Preparing output directory</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:55</date>
+  <millis>1513692775356</millis>
+  <sequence>50</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
+  <method>runAlgorithm</method>
+  <thread>13</thread>
+  <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 0, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN0.tsv</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:55</date>
+  <millis>1513692775662</millis>
+  <sequence>51</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
+  <method>runAlgorithm</method>
+  <thread>13</thread>
+  <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 1, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN1.tsv</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:55</date>
+  <millis>1513692775926</millis>
+  <sequence>52</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
+  <method>runAlgorithm</method>
+  <thread>13</thread>
+  <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 2, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN2.tsv</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:56</date>
+  <millis>1513692776154</millis>
+  <sequence>53</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
+  <method>runAlgorithm</method>
+  <thread>13</thread>
+  <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 3, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN3.tsv</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:56</date>
+  <millis>1513692776331</millis>
+  <sequence>54</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.util.ExperimentAlgorithm</class>
+  <method>runAlgorithm</method>
+  <thread>13</thread>
+  <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 4, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN4.tsv</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:56</date>
+  <millis>1513692776520</millis>
+  <sequence>55</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>13</thread>
+  <message>Computing indicator: HV</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:56</date>
+  <millis>1513692776520</millis>
+  <sequence>56</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>13</thread>
   <message>RF: experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.rf</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:56</date>
+  <millis>1513692776521</millis>
+  <sequence>57</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>resetFile</method>
+  <thread>13</thread>
+  <message>File experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/HV exist.</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:56</date>
+  <millis>1513692776521</millis>
+  <sequence>58</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>resetFile</method>
+  <thread>13</thread>
+  <message>File experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/HV is a file. Deleting file.</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:56</date>
+  <millis>1513692776522</millis>
+  <sequence>59</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>resetFile</method>
+  <thread>13</thread>
+  <message>File succesfully deleted.</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:56</date>
+  <millis>1513692776522</millis>
+  <sequence>60</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>13</thread>
+  <message>HV: 0.0</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:56</date>
+  <millis>1513692776523</millis>
+  <sequence>61</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>13</thread>
+  <message>HV: 0.0</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:56</date>
+  <millis>1513692776524</millis>
+  <sequence>62</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>13</thread>
+  <message>HV: 0.0</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:56</date>
+  <millis>1513692776525</millis>
+  <sequence>63</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>13</thread>
+  <message>HV: 0.11111111111111113</message>
+</record>
+<record>
+  <date>2017-12-19T14:12:56</date>
+  <millis>1513692776526</millis>
+  <sequence>64</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>13</thread>
+  <message>HV: 0.44444444444444453</message>
 </record>
 </log>

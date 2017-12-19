@@ -28,7 +28,7 @@ public class DefTableModel extends DefaultTableModel {
 				@SuppressWarnings("unused")
 				Double a = Double.parseDouble((String) this.getValueAt(row, column));
 			}catch(NumberFormatException e) {
-				JOptionPane.showMessageDialog(null,"Valor não aceite, insira somente decimais");
+				JOptionPane.showMessageDialog(null,"Valor nao aceite, insira somente decimais");
 				this.setValueAt("0.0", row, column);
 			}			
 			

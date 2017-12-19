@@ -22,7 +22,7 @@ import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import antiSpamFilter.AntiSpamFilterProblem;
 
 public class ButtonOpListener implements ActionListener {
-	//Listener dedicado aos butões, generalista,enumerado serve para decidir a funcionalidade
+	//Listener dedicado aos butoes, generalista,enumerado serve para decidir a funcionalidade
 	protected enum ManualOptions{GERAR,AVALIAR,GRAVAR,INICIALIZAR};
 	protected enum AutomaticOptions{GERAR_AUTO,GRAVAR_AUTO};
 
@@ -122,11 +122,11 @@ public class ButtonOpListener implements ActionListener {
 					int maxEvaluations=0;
 					do {		
 						try {
-							String str=JOptionPane.showInputDialog("Quanto maior o numero de avaliações mais lento será o algoritmo!\n Qual o máximo de avaliações que deseja? (máximo recomendado 450)");
+							String str=JOptionPane.showInputDialog("Quanto maior o numero de avaliacoes mais lento sera o algoritmo!\n Qual o maximo de avaliacoes que deseja? (maximo recomendado 450)");
 							maxEvaluations = Integer.parseInt(str);
 							done=true;
 						}catch(NumberFormatException e) {
-							JOptionPane.showMessageDialog(null,"Por favor, insira valores numéricos válidos");
+							JOptionPane.showMessageDialog(null,"Por favor, insira valores numericos validos");
 						}
 					} while (!done);
 
@@ -137,7 +137,7 @@ public class ButtonOpListener implements ActionListener {
 						AntiSpamFilterAutomaticConfiguration l = new AntiSpamFilterAutomaticConfiguration(antiSpamProblem,maxEvaluations);
 					}catch(JMetalException e) {
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, "O algoritmo encontrou a otimização máxima!");
+						JOptionPane.showMessageDialog(null, "O algoritmo encontrou a otimizacao maxima!");
 					}
 					LeitorExperimental le = new LeitorExperimental();
 					le.start();
