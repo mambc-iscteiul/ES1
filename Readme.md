@@ -3,8 +3,11 @@ IC1/IC2
 Grupo 70
 
 72788, Mafalda Cardoso, Scrum Master
+
 73291, Filipe Teixeira, Developer
+
 73680, Rui Francisco, Developer
+
 72953, Débora Gabriel, Quality Manager
 
 AntiSpamConfigurationForProfessionalMailbox
