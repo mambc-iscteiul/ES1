@@ -1,9 +1,23 @@
-Identificação da turma (ex: EIC1)
+IC1/IC2
 
-Identificação do grupo (ex: Grupo 2)
+Grupo 70
 
-Identificação do número, nome e papel de cada membro do grupo (ex: 12345, José Silva, Scrum Master)
+72788, Mafalda Cardoso, Scrum Master
+73291, Filipe Teixeira, Developer
+73680, Rui Francisco, Developer
+72953, Débora Gabriel, Quality Manager
 
-Identificação da variante do projeto desenvolvida (ex: AntiSpamConfigurationForProfessionalMailbox)
+AntiSpamConfigurationForProfessionalMailbox
+
 
 Link para um vídeo no youtube com a demonstração da aplicação final desenvolvida (ex: http://...)
+
+
+Funcionalidades extra implementadas:
+- A lista da configuração automática não é editável e só recebe valores numéricos;
+- Os botões não estão ativos até se introduzir o ficheiro de regras (rules.cf);
+- A procura de ficheiros está completamente dedicada, ou seja, não se aceita outros ficheiros que não os desejados;
+- Só se pode realizar a avaliação da configuração se forem inseridos previamente os ficheiros ham e spam;
+- Cada vez que é introduzido um novo ficheiro, as estruturas de dados fazem refresh de forma a ter tudo o mais atualizado possível;
+- As max evaluations na geração automática estão completamente dinâmicas e o programa questiona o user para as introduzir.
+
