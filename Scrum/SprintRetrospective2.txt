@@ -11,7 +11,8 @@ Participantes:
 Things That Went Well:
 - Trabalho exemplar por parte dos Developers. Seguiram à risca os conselhos extraídos da análise ao código pela Quality Manager, de forma a não cometerem os mesmos erros;
 - JMetal e implementação do mesmo realizada de forma eficaz;
-
+- Boa gestão de conflitos internos de tal forma que não prejudicou o sucesso do projeto.
 
 Things That Could Have Gone Better:
 - Falha de comunicação entre os elementos do grupo;
+- Por vezes, tarefas que não eram tão importantes (extras) foram priorizadas em vez de tarefas mais essenciais;
