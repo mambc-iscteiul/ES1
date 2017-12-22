@@ -23,12 +23,25 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 
 import GUI.ButtonOptionListener.AutomaticOptions;
 import GUI.ButtonOptionListener.ManualOptions;
-import GUI.DefaultTableModelEdited.Options;
+import GUI.DefaultTableModelEdited.ListType;
 import GUI.FileChooserListener.FileType;
 import InputOutput.RulesReader;
+/**
+ * The GUI class is the Graphical User Interface for the configuration of the AntiSpamFilter.
+ * It's a workspace of interaction with the representations of the imported rules, and provides
+ * means of evaluation the current set weights associated with each rule.
+ * Also runs an automated algorithm to optimize the weights of each rule in order to satisfy
+ * the requirements of an ProfessionalMailBox.
+ * 
+ * @author ES1-2017-IC1-70
+ * @version 0.9
+ *
+ */
+
 
 public class GUI {
 
@@ -60,6 +73,7 @@ public class GUI {
 	 */
 
 	private static DefaultTableModelEdited manualRulesWeightList;
+
 	private static DefaultTableModelEdited automaticRulesWeightList;
 
 	private static Map<String,Double> rulesMap;
@@ -68,13 +82,15 @@ public class GUI {
 
 
 
-
+/**
+ * This method constructs a User Interface with the specified width and height value
+ * and instantiates all of it's visual and logical components
+ * @param width width value of the GUI window
+ * @param height height value of the GUI window
+ */
 	public GUI(int width, int height) {
 
-		long r = System.currentTimeMillis();
-
 		frame = new JFrame("Configuracao do servico de filtragem anti-spam");
-		//frame.setIconImage(Toolkit.getDefaultToolkit().getImage("/ES1-2017/Images/2814.png"));
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLayout(new GridLayout(3, 0));
 
@@ -87,19 +103,23 @@ public class GUI {
 		frame.pack();
 		frame.setSize(width, height);
 		frame.setVisible(true);
-		long g = System.currentTimeMillis();
-		System.out.println(g-r);
+
 
 	}
 
+	/**
+	 * Facade method that calls all of the constructors for the different parts of the GUI.
+	 */
 	private void addFrameContent() {
-
 		addFirstPanel();
 		addSecondPanel();
 		addThirdPanel();
 
 	}
-
+	/**
+	 * Creates the visual and logic components associated with the first panel of the GUI
+	 * which contemplates the acess of the Files used in the program.
+	 */
 	private void addFirstPanel() {
 		//1. Criacao de painel inicial dirigido aos ficheiros
 		JPanel filesPanel = new JPanel();
@@ -146,13 +166,15 @@ public class GUI {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
+				GUI.setRulesFile(new File(textFieldRules.getText()));
 				RulesReader rulesReader = new RulesReader(textFieldRules.getText());
 				rulesReader.start();
 			}
+			
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				//metodo somente necessario por ser import
-			}
+				}
 			@Override
 			public void removeUpdate(DocumentEvent arg0) {
 				//metodo somente necessario por ser import
@@ -202,6 +224,10 @@ public class GUI {
 
 	}
 
+	/**
+	 * Creates the visual and logic components associated with the second panel of the GUI
+	 * which contemplates the manual configurations on the AntiSpamFilter.
+	 */
 	private void addSecondPanel() {
 		//2. Criacao de painel inicial dirigido a configuracao manual
 		JPanel manualPanel = new JPanel();
@@ -214,15 +240,16 @@ public class GUI {
 
 		//2.1.1. Construcao da tabela
 
+	
 		String[] columnNamesVector = {"Regras","Pesos"};
-		manualRulesWeightList = new DefaultTableModelEdited(columnNamesVector,0, Options.MANUAL);
+		manualRulesWeightList = new DefaultTableModelEdited(columnNamesVector,0, ListType.MANUAL);
 
 		JTable manualRulesTable = new JTable(manualRulesWeightList);
 		manualRulesTable.setGridColor(Color.black);
 
 		JScrollPane scroll = new JScrollPane(manualRulesTable);
 		manualConfigurationPanel.add(scroll, BorderLayout.CENTER);
-
+		
 		//2.1.2. Criacao de painel para falsos positivos e falsos negativos
 		JPanel manualFalseResultsPanel = new JPanel();
 		manualConfigurationPanel.add(manualFalseResultsPanel, BorderLayout.SOUTH);
@@ -301,9 +328,9 @@ public class GUI {
 				//Apresentacao dos botoes
 				JPanel expandedManualButtonsPanel = new JPanel(new GridLayout(1,4));
 				/*
-				 * Criacao de botoes replica, pois a propria implementacao JButton, nao
+				 * Criacao de botoes replicados, pois a propria implementacao JButton, nao
 				 * permite instanciacao multipla, como a DefaultModelList.
-				 * Ou seja, estes nao podem existir em "2" lados ao emsmo tempo. 
+				 * Ou seja, estes nao podem existir em "2" lados ao mesmo tempo. 
 				 */
 				JButton expandedGenerateConfigurationButton = new JButton("Gerar Configuracao");
 				expandedGenerateConfigurationButton.addActionListener(new ButtonOptionListener(ManualOptions.GENERATEMANUAL,null));
@@ -330,6 +357,10 @@ public class GUI {
 
 	}
 
+	/**
+	 * Creates the visual and logic components associated with the third panel of the GUI
+	 * which contemplates the automatic configurations on the AntiSpamFilter.
+	 */
 	private void addThirdPanel() {
 
 		//3. Criacao de painel inicial dirigido a configuracao automatica
@@ -345,7 +376,7 @@ public class GUI {
 		//2.1.1. Construcao da tabela
 
 		String[] columnNames = {"Regras","Pesos"};
-		automaticRulesWeightList= new DefaultTableModelEdited(columnNames,0, Options.AUTOMATIC);
+		automaticRulesWeightList= new DefaultTableModelEdited(columnNames,0, ListType.AUTOMATIC);
 
 
 
@@ -447,29 +478,69 @@ public class GUI {
 
 	}
 
-	/*
-	 * Acesso controlado das listas
-	 */
+	
 
-
-
+/**
+ * This method returns the displayed manual weight list 
+ * 
+ * @return a DefaultTableModelEdited associated with the visualization of the GUI manual Table
+ */
 	public static DefaultTableModelEdited getManualRulesWeightList() {
 		return manualRulesWeightList;
 	}
 
+	/**
+	 * This method returns the displayed automatic weight list 
+	 * 
+	 * @return a DefaultTableModelEdited associated with the visualization of the GUI automatic Table
+	 */
 	public static DefaultTableModelEdited getAutomaticRulesWeightList() {
 		return automaticRulesWeightList;
 	}
+	//--------------------------------------
+	
+	/**
+	 * This method sets the list given in the arguments as the main manual weight list
+	 * 
+	 * @param manualRulesWeightList list to be the designated manual weight list 
+	 */
+	public static void setManualRulesWeightList(DefaultTableModelEdited manualRulesWeightList) {
+		GUI.manualRulesWeightList = manualRulesWeightList;
+	}
+	
+	/**
+	 * This method sets the list given in the arguments as the main manual weight list
+	 * @param automaticRulesWeightList list to be the designated automatic weight list 
+	 */
+	public static void setAutomaticRulesWeightList(DefaultTableModelEdited automaticRulesWeightList) {
+		GUI.automaticRulesWeightList = automaticRulesWeightList;
+	}
+
 
 	//---------------------------------------
 
+	/**
+	 * This method returns the mapping of the rules and their weights for efficient logical computation 
+	 * 
+	 * @return a HashMap associated with the desired mapping of rules-weights
+	 */
 	public static Map<String, Double> getRulesMap() {
 		return rulesMap;
 	}
+	/**
+	 * This method returns the mapping of the rules present in each e-mail saved in the Spam file. 
+	 * 
+	 * @return a HashMap associated with the rules present in each Spam e-mail
+	 */
 
 	public static Map<Integer, ArrayList<String>> getSpamMap() {
 		return spamMap;
 	}
+	/**
+	 * This method returns the mapping of the rules present in each e-mail saved in the Ham file. 
+	 * 
+	 * @return a HashMap associated with the rules present in each Ham e-mail
+	 */
 
 	public static Map<Integer, ArrayList<String>> getHamMap(){
 		return hamMap;
@@ -479,7 +550,9 @@ public class GUI {
 
 
 	//---------------------------------------
-	// Ativacao dos butoes inactivos ate se escolher o ficheiro de regras
+/**
+ * This method enables all the buttons from the moment that the rules file is selected
+ */
 	public static void ActivateButons() {
 		for (int i = 0; i < buttonList.size(); i++) {
 			buttonList.get(i).setEnabled(true);
@@ -491,68 +564,150 @@ public class GUI {
 
 
 	//---------------------------------------
-
-	public static  JTextField getTextFieldManualFalsePositive() {
+	
+	/**
+	 * This method returns the TextField object associated with the manual evaluation
+	 * count of False Positives detected 
+	 * 
+	 * @return a JTextField with the value of detected false positives
+	 */
+	public static JTextField getTextFieldManualFalsePositive() {
 		return textFieldManualFalsePositive;
 	}
 
+
+	/**
+	 * This method returns the TextField object associated with the manual evaluation
+	 * count of False Negatives detected 
+	 * 
+	 * @return a JTextField with the value of detected false negatives
+	 */
+	
 	public static JTextField getTextFieldManualFalseNegative() {
 		return textFieldManualFalseNegative;
 	}
-
+//___________________________________________________________
+	
+	/**
+	 * This method returns the TextField object associated with the automatic evaluation
+	 * count of False Positives detected 
+	 * 
+	 * @return a JTextField with the value of detected false positives
+	 */
 	public static JTextField getTextFieldAutomaticFalsePositive() {
 		return textFieldAutomaticFalsePositive;
 	}
 
+	/**
+	 * This method returns the TextField object associated with the automatic evaluation
+	 * count of False Negatives detected 
+	 * 
+	 * @return a JTextField with the value of detected false negatives
+	 */
+	
 	public static JTextField getTextFieldAutomaticFalseNegative() {
 		return textFieldAutomaticFalseNegative;
 	}
 
 	//---------------------------------------
+	
+	/**
+	 * This method returns the TextField object associated with the File path 
+	 * of the desired Rules file
+	 * 
+	 * @return a JTextField with an absolute path for a File
+	 */
 
 	public static JTextField getTextFieldRules() {
 		return textFieldRules;	
 	}
+	/**
+	 * This method returns the TextField object associated with the File path 
+	 * of the desired Ham file
+	 * 
+	 * @return a JTextField with an absolute path for a File
+	 */
 	public static JTextField getTextFieldHam() {
 		return textFieldHam;
 	}
 
+	/**
+	 * This method returns the TextField object associated with the File path 
+	 * of the desired Spam file
+	 * 
+	 * @return a JTextField with an absolute path for a File
+	 */
 	public static JTextField getTextFieldSpam() {
 		return textFieldSpam;
 	}
 
 	//---------------------------------------
-	public ArrayList<JButton> getButtonList() {
+	/**
+	 * This method returns a list of all the buttons in the GUI
+	 * 
+	 * @return an ArrayList with all the buttons of the GUI
+	 */
+	public static ArrayList<JButton> getButtonList() {
 		return buttonList;
 	}
 
 	//---------------------------------------
+	/**
+	 * This method returns the selected Rules File
+	 * 
+	 * @return a File of the desired rules
+	 */
 
 	public static File getRulesFile() {
 		return rulesFile;
 	}
+	/**
+	 * This method returns the selected Spam File
+	 * 
+	 * @return a File of the Spam e-mails
+	 */
 	public static File getSpamFile() {
 		return spamFile;
 	}
+	/**
+	 * This method returns the selected Ham File
+	 * 
+	 * @return a File of the Ham e-mails
+	 */
 
 	public static File getHamFile() {
 		return hamFile;
 	}
 
-
 	//---------------------------------------
+	
+	/**
+	 * This method sets the desired File to be the designated Rules File
+	 * 
+	 * @param rules File to set as the designated Rules File
+	 */
 	public static void setRulesFile(File rules) {
 		GUI.rulesFile = rules;
 	}
+	
+	/**
+	 * This method sets the desired File to be the designated Ham File
+	 * 
+	 * @param ham File to set as the designated Ham File
+	 */
 
-	public  static void setHamFile(File ham) {
+	public static void setHamFile(File ham) {
 		GUI.hamFile = ham;
 	}
 
+	/**
+	 * This method sets the desired File to be the designated Spam File
+	 * 
+	 * @param spam File to set as the designated Spam File
+	 */
+	
 	public  static void setSpamFile(File spam) {
 		GUI.spamFile = spam;
 	}
-
-
 
 }

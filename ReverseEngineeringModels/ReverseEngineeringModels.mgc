@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ClassDiagram>
-    <Class name="GUI.FileChooserListener" x="710" y="284">
+    <Class name="GUI.DefaultTableModelEdited" x="705" y="478">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="GUI.DefaultTableModelEdited.Options"
+            endpointName="option" kind="Simple"/>
+    </Class>
+    <Class name="GUI.FileChooserListener" x="47" y="226">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -10,9 +22,9 @@
             accessors-accepted="false" constructors-accepted="false"/>
         <Association
             destinationClassName="GUI.FileChooserListener.FileType"
-            endpointName="enu" kind="Simple"/>
+            endpointName="fileType" kind="Simple"/>
     </Class>
-    <Class name="InputOutput.Leitor" x="682" y="456">
+    <Class name="InputOutput.RulesReader" x="290" y="318">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -20,10 +32,32 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
+        <Communication destinationClassName="GUI.DefaultTableModelEdited"/>
         <Communication destinationClassName="GUI.GUI"/>
+    </Class>
+    <Class name="InputOutput.SpamReader" x="310" y="155">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
     </Class>
     <Class name="antiSpamFilter.AntiSpamFilterAutomaticConfiguration"
-        x="78" y="55">
+        x="48" y="16">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="antiSpamFilter.AntiSpamFilterProblem"
+            endpointName="antiSpamFilterProblem" kind="Simple"/>
+    </Class>
+    <Class name="antiSpamFilter.AntiSpamFilterProblem" x="34" y="105">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -32,7 +66,7 @@
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
     </Class>
-    <Class name="antiSpamFilter.AntiSpamFilterProblem" x="498" y="50">
+    <Class name="GUI.GUI" x="1017" y="325">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -40,8 +74,14 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="GUI.DefaultTableModelEdited"
+            endpointName="automaticRulesWeightList" kind="Simple"/>
+        <Association destinationClassName="GUI.DefaultTableModelEdited"
+            endpointName="manualRulesWeightList" kind="Simple">
+            <Point x="1059" y="502"/>
+        </Association>
     </Class>
-    <Class name="GUI.ButtonOpListener" x="696" y="182">
+    <Class name="Avaliators.FalseNegativeAvaliator" x="827" y="5">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -49,28 +89,9 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
-        <Association destinationClassName="GUI.ButtonOpListener.Option"
-            endpointName="op" kind="Simple"/>
         <Communication destinationClassName="GUI.GUI"/>
     </Class>
-    <Class name="GUI.GUI" x="331" y="211">
-        <AttributesDisplayFilter public-accepted="true"
-            private-accepted="true" protected-accepted="true"
-            default-accepted="true" static-accepted="false"/>
-        <MethodDisplayFilter public-accepted="true"
-            private-accepted="false" protected-accepted="false"
-            default-accepted="false" static-accepted="false"
-            accessors-accepted="false" constructors-accepted="false"/>
-        <Association destinationClassName="GUI.DefTableModel"
-            endpointName="lista_regras_pesos_manual" kind="Simple">
-            <Point x="166" y="412"/>
-        </Association>
-        <Association destinationClassName="GUI.DefTableModel"
-            endpointName="lista_regras_pesos_automatico" kind="Simple">
-            <Point x="569" y="412"/>
-        </Association>
-    </Class>
-    <Class name="GUI.DefTableModel" x="275" y="387">
+    <Class name="GUI.DefaultTableModelEdited.Options" x="765" y="358">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -79,7 +100,7 @@
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
     </Class>
-    <Class name="Testes.TesteGUI" x="486" y="559">
+    <Class name="InputOutput.HamReader" x="319" y="12">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -87,26 +108,51 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
-        <Association destinationClassName="InputOutput.Escritor"
-            endpointName="escritor" kind="Simple"/>
+    </Class>
+    <Class name="GUI.ButtonOptionListener.ManualOptions" x="716" y="126">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="GUI.ButtonOptionListener" x="424" y="148">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="GUI.ButtonOptionListener.AutomaticOptions"
+            endpointName="automaticOption" kind="Simple"/>
+        <Association
+            destinationClassName="GUI.ButtonOptionListener.ManualOptions"
+            endpointName="manualOption" kind="Simple"/>
+        <Communication destinationClassName="GUI.GUI"/>
+    </Class>
+    <Class name="Testes.TesteGUI" x="633" y="325">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="Launch.Launch"
+            endpointName="launch" kind="Simple"/>
         <Association destinationClassName="GUI.GUI" endpointName="gui" kind="Simple"/>
-        <Association destinationClassName="InputOutput.Leitor"
-            endpointName="leitor" kind="Simple"/>
-        <Association destinationClassName="GUI.FileChooserListener"
-            endpointName="fc" kind="Simple"/>
-        <Communication destinationClassName="InputOutput.Leitor"/>
+        <Association destinationClassName="InputOutput.Writer"
+            endpointName="writer" kind="Simple"/>
+        <Association destinationClassName="InputOutput.RulesReader"
+            endpointName="rulesReader" kind="Simple"/>
+        <Communication destinationClassName="InputOutput.RulesReader"/>
         <Communication destinationClassName="GUI.GUI"/>
     </Class>
-    <Class name="GUI.ButtonOpListener.Option" x="557" y="173">
-        <AttributesDisplayFilter public-accepted="true"
-            private-accepted="true" protected-accepted="true"
-            default-accepted="true" static-accepted="false"/>
-        <MethodDisplayFilter public-accepted="true"
-            private-accepted="false" protected-accepted="false"
-            default-accepted="false" static-accepted="false"
-            accessors-accepted="false" constructors-accepted="false"/>
-    </Class>
-    <Class name="Avaliators.FalsePositiveAvaliator" x="12" y="255">
+    <Class name="Avaliators.FalsePositiveAvaliator" x="1092" y="4">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -116,7 +162,7 @@
             accessors-accepted="false" constructors-accepted="false"/>
         <Communication destinationClassName="GUI.GUI"/>
     </Class>
-    <Class name="Launch.Launch" x="343" y="123">
+    <Class name="InputOutput.SolutionReader" x="511" y="10">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -125,7 +171,7 @@
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
     </Class>
-    <Class name="GUI.FileChooserListener.FileType" x="573" y="297">
+    <Class name="Launch.Launch" x="654" y="228">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -134,7 +180,7 @@
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
     </Class>
-    <Class name="InputOutput.Escritor" x="991" y="441">
+    <Class name="GUI.ButtonOptionListener.AutomaticOptions" x="461" y="253">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -142,5 +188,41 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="InputOutput.Writer" x="269" y="464">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="GUI.DefaultTableModelEdited"
+            endpointName="tableModel" kind="Simple"/>
+    </Class>
+    <Class name="GUI.FileChooserListener.FileType" x="124" y="360">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="Testes.TesteAvaliators" x="1015" y="198">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="Avaliators.FalsePositiveAvaliator"
+            endpointName="falsePositiveAvaliator" kind="Simple"/>
+        <Association
+            destinationClassName="Avaliators.FalseNegativeAvaliator"
+            endpointName="falseNegativeAvaliator" kind="Simple"/>
+        <Association destinationClassName="GUI.GUI" endpointName="gui" kind="Simple"/>
     </Class>
 </ClassDiagram>

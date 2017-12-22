@@ -4,16 +4,15 @@ Coordenador:
 - Mafalda Cardoso.
 
 Participantes:
-- D√©bora Gabriel;
+- DÈbora Gabriel;
 - Filipe Teixeira;
 - Rui Francisco.
 
 Things That Went Well:
-- Coordena√ß√£o entre os membros da equipa, facilitadas pelas reuni√µes de Daily Scrum;
-- A carga de trabalho foi bem distribu√≠da ao longo das semanas propostas para t√©rmino do Sprint, logo evit√°mos ter uma carga hor√°ria de trabalho excessiva no final do Sprint;
-- Visto que, fomos implementando pequenas funcionalidades de cada vez, melhor√°mos a estimativa do tempo utilizado na realiza√ß√£o e planeamento do Sprint.
+- CoordenaÁ„o entre os membros da equipa, facilitadas pelas reuniıes de Daily Scrum;
+- A carga de trabalho foi bem distribuÌda ao longo das semanas propostas para tÈrmino do Sprint, logo evit·mos ter uma carga hor·ria de trabalho excessiva no final do Sprint;
+- Visto que, fomos implementando pequenas funcionalidades de cada vez, melhor·mos a estimativa do tempo utilizado na realizaÁ„o e planeamento do Sprint.
 
 Things That Could Have Gone Better:
 - Substim√°mos algumas tarefas;
 - As pessoas do grupo, por vezes, acabaram por realizar tarefas que n√£o lhes competia.
-

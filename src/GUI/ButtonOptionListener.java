@@ -12,33 +12,59 @@ import org.uma.jmetal.util.JMetalException;
 
 import Avaliators.FalseNegativeAvaliator;
 import Avaliators.FalsePositiveAvaliator;
-import InputOutput.Writer;
 import InputOutput.HamReader;
 import InputOutput.SolutionReader;
 import InputOutput.SpamReader;
+import InputOutput.Writer;
 import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import antiSpamFilter.AntiSpamFilterProblem;
+/**
+ * This class is an ActionListener for the buttons in the GUI of the AntiSpamFilterConfiguration
+ * @author ES1-2017-IC1-70
+ * @version 0.9
+ *
+ */
 
 public class ButtonOptionListener implements ActionListener {
 	//Listener dedicado aos butões, generalista,enumerado serve para decidir a funcionalidade
+	/**
+	 * This Enumerate represents the default operations in the manual configuration
+	 * @author ES1-2017-IC1-70
+	 * @version 0.9
+	 */
 	protected enum ManualOptions{GENERATEMANUAL, EVALUATE, SAVEMANUAL, INITIALIZE};
+	/**
+	 * This Enumerate represents the default operations in the automatic configuration
+	 * @author ES1-2017-IC1-70
+	 * @version 0.9
+	 */
 	protected enum AutomaticOptions{GENERATEAUTOMATIC, SAVEAUTOMATIC};
 
 	private ManualOptions manualOption;
 	private AutomaticOptions automaticOption;
 
 
+	/**
+	 * Constructs an ActionListener in respect with the type of operations
+	 * @param manualOption type of manual operation, can be null
+	 * @param automaticOption type of automatic operation, can be null
+	 */
 	public ButtonOptionListener(ManualOptions manualOption,AutomaticOptions automaticOption) {
 		this.manualOption = manualOption;
 		this.automaticOption = automaticOption;
 	}
 
-
-
+	/**
+	 * Invoked when an action occurs. Depending on the option type,
+	 * the actions will vary
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
 		if(automaticOption == null) {
+			/*
+			 * Gera valores aleatório 
+			 */
 			switch(manualOption) {
 			case GENERATEMANUAL: 
 				for (int i = 0; i < GUI.getManualRulesWeightList().getRowCount(); i++) {
@@ -49,16 +75,14 @@ public class ButtonOptionListener implements ActionListener {
 				}
 				break;
 
+				/*
+				 * Lança os avaliadores 
+				 */
 			case EVALUATE:
 				if(!GUI.getTextFieldHam().getText().equals("")&&!GUI.getTextFieldSpam().getText().equals("")) {
 					for (int i = 0; i < GUI.getManualRulesWeightList().getRowCount(); i++) {
 						GUI.getRulesMap().put((String) GUI.getManualRulesWeightList().getValueAt(i, 0), Double.parseDouble((String) GUI.getManualRulesWeightList().getValueAt(i, 1)));
 					}
-					//					for (String key : GUI.getMapa().keySet()) {
-					//						   System.out.println("------------------------------------------------");
-					//						   System.out.println("key: " + key + " value: " + GUI.getMapa().get(key));
-					//						}
-
 					GUI.setHamFile(new File(GUI.getTextFieldHam().getText()));
 					FalsePositiveAvaliator falsePositiveAvaliator = new FalsePositiveAvaliator(GUI.getHamFile());
 					falsePositiveAvaliator.start();
@@ -73,17 +97,27 @@ public class ButtonOptionListener implements ActionListener {
 				break;
 
 			case SAVEMANUAL	:
+				/*
+				 * Guarda os pesos no ficheiro
+				 */
 				Writer writer = null;
 				try {
 					GUI.setRulesFile(new File(GUI.getTextFieldRules().getText()));
 					writer = new Writer(GUI.getRulesFile(),GUI.getManualRulesWeightList());
 					writer.start();
+
+					writer = new Writer(new File("./AntiSpamConfigurationForProfessionalMailbox/rules.cf"),GUI.getManualRulesWeightList());
+					writer.start();
+
+
 				} catch (IOException e1) {
-					e1.printStackTrace();
 				}
 				break;
 
 			case INITIALIZE:
+				/*
+				 * Atribui "0.0"a todas as regras 
+				 */
 				for (int i = 0; i < GUI.getManualRulesWeightList().getRowCount(); i++) {
 					GUI.getManualRulesWeightList().setValueAt("0.0", i, 1);
 				}
@@ -96,6 +130,10 @@ public class ButtonOptionListener implements ActionListener {
 		}else {
 			switch(automaticOption) {
 			case GENERATEAUTOMATIC: 
+				/*
+				 *Lança o algoritmo automático e lê do ficheiro de otimização que este cria
+				 * para replicar os pesos da melhor opção, na tabela do GUI 
+				 */
 				if(!GUI.getTextFieldHam().getText().equals("")&&!GUI.getTextFieldSpam().getText().equals("")) {
 
 					//Criar Mapa de Rules a 0.0 (Aproveitar as lista manual)
@@ -119,8 +157,10 @@ public class ButtonOptionListener implements ActionListener {
 					boolean done = false;
 					int maxEvaluations = 0;
 					do {		
+
 						try {
 							String notice = JOptionPane.showInputDialog("Quanto maior o numero de avaliações mais lento será o algoritmo!\n Qual o máximo de avaliações que deseja? (máximo recomendado 450)");
+
 							maxEvaluations = Integer.parseInt(notice);
 							done = true;
 						}catch(NumberFormatException e) {
@@ -134,9 +174,9 @@ public class ButtonOptionListener implements ActionListener {
 						@SuppressWarnings("unused")
 						AntiSpamFilterAutomaticConfiguration antiSpamFilterAutomaticConfiguration = new AntiSpamFilterAutomaticConfiguration(antiSpamFilterProblem,maxEvaluations);
 					}catch(JMetalException e) {
-						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "O algoritmo encontrou a otimização máxima!");
 					}
+					createEPS();
 					SolutionReader solutionReader = new SolutionReader();
 					solutionReader.start();
 
@@ -147,16 +187,41 @@ public class ButtonOptionListener implements ActionListener {
 
 			case SAVEAUTOMATIC:
 				try {
+					/*
+					 * Guarda os pesos no ficheiro
+					 */
 					GUI.setRulesFile(new File(GUI.getTextFieldRules().getText()));
 					Writer writer = new Writer(GUI.getRulesFile(), GUI.getAutomaticRulesWeightList());
 					writer.start();
+
+					writer = new Writer(new File("./AntiSpamConfigurationForProfessionalMailbox/rules.cf"),GUI.getManualRulesWeightList());
+					writer.start();
 				} catch (IOException e) {
-					e.printStackTrace();
 				}
 				break;
 			default:
 				break;
 			}
 		}
+	}
+
+	private void createEPS() {
+
+		String[] params = new String [2];
+
+		params[0] = "C:/Program Files/R/R-3.4.3/bin/x64/Rscript.exe";
+
+		params[1] = "C:/Users/Filipe/git/ES1-2017-IC1-70/experimentBaseDirectory/AntiSpamStudy/R/HV.Boxplot.R";
+
+		String[] envp = new String [1];
+
+		envp[0] = "Path=C:/Program Files/R/R-3.4.3/bin/x64";
+
+		try {
+			@SuppressWarnings("unused")
+			Process p = Runtime.getRuntime().exec(params, envp, new File("C:/Users/Filipe/git/ES1-2017-IC1-70/experimentBaseDirectory/AntiSpamStudy/R"));
+		} catch (IOException e) {
+		}
+
 	}
 }
