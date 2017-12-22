@@ -12,16 +12,18 @@ class TestDataStructures {
 	void init()
 	{
 		GUI gui =  new GUI(1100, 1100);
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 3; i++) {
 			GUI.getButtonList().get(i).doClick();
 		}
+		GUI.getButtonList().get(9).doClick();
 	}
-
+	
 	@Test
 	void testSpamReader() throws InterruptedException {
 		init();
 		assertNotNull(GUI.getSpamMap());
 		System.out.println("-------------------LI AGORA--------------------------");
+		
 		assertEquals(239, GUI.getSpamMap().size());
 	}
 
@@ -30,8 +32,15 @@ class TestDataStructures {
 		init();
 		assertNotNull(GUI.getHamMap());
 		System.out.println("-------------------LI AGORA--------------------------");
+		
 		assertEquals(695, GUI.getHamMap().size());
 	}
 
+	@Test
+	void testSolutionReader() {
+		init();
+		assertNotNull(GUI.getAutomaticRulesWeightList());
+		assertEquals(335,GUI.getAutomaticRulesWeightList().getRowCount());
 
+	}
 }

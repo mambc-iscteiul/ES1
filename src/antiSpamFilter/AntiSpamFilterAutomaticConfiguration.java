@@ -26,6 +26,7 @@ public class AntiSpamFilterAutomaticConfiguration {
 	private static AntiSpamFilterProblem antiSpamFilterProblem;
 	private static int maxEvaluations;
 
+
 	public AntiSpamFilterAutomaticConfiguration(AntiSpamFilterProblem antiSpamProblem, int maxEvaluations) {
 		antiSpamFilterProblem = antiSpamProblem;
 		AntiSpamFilterAutomaticConfiguration.maxEvaluations=maxEvaluations;

@@ -139,9 +139,9 @@ public class ButtonOptionListener implements ActionListener {
 					//Criar Mapa de Rules a 0.0 (Aproveitar as lista manual)
 					for (int i = 0; i < GUI.getAutomaticRulesWeightList().getRowCount(); i++) {
 						GUI.getRulesMap().put((String) GUI.getAutomaticRulesWeightList().getValueAt(i, 0), 0.0);
-						
-					}
 
+					}
+					
 					//criar a estrutura de dados de HAM
 
 					GUI.setHamFile(new File(GUI.getTextFieldHam().getText()));
@@ -205,7 +205,7 @@ public class ButtonOptionListener implements ActionListener {
 	private void createEPS() {
 
 		String[] params = new String [2];
-
+		
 		params[0] = "C:/Program Files/R/R-3.4.3/bin/x64/Rscript.exe";
 
 		params[1] = "./experimentBaseDirectory/AntiSpamStudy/R/HV.Boxplot.R";
@@ -213,10 +213,10 @@ public class ButtonOptionListener implements ActionListener {
 		String[] envp = new String [1];
 
 		envp[0] = "Path=C:/Program Files/R/R-3.4.3/bin/x64";
-
+		
 		try {
 			@SuppressWarnings("unused")
-			Process p = Runtime.getRuntime().exec(params, envp, new File("C:/Users/Filipe/Desktop"));
+			Process p = Runtime.getRuntime().exec(params, envp, new File("C:Users/Rita/Desktop"));
 		} catch (IOException e) {
 		}
 

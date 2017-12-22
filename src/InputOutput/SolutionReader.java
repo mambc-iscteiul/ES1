@@ -13,6 +13,7 @@ import GUI.GUI;
  * @version 0.9
  *
  */
+
 public class SolutionReader extends Thread {
 
 	private double falsePositiveOptimization = 999999;
@@ -43,9 +44,6 @@ public class SolutionReader extends Thread {
 				}
 				countLines++;
 			}
-
-			System.out.println(lineNumber+"ª linha");
-			System.out.println("Par otimizado: "+falsePositiveOptimization+", "+falseNegativeOptimization+".");
 
 			scanner = new Scanner(new File("./experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rs"));
 			int counter = 1;
