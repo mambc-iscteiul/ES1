@@ -49,12 +49,14 @@ public class RulesReader extends Thread{
 						//como o removeRow provoca um ajustamento de numeração da lista
 						//tem de se remover a primeira posição o numero de vezes igual à 
 						//dimensão original da list
-						String[] columnNamesVector = {"Regras","Pesos"};
-						DefaultTableModelEdited newManualList = new DefaultTableModelEdited(columnNamesVector, 0, ListType.MANUAL);
-						DefaultTableModelEdited newAutomaticList = new DefaultTableModelEdited(columnNamesVector, 0, ListType.AUTOMATIC);
-						GUI.setAutomaticRulesWeightList(newAutomaticList);
-						GUI.setManualRulesWeightList(newManualList);
+					GUI.getManualRulesWeightList().removeRow(0);
+					GUI.getTextFieldManualFalseNegative().setText("0");
+					GUI.getTextFieldManualFalsePositive().setText("0");
+					GUI.getAutomaticRulesWeightList().removeRow(0);
+					GUI.getTextFieldAutomaticFalseNegative().setText("0");
+					GUI.getTextFieldAutomaticFalseNegative().setText("0");
 					}
+					
 				}catch(IndexOutOfBoundsException e) {
 				}
 			}

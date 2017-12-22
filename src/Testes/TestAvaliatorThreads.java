@@ -18,7 +18,7 @@ import Launch.Launch;
  * @version 0.9
  *
  */
-class TesteAvaliators {
+class TesteAvaliatorThreads {
 
 	Launch launchTester= new Launch();
 	FalsePositiveAvaliator falsePositiveAvaliator;
@@ -27,6 +27,7 @@ class TesteAvaliators {
 	@SuppressWarnings("static-access")
 	@Test
 	void test() {
+		
 		launchTester.main(null);
 
 		for (int i = 0; i < 3; i++) {
@@ -41,6 +42,7 @@ class TesteAvaliators {
 		
 		GUI.getRulesMap().replace("BAYES_00", 6.0);
 		GUI.getRulesMap().replace("BAYES_99", -6.0);
+		System.out.println("MAPA----->" + GUI.getRulesMap());
 
 
 		File HAM_test = new File(GUI.getTextFieldHam().getText());

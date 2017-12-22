@@ -497,23 +497,23 @@ public class GUI {
 		return automaticRulesWeightList;
 	}
 	//--------------------------------------
+//	
+//	/**
+//	 * This method sets the list given in the arguments as the main manual weight list
+//	 * 
+//	 * @param manualRulesWeightList list to be the designated manual weight list 
+//	 */
+//	public static void setManualRulesWeightList(DefaultTableModelEdited manualRulesWeightList) {
+//		GUI.manualRulesWeightList = manualRulesWeightList;
+//	}
 	
-	/**
-	 * This method sets the list given in the arguments as the main manual weight list
-	 * 
-	 * @param manualRulesWeightList list to be the designated manual weight list 
-	 */
-	public static void setManualRulesWeightList(DefaultTableModelEdited manualRulesWeightList) {
-		GUI.manualRulesWeightList = manualRulesWeightList;
-	}
-	
-	/**
-	 * This method sets the list given in the arguments as the main manual weight list
-	 * @param automaticRulesWeightList list to be the designated automatic weight list 
-	 */
-	public static void setAutomaticRulesWeightList(DefaultTableModelEdited automaticRulesWeightList) {
-		GUI.automaticRulesWeightList = automaticRulesWeightList;
-	}
+//	/**
+//	 * This method sets the list given in the arguments as the main manual weight list
+//	 * @param automaticRulesWeightList list to be the designated automatic weight list 
+//	 */
+//	public static void setAutomaticRulesWeightList(DefaultTableModelEdited automaticRulesWeightList) {
+//		GUI.automaticRulesWeightList = automaticRulesWeightList;
+//	}
 
 
 	//---------------------------------------
