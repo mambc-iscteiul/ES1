@@ -1,0 +1,18 @@
+Retrospective Summary Report
+
+Coordenador: 
+- Mafalda Cardoso.
+
+Participantes:
+- Debora Gabriel;
+- Filipe Teixeira;
+- Rui Francisco.
+
+Things That Went Well:
+- Coordenacao entre os membros da equipa, facilitadas pelas reunioes de Daily Scrum;
+- A carga de trabalho foi bem distribuida ao longo das semanas propostas para termino do Sprint, logo evitamos ter uma carga horaria de trabalho excessiva no final do Sprint;
+- Visto que, fomos implementando pequenas funcionalidades de cada vez, melhoramos a estimativa do tempo utilizado na realizacao e planeamento do Sprint.
+
+Things That Could Have Gone Better:
+- Substimámos algumas tarefas;
+- As pessoas do grupo, por vezes, acabaram por realizar tarefas que não lhes competia.
