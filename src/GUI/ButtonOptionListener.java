@@ -12,10 +12,10 @@ import org.uma.jmetal.util.JMetalException;
 
 import Avaliators.FalseNegativeAvaliator;
 import Avaliators.FalsePositiveAvaliator;
-import InputOutput.Writer;
 import InputOutput.HamReader;
 import InputOutput.SolutionReader;
 import InputOutput.SpamReader;
+import InputOutput.Writer;
 import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import antiSpamFilter.AntiSpamFilterProblem;
 /**
@@ -176,24 +176,8 @@ public class ButtonOptionListener implements ActionListener {
 						JOptionPane.showMessageDialog(null, "O algoritmo encontrou a otimização máxima!");
 					}
 
-					//					System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-					//					
-					//					try
-					//					{
-					//						
-					//						// Command to create an external process
-					//						// Running the above command
-					//						 String command = "C:\\Users\\Filipe\\git\\ES1-2017-IC1-70\\experimentBaseDirectory\\AntiSpamStudy\\latex\\AntiSpamStudy.tex";		 
-					//				            // Running the above command
-					//				            Runtime run  = Runtime.getRuntime();
-					//				            Process proc = run.exec("/usr/local/bin/pdflatex " + NSGAII_TEX_FILE, null,
-					//									new File(ANTI_SPAM_STUDY + LATEX_DIR)).waitFor();
-					//					}
-					//
-					//					catch (IOException e)
-					//					{
-					//						e.printStackTrace();
-					//					}
+					m();
+					
 
 					SolutionReader solutionReader = new SolutionReader();
 					solutionReader.start();
@@ -208,7 +192,7 @@ public class ButtonOptionListener implements ActionListener {
 					/*
 					 * Guarda os pesos no ficheiro
 					 */
-					
+
 					GUI.setRulesFile(new File(GUI.getTextFieldRules().getText()));
 					Writer writer = new Writer(GUI.getRulesFile(), GUI.getAutomaticRulesWeightList());
 					writer.start();
@@ -223,5 +207,26 @@ public class ButtonOptionListener implements ActionListener {
 				break;
 			}
 		}
+	}
+
+	private void m() {
+		
+		String[] params = new String [2];
+
+		params[0] = "C:/Program Files/R/R-3.4.3/bin/x64/Rscript.exe";
+
+		params[1] = "C:/Users/Filipe/git/ES1-2017-IC1-70/experimentBaseDirectory/AntiSpamStudy/R/HV.Boxplot.R";
+
+		String[] envp = new String [1];
+
+		envp[0] = "Path=C:/Program Files/R/R-3.4.3/bin/x64";
+		
+		try {
+			@SuppressWarnings("unused")
+			Process p = Runtime.getRuntime().exec(params, envp, new File("C:/Users/Filipe/git/ES1-2017-IC1-70/experimentBaseDirectory/AntiSpamStudy/R"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

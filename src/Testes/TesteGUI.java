@@ -44,8 +44,7 @@ class TesteGUI {
 	}
 
 	@Test
-	void testButtons(){
-		
+	void testButtons() {
 		GUI.ActivateButons();	
 		for (int i = 0; i < GUI.getButtonList().size(); i++) {
 			assertNotNull(GUI.getButtonList().get(i));
