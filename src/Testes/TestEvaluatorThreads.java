@@ -18,7 +18,7 @@ import Launch.Launch;
  * @version 0.9
  *
  */
-class TesteAvaliatorThreads {
+class TesteEvaluatorThreads {
 
 	Launch launchTester= new Launch();
 	FalsePositiveAvaliator falsePositiveAvaliator;
@@ -27,7 +27,7 @@ class TesteAvaliatorThreads {
 	@SuppressWarnings("static-access")
 	@Test
 	void test() {
-		
+
 		launchTester.main(null);
 
 		for (int i = 0; i < 3; i++) {
@@ -39,7 +39,7 @@ class TesteAvaliatorThreads {
 		for (int i = 0; i < GUI.getManualRulesWeightList().getRowCount(); i++) {
 			GUI.getRulesMap().put((String) GUI.getManualRulesWeightList().getValueAt(i, 0), Double.parseDouble((String) GUI.getManualRulesWeightList().getValueAt(i, 1)));
 		}
-		
+
 		GUI.getRulesMap().replace("BAYES_00", 6.0);
 		GUI.getRulesMap().replace("BAYES_99", -6.0);
 		System.out.println("MAPA----->" + GUI.getRulesMap());
@@ -64,7 +64,7 @@ class TesteAvaliatorThreads {
 		} catch (InterruptedException e1) {
 		}
 		assertEquals(227, falseNegativeAvaliator.getFalseNegativesCount());
-		
+
 		assertNotNull(falseNegativeAvaliator.getRuleMap());
 		assertNotNull(falsePositiveAvaliator.getRulesMap());
 
