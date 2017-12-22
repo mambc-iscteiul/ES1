@@ -46,8 +46,7 @@ class TestAntiSpamFilter {
 		assertNotNull(problem.getRulesMap());
 		
 		assertEquals(335, problem.getRulesMap().size());
-		assertEquals(695, problem.getHamMap().size());
-		assertEquals(239, problem.getSpamMap().size());
+
 		try {
 			AntiSpamFilterAutomaticConfiguration configuration = new AntiSpamFilterAutomaticConfiguration(problem, 1);
 			assertNotNull(configuration);
