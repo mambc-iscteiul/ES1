@@ -39,6 +39,7 @@ public class Writer extends Thread{
 	@Override
 	public void run() {
 
+		
 		try {
 			bufferedWriter.flush();
 			for (int i = 0; i < GUI.getManualRulesWeightList().getRowCount(); i++) {

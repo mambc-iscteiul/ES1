@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import GUI.DefaultTableModelEdited;
 import GUI.GUI;
+import GUI.DefaultTableModelEdited.ListType;
 /**
  * This class maps all the Rules in a relation rules-weight and represents it visually.
  * 
@@ -37,7 +39,7 @@ public class RulesReader extends Thread{
 	@Override
 	public void run() {
 		try {
-
+			
 			Scanner scanner = new Scanner(new File(namefile));
 			if(GUI.getManualRulesWeightList().getRowCount()>0) {
 				try {
@@ -46,12 +48,14 @@ public class RulesReader extends Thread{
 					for (int i = 0; i < numberOfLines; i++) {
 						//como o removeRow provoca um ajustamento de numeração da lista
 						//tem de se remover a primeira posição o numero de vezes igual à 
-						//dimensão original da lista
-						GUI.getManualRulesWeightList().removeRow(0);
-						GUI.getAutomaticRulesWeightList().removeRow(0);
+						//dimensão original da list
+						String[] columnNamesVector = {"Regras","Pesos"};
+						DefaultTableModelEdited newManualList = new DefaultTableModelEdited(columnNamesVector, 0, ListType.MANUAL);
+						DefaultTableModelEdited newAutomaticList = new DefaultTableModelEdited(columnNamesVector, 0, ListType.AUTOMATIC);
+						GUI.setAutomaticRulesWeightList(newAutomaticList);
+						GUI.setManualRulesWeightList(newManualList);
 					}
 				}catch(IndexOutOfBoundsException e) {
-
 				}
 			}
 

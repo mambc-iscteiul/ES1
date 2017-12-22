@@ -49,7 +49,6 @@ public class FalsePositiveAvaliator extends Thread {
 			GUI.getTextFieldManualFalsePositive().setText(""+falsePositivesCount);			
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		}
 	}
 

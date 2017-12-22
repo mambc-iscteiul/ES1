@@ -33,15 +33,15 @@ public class FileChooserListener implements ActionListener {
 
 
 
-/**
- * This method constructs the Listener in association with a FileType to assert if the 
- * correct type of File is selected, if so, it utilizes it to extract it's absolute path and 
- * represent it visually via the JtextField provided
- * 
- * @param path the TextField object responsible for the visualization of the absolute path of the selected File
- * @param file selected File in association with the FileType
- * @param fileType Enumerated of the description of the type of File to be instantiated
- */
+	/**
+	 * This method constructs the Listener in association with a FileType to assert if the 
+	 * correct type of File is selected, if so, it utilizes it to extract it's absolute path and 
+	 * represent it visually via the JtextField provided
+	 * 
+	 * @param path the TextField object responsible for the visualization of the absolute path of the selected File
+	 * @param file selected File in association with the FileType
+	 * @param fileType Enumerated of the description of the type of File to be instantiated
+	 */
 	public FileChooserListener(JTextField path, File file, FileType fileType) {
 		this.path = path;
 		this.file = file;
@@ -75,7 +75,7 @@ public class FileChooserListener implements ActionListener {
 				//Estar ciclicamente a apresentar o FileChooser enquanto o documento selecionado não for o correto para cada caso 
 			} while(!file.getAbsolutePath().endsWith(".cf")&& fileType.equals(FileType.RULES)|| !file.getName().startsWith("ham")&& fileType.equals(FileType.HAM)|| !file.getName().startsWith("spam")&& fileType.equals(FileType.SPAM));	
 			path.setText(file.getAbsolutePath());
-
+			
 		}catch(NullPointerException e){
 		}
 

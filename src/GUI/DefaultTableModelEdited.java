@@ -21,7 +21,7 @@ public class DefaultTableModelEdited extends DefaultTableModel {
 	 * @version 0.9
 	 */
 	
-	protected enum ListType {MANUAL, AUTOMATIC};
+	public enum ListType {MANUAL, AUTOMATIC};
 	private ListType listType;
 
 	/**
@@ -42,7 +42,7 @@ public class DefaultTableModelEdited extends DefaultTableModel {
 	public void addRow(Object[] rowData) {
 		super.addRow(rowData);
 	}
-
+	
 	/**
 	 *This method notifies all listeners that the value of the cell at [row, column] has been updated.
 	 * @param rowsNumber row of cell which has been updated
@@ -51,7 +51,6 @@ public class DefaultTableModelEdited extends DefaultTableModel {
 	@Override
 	public void fireTableCellUpdated(int rowsNumber, int columnsNumber) {
 		super.fireTableCellUpdated(rowsNumber, columnsNumber);
-
 		switch (listType) {
 		case MANUAL:
 			try {
@@ -60,7 +59,8 @@ public class DefaultTableModelEdited extends DefaultTableModel {
 			}catch(NumberFormatException e) {
 				JOptionPane.showMessageDialog(null,"Valor não aceite, insira somente decimais");
 				this.setValueAt("0.0", rowsNumber, columnsNumber);
-			}			
+			}		
+			
 			break;
 		default:
 			break;
@@ -79,7 +79,6 @@ public class DefaultTableModelEdited extends DefaultTableModel {
 		}else {
 			return false;
 		}
-
 	}
 
 

@@ -73,6 +73,7 @@ public class GUI {
 	 */
 
 	private static DefaultTableModelEdited manualRulesWeightList;
+
 	private static DefaultTableModelEdited automaticRulesWeightList;
 
 	private static Map<String,Double> rulesMap;
@@ -169,10 +170,11 @@ public class GUI {
 				RulesReader rulesReader = new RulesReader(textFieldRules.getText());
 				rulesReader.start();
 			}
+			
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				//metodo somente necessario por ser import
-			}
+				}
 			@Override
 			public void removeUpdate(DocumentEvent arg0) {
 				//metodo somente necessario por ser import
@@ -495,6 +497,25 @@ public class GUI {
 	public static DefaultTableModelEdited getAutomaticRulesWeightList() {
 		return automaticRulesWeightList;
 	}
+	//--------------------------------------
+	
+	/**
+	 * This method sets the list given in the arguments as the main manual weight list
+	 * 
+	 * @param manualRulesWeightList list to be the designated manual weight list 
+	 */
+	public static void setManualRulesWeightList(DefaultTableModelEdited manualRulesWeightList) {
+		GUI.manualRulesWeightList = manualRulesWeightList;
+	}
+	
+	/**
+	 * This method sets the list given in the arguments as the main manual weight list
+	 * @param automaticRulesWeightList list to be the designated automatic weight list 
+	 */
+	public static void setAutomaticRulesWeightList(DefaultTableModelEdited automaticRulesWeightList) {
+		GUI.automaticRulesWeightList = automaticRulesWeightList;
+	}
+
 
 	//---------------------------------------
 

@@ -50,7 +50,7 @@ class TesteAvaliators {
 		falseNegativeAvaliator= new FalseNegativeAvaliator(SPAM_test);
 		assertNotNull(falseNegativeAvaliator);
 		assertNotNull(falsePositiveAvaliator);
-
+		
 		falsePositiveAvaliator.start();
 		try {
 			falsePositiveAvaliator.join();
@@ -63,6 +63,9 @@ class TesteAvaliators {
 		} catch (InterruptedException e1) {
 		}
 		assertEquals(227, falseNegativeAvaliator.getFalseNegativesCount());
+		
+		assertNotNull(falseNegativeAvaliator.getRuleMap());
+		assertNotNull(falsePositiveAvaliator.getRulesMap());
 
 	}
 }

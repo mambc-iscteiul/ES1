@@ -56,18 +56,11 @@ public class SolutionReader extends Thread {
 			String[] optimizedRules= scanner.nextLine().split(" ");
 			GUI.getTextFieldAutomaticFalsePositive().setText(""+(int)falsePositiveOptimization);
 			GUI.getTextFieldAutomaticFalseNegative().setText(""+(int)falseNegativeOptimization);
-
 			for (int i = 0; i < optimizedRules.length; i++) {
 				GUI.getAutomaticRulesWeightList().setValueAt(optimizedRules[i],i, 1);
 			}
-
-
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		}
-
-
-
 	}
 }

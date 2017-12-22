@@ -12,47 +12,66 @@ import javax.swing.JButton;
 
 import org.junit.jupiter.api.Test;
 
+import GUI.DefaultTableModelEdited;
+import GUI.DefaultTableModelEdited.ListType;
 import GUI.GUI;
+import InputOutput.HamReader;
 import InputOutput.RulesReader;
+import InputOutput.SpamReader;
 import InputOutput.Writer;
 import Launch.Launch;
 /**
- * 
  * @author ES1-2017-IC1-70
  * @version 0.9
- *
  */
 class TesteGUI {
 
-	//	private GUI gui = new GUI(100, 100);
+	Launch launch = new Launch();
 	private RulesReader rulesReader;
+	private HamReader hamReader;
+	private SpamReader spamReader;
 	private Writer writer;
 	JButton tester;
 
 	@Test
 	void testGUI() {
 		Launch.main(null);
-		//só funciona assim
-		rulesReader = new RulesReader("C:/Users/Filipe/Documents/rules.cf");
-		assertNotNull(rulesReader);
+		assertNotNull(GUI.class);
+	}
+	
+	@Test
+	void testRulesReader() {
+		GUI gui = new GUI(0, 0);
+		rulesReader = new RulesReader("./AntiSpamConfigurationForProfessionalMailbox/rules.cf");
 		rulesReader.run();
-		assertTrue(rulesReader.isAlive());
 		assertNotNull(GUI.getManualRulesWeightList());
 		assertEquals(335, GUI.getManualRulesWeightList().getRowCount());
-		assertFalse(GUI.getManualRulesWeightList().isCellEditable(0, 0));
+	}
+	
+	@Test
+	void testDefaultTableModelEdited() {
+		DefaultTableModelEdited manualList = new DefaultTableModelEdited(null, 1, ListType.MANUAL);
+		String[] randomLine1= {"Hello World","0.0"};
+		manualList.addRow(randomLine1);
 
+		assertTrue(manualList.isCellEditable(0, 1));
+		
+		DefaultTableModelEdited automaticList = new DefaultTableModelEdited(null, 1, ListType.AUTOMATIC);
+		assertFalse(automaticList.isCellEditable(0, 1));
+		
 	}
 
+	
 	@Test
 	void testButtons() {
 		GUI.ActivateButons();	
 		for (int i = 0; i < GUI.getButtonList().size(); i++) {
 			assertNotNull(GUI.getButtonList().get(i));
-			GUI.getButtonList().get(i).doClick();
 			assertTrue(GUI.getButtonList().get(i).isEnabled());
+			GUI.getButtonList().get(i).doClick();
 		}
 	}
-
+	
 	@Test
 	void testeWriter() {
 		//talvez ler o ficheiro e assert de que foram botadas 335 linhas
@@ -63,16 +82,11 @@ class TesteGUI {
 			assertNotNull(writer.getWriter());
 			assertNotNull(writer.getFileWriter());
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
 	@Test
 	void testFileChooser() {
-
-		//clicar so nos primeiros 3 botoes(procurar ficheiros)
-		//desta forma cria o jfilechooser
-
 				for (int i = 0; i < 3; i++) {
 					GUI.getButtonList().get(i).doClick();
 					System.out.println(GUI.getButtonList().get(i).getText());
@@ -82,10 +96,25 @@ class TesteGUI {
 				assertFalse(GUI.getTextFieldHam().getText().equals(" "));
 				assertFalse(GUI.getTextFieldSpam().getText().equals(" "));
 	}
-	//FALTA ASSERTS
+	
+	
+	@Test
+	void testHamReader() {
+		hamReader = new HamReader(GUI.getHamFile());
+		hamReader.start();
+		assertNotNull(GUI.getHamMap());
+		assertEquals(665, GUI.getHamMap().size());
+	}
+	@Test
+	void testSpamReader() {
+		spamReader = new SpamReader(GUI.getSpamFile());
+		spamReader.start();
+		assertNotNull(GUI.getSpamMap());
+		assertEquals(239, GUI.getSpamMap().size());
+		
+	}
+	
+	
+	
+	
 }
-
-
-// falta teste de butoplistener
-
-

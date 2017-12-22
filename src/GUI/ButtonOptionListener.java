@@ -83,7 +83,6 @@ public class ButtonOptionListener implements ActionListener {
 					for (int i = 0; i < GUI.getManualRulesWeightList().getRowCount(); i++) {
 						GUI.getRulesMap().put((String) GUI.getManualRulesWeightList().getValueAt(i, 0), Double.parseDouble((String) GUI.getManualRulesWeightList().getValueAt(i, 1)));
 					}
-
 					GUI.setHamFile(new File(GUI.getTextFieldHam().getText()));
 					FalsePositiveAvaliator falsePositiveAvaliator = new FalsePositiveAvaliator(GUI.getHamFile());
 					falsePositiveAvaliator.start();
@@ -158,8 +157,10 @@ public class ButtonOptionListener implements ActionListener {
 					boolean done = false;
 					int maxEvaluations = 0;
 					do {		
+
 						try {
 							String notice = JOptionPane.showInputDialog("Quanto maior o numero de avaliações mais lento será o algoritmo!\n Qual o máximo de avaliações que deseja? (máximo recomendado 450)");
+
 							maxEvaluations = Integer.parseInt(notice);
 							done = true;
 						}catch(NumberFormatException e) {
@@ -175,10 +176,7 @@ public class ButtonOptionListener implements ActionListener {
 					}catch(JMetalException e) {
 						JOptionPane.showMessageDialog(null, "O algoritmo encontrou a otimização máxima!");
 					}
-
-					m();
-					
-
+					createEPS();
 					SolutionReader solutionReader = new SolutionReader();
 					solutionReader.start();
 
@@ -192,7 +190,6 @@ public class ButtonOptionListener implements ActionListener {
 					/*
 					 * Guarda os pesos no ficheiro
 					 */
-
 					GUI.setRulesFile(new File(GUI.getTextFieldRules().getText()));
 					Writer writer = new Writer(GUI.getRulesFile(), GUI.getAutomaticRulesWeightList());
 					writer.start();
@@ -200,7 +197,6 @@ public class ButtonOptionListener implements ActionListener {
 					writer = new Writer(new File("./AntiSpamConfigurationForProfessionalMailbox/rules.cf"),GUI.getManualRulesWeightList());
 					writer.start();
 				} catch (IOException e) {
-					e.printStackTrace();
 				}
 				break;
 			default:
@@ -209,8 +205,8 @@ public class ButtonOptionListener implements ActionListener {
 		}
 	}
 
-	private void m() {
-		
+	private void createEPS() {
+
 		String[] params = new String [2];
 
 		params[0] = "C:/Program Files/R/R-3.4.3/bin/x64/Rscript.exe";
@@ -220,13 +216,12 @@ public class ButtonOptionListener implements ActionListener {
 		String[] envp = new String [1];
 
 		envp[0] = "Path=C:/Program Files/R/R-3.4.3/bin/x64";
-		
+
 		try {
 			@SuppressWarnings("unused")
 			Process p = Runtime.getRuntime().exec(params, envp, new File("C:/Users/Filipe/git/ES1-2017-IC1-70/experimentBaseDirectory/AntiSpamStudy/R"));
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
-		
+
 	}
 }

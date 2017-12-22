@@ -32,7 +32,6 @@ public class AntiSpamFilterAutomaticConfiguration {
 		try {
 			main(null);
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
