@@ -139,7 +139,7 @@ public class ButtonOptionListener implements ActionListener {
 					//Criar Mapa de Rules a 0.0 (Aproveitar as lista manual)
 					for (int i = 0; i < GUI.getAutomaticRulesWeightList().getRowCount(); i++) {
 						GUI.getRulesMap().put((String) GUI.getAutomaticRulesWeightList().getValueAt(i, 0), 0.0);
-
+						
 					}
 
 					//criar a estrutura de dados de HAM
@@ -154,19 +154,16 @@ public class ButtonOptionListener implements ActionListener {
 					SpamReader spamReader = new SpamReader(GUI.getSpamFile()); 
 					spamReader.start();
 
-					boolean done = false;
 					int maxEvaluations = 0;
-					do {		
 
-						try {
-							String notice = JOptionPane.showInputDialog("Quanto maior o numero de avaliações mais lento será o algoritmo!\n Qual o máximo de avaliações que deseja? (máximo recomendado 450)");
+					try {
+						String notice = JOptionPane.showInputDialog("Quanto maior o numero de avaliações mais lento será o algoritmo!\n Qual o máximo de avaliações que deseja? (máximo recomendado 450)");
 
-							maxEvaluations = Integer.parseInt(notice);
-							done = true;
-						}catch(NumberFormatException e) {
-							JOptionPane.showMessageDialog(null,"Por favor, insira valores numéricos válidos");
-						}
-					} while (!done);
+						maxEvaluations = Integer.parseInt(notice);
+					}catch(NumberFormatException e) {
+						JOptionPane.showMessageDialog(null,"Por favor, insira valores numéricos válidos");
+					}
+
 
 					AntiSpamFilterProblem antiSpamFilterProblem = new AntiSpamFilterProblem(GUI.getRulesMap(),GUI.getSpamMap(),GUI.getHamMap());
 
@@ -211,7 +208,7 @@ public class ButtonOptionListener implements ActionListener {
 
 		params[0] = "C:/Program Files/R/R-3.4.3/bin/x64/Rscript.exe";
 
-		params[1] = "C:/Users/Filipe/git/ES1-2017-IC1-70/experimentBaseDirectory/AntiSpamStudy/R/HV.Boxplot.R";
+		params[1] = "./experimentBaseDirectory/AntiSpamStudy/R/HV.Boxplot.R";
 
 		String[] envp = new String [1];
 
@@ -219,7 +216,7 @@ public class ButtonOptionListener implements ActionListener {
 
 		try {
 			@SuppressWarnings("unused")
-			Process p = Runtime.getRuntime().exec(params, envp, new File("C:/Users/Filipe/git/ES1-2017-IC1-70/experimentBaseDirectory/AntiSpamStudy/R"));
+			Process p = Runtime.getRuntime().exec(params, envp, new File("C:/Users/Filipe/Desktop"));
 		} catch (IOException e) {
 		}
 

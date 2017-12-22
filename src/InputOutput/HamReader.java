@@ -48,8 +48,8 @@ public class HamReader extends Thread{
 				key++;
 			}
 			scanner.close();
+			System.out.println("HAMREADER--------------->"+ GUI.getHamMap().size());
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		}
 
 

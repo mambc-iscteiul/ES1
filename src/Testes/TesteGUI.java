@@ -38,16 +38,17 @@ class TesteGUI {
 		Launch.main(null);
 		assertNotNull(GUI.class);
 	}
-	
+
 	@Test
 	void testRulesReader() {
-		GUI gui = new GUI(0, 0);
+		@SuppressWarnings("unused")
+		GUI gui= new GUI(0, 0);
 		rulesReader = new RulesReader("./AntiSpamConfigurationForProfessionalMailbox/rules.cf");
 		rulesReader.run();
 		assertNotNull(GUI.getManualRulesWeightList());
 		assertEquals(335, GUI.getManualRulesWeightList().getRowCount());
 	}
-	
+
 	@Test
 	void testDefaultTableModelEdited() {
 		DefaultTableModelEdited manualList = new DefaultTableModelEdited(null, 1, ListType.MANUAL);
@@ -55,13 +56,13 @@ class TesteGUI {
 		manualList.addRow(randomLine1);
 
 		assertTrue(manualList.isCellEditable(0, 1));
-		
+
 		DefaultTableModelEdited automaticList = new DefaultTableModelEdited(null, 1, ListType.AUTOMATIC);
 		assertFalse(automaticList.isCellEditable(0, 1));
-		
+
 	}
 
-	
+
 	@Test
 	void testButtons() {
 		GUI.ActivateButons();	
@@ -71,7 +72,7 @@ class TesteGUI {
 			GUI.getButtonList().get(i).doClick();
 		}
 	}
-	
+
 	@Test
 	void testeWriter() {
 		//talvez ler o ficheiro e assert de que foram botadas 335 linhas
@@ -87,34 +88,20 @@ class TesteGUI {
 
 	@Test
 	void testFileChooser() {
-				for (int i = 0; i < 3; i++) {
-					GUI.getButtonList().get(i).doClick();
-					System.out.println(GUI.getButtonList().get(i).getText());
-					assertTrue(GUI.getButtonList().get(i).isEnabled());
-				}
-				assertFalse(GUI.getTextFieldRules().getText().equals(" "));
-				assertFalse(GUI.getTextFieldHam().getText().equals(" "));
-				assertFalse(GUI.getTextFieldSpam().getText().equals(" "));
+		for (int i = 0; i < 3; i++) {
+			GUI.getButtonList().get(i).doClick();
+			System.out.println(GUI.getButtonList().get(i).getText());
+			assertTrue(GUI.getButtonList().get(i).isEnabled());
+		}
+		assertFalse(GUI.getTextFieldRules().getText().equals(" "));
+		assertFalse(GUI.getTextFieldHam().getText().equals(" "));
+		assertFalse(GUI.getTextFieldSpam().getText().equals(" "));
 	}
-	
-	
-	@Test
-	void testHamReader() {
-		hamReader = new HamReader(GUI.getHamFile());
-		hamReader.start();
-		assertNotNull(GUI.getHamMap());
-		assertEquals(665, GUI.getHamMap().size());
-	}
-	@Test
-	void testSpamReader() {
-		spamReader = new SpamReader(GUI.getSpamFile());
-		spamReader.start();
-		assertNotNull(GUI.getSpamMap());
-		assertEquals(239, GUI.getSpamMap().size());
-		
-	}
-	
-	
-	
-	
+
+
+
+
+
+
+
 }

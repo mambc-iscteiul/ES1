@@ -38,7 +38,7 @@ class TesteAvaliators {
 		for (int i = 0; i < GUI.getManualRulesWeightList().getRowCount(); i++) {
 			GUI.getRulesMap().put((String) GUI.getManualRulesWeightList().getValueAt(i, 0), Double.parseDouble((String) GUI.getManualRulesWeightList().getValueAt(i, 1)));
 		}
-
+		
 		GUI.getRulesMap().replace("BAYES_00", 6.0);
 		GUI.getRulesMap().replace("BAYES_99", -6.0);
 
@@ -50,7 +50,6 @@ class TesteAvaliators {
 		falseNegativeAvaliator= new FalseNegativeAvaliator(SPAM_test);
 		assertNotNull(falseNegativeAvaliator);
 		assertNotNull(falsePositiveAvaliator);
-		
 		falsePositiveAvaliator.start();
 		try {
 			falsePositiveAvaliator.join();

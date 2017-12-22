@@ -49,6 +49,7 @@ public class SpamReader extends Thread {
 				keyValue++;
 			}	
 			scanner.close();
+			System.out.println("SPAMREADER--------------->"+ GUI.getSpamMap().size());
 		} catch (FileNotFoundException e) {
 		}
 	}

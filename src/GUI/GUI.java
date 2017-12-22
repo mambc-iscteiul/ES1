@@ -455,7 +455,6 @@ public class GUI {
 		automaticConfigurationButtonsPanel.setLayout(new GridLayout(3, 0));
 		automaticPanel.add(automaticConfigurationButtonsPanel, BorderLayout.EAST);
 
-
 		//3.2.1. Adicionar os botoes ao painel
 		JButton generateAutomaticConfigurationButton = new JButton("Gerar Conf. Automatica c/ JMetal");
 		//comecar sem ser editavel
