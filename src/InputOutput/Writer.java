@@ -58,7 +58,7 @@ public class Writer extends Thread{
 	public BufferedWriter getWriter() {
 		return bufferedWriter;
 	}
-
+	
 	/**
 	 * This method return the FileWriter used on the writing process
 	 * @return a FileWriter associated with a File.

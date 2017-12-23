@@ -67,8 +67,6 @@ public class FalsePositiveAvaliator extends Thread {
 		}
 		return math;
 	}
-
-
 	/**
 	 * This methods returns the overall count of False Positives
 	 * @return the count of False Positives
@@ -76,7 +74,6 @@ public class FalsePositiveAvaliator extends Thread {
 	public int getFalsePositivesCount() {
 		return falsePositivesCount;
 	}
-	
 	/**
 	 * This method returns the rule-weight relation which has been used
 	 * to calculate the False Positives

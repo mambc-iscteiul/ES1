@@ -21,6 +21,7 @@ import InputOutput.SpamReader;
 import InputOutput.Writer;
 import Launch.Launch;
 /**
+ * 
  * @author ES1-2017-IC1-70
  * @version 0.9
  */
@@ -28,10 +29,9 @@ class TesteGUI {
 
 	Launch launch = new Launch();
 	private RulesReader rulesReader;
-	private HamReader hamReader;
-	private SpamReader spamReader;
 	private Writer writer;
 	JButton tester;
+
 
 	@Test
 	void testGUI() {
@@ -59,7 +59,6 @@ class TesteGUI {
 
 		DefaultTableModelEdited automaticList = new DefaultTableModelEdited(null, 1, ListType.AUTOMATIC);
 		assertFalse(automaticList.isCellEditable(0, 1));
-
 	}
 
 
@@ -97,11 +96,4 @@ class TesteGUI {
 		assertFalse(GUI.getTextFieldHam().getText().equals(" "));
 		assertFalse(GUI.getTextFieldSpam().getText().equals(" "));
 	}
-
-
-
-
-
-
-
 }

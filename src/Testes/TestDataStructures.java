@@ -9,6 +9,9 @@ import GUI.GUI;
 
 class TestDataStructures {
 
+
+	
+	
 	void init()
 	{
 		GUI gui =  new GUI(1100, 1100);
@@ -22,7 +25,6 @@ class TestDataStructures {
 	void testSpamReader() throws InterruptedException {
 		init();
 		assertNotNull(GUI.getSpamMap());
-		System.out.println("-------------------LI AGORA--------------------------");
 		
 		assertEquals(239, GUI.getSpamMap().size());
 	}
@@ -31,7 +33,6 @@ class TestDataStructures {
 	void testHamReader() throws InterruptedException {
 		init();
 		assertNotNull(GUI.getHamMap());
-		System.out.println("-------------------LI AGORA--------------------------");
 		
 		assertEquals(695, GUI.getHamMap().size());
 	}

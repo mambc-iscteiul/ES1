@@ -23,7 +23,6 @@ public class FileChooserListener implements ActionListener {
 	 * 
 	 * @author ES1-2017-IC1-70
 	 * @version 0.9
-	 *
 	 */
 	public enum FileType {RULES,SPAM,HAM};
 
@@ -42,11 +41,11 @@ public class FileChooserListener implements ActionListener {
 	 * @param file selected File in association with the FileType
 	 * @param fileType Enumerated of the description of the type of File to be instantiated
 	 */
+	
 	public FileChooserListener(JTextField path, File file, FileType fileType) {
 		this.path = path;
 		this.file = file;
 		this.fileType = fileType;
-
 	}
 
 	/**
@@ -78,7 +77,5 @@ public class FileChooserListener implements ActionListener {
 			
 		}catch(NullPointerException e){
 		}
-
 	}
-
 }

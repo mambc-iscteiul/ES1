@@ -43,7 +43,6 @@ public class ButtonOptionListener implements ActionListener {
 	private ManualOptions manualOption;
 	private AutomaticOptions automaticOption;
 
-
 	/**
 	 * Constructs an ActionListener in respect with the type of operations
 	 * @param manualOption type of manual operation, can be null
@@ -74,7 +73,6 @@ public class ButtonOptionListener implements ActionListener {
 					GUI.getManualRulesWeightList().setValueAt(""+randomValue, i, 1);
 				}
 				break;
-
 				/*
 				 * Lança os avaliadores 
 				 */
@@ -105,18 +103,16 @@ public class ButtonOptionListener implements ActionListener {
 					GUI.setRulesFile(new File(GUI.getTextFieldRules().getText()));
 					writer = new Writer(GUI.getRulesFile(),GUI.getManualRulesWeightList());
 					writer.start();
-
+					
 					writer = new Writer(new File("./AntiSpamConfigurationForProfessionalMailbox/rules.cf"),GUI.getManualRulesWeightList());
 					writer.start();
-
-
 				} catch (IOException e1) {
 				}
 				break;
 
 			case INITIALIZE:
 				/*
-				 * Atribui "0.0"a todas as regras 
+				 * Atribui "0.0" a todas as regras 
 				 */
 				for (int i = 0; i < GUI.getManualRulesWeightList().getRowCount(); i++) {
 					GUI.getManualRulesWeightList().setValueAt("0.0", i, 1);
@@ -141,7 +137,7 @@ public class ButtonOptionListener implements ActionListener {
 						GUI.getRulesMap().put((String) GUI.getAutomaticRulesWeightList().getValueAt(i, 0), 0.0);
 
 					}
-					
+				
 					//criar a estrutura de dados de HAM
 
 					GUI.setHamFile(new File(GUI.getTextFieldHam().getText()));
