@@ -41,10 +41,6 @@ class TestDataStructures {
 	void testSpamReader() throws InterruptedException {
 		init();
 		assertNotNull(GUI.getSpamMap());
-<<<<<<< HEAD
-=======
-		
->>>>>>> branch 'master' of https://github.com/mambc-iscteiul/ES1-2017-IC1-70.git
 		assertEquals(239, GUI.getSpamMap().size());
 	}
 
@@ -57,15 +53,11 @@ class TestDataStructures {
 	void testHamReader() throws InterruptedException {
 		init();
 		assertNotNull(GUI.getHamMap());
-<<<<<<< HEAD
-=======
-		
->>>>>>> branch 'master' of https://github.com/mambc-iscteiul/ES1-2017-IC1-70.git
 		assertEquals(695, GUI.getHamMap().size());
 	}
 
 	/**
-	 * Check if the number of rules readed from solutions file is 335, corresponding with the number of rule solutions weights.
+	 * Check if the number of rules read from solutions file is 335, corresponding with the number of rule solutions weights.
 	 */
 	@Test
 	void testSolutionReader() {
