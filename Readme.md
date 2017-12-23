@@ -8,19 +8,19 @@ Grupo 70
 
 73680, Rui Francisco, Developer
 
-72953, DÈbora Gabriel, Quality Manager
+72953, D√©bora Gabriel, Quality Manager
 
 AntiSpamConfigurationForProfessionalMailbox
 
 
-Link para um vÌdeo no youtube com a demonstraÁ„o da aplicaÁ„o final desenvolvida (ex: http://...)
+https://youtu.be/FLjAnJ9Oi1U
 
 
 Funcionalidades extra implementadas:
-- A lista da configuraÁ„o autom·tica n„o È edit·vel e sÛ recebe valores numÈricos;
-- Os botıes n„o est„o ativos atÈ se introduzir o ficheiro de regras (rules.cf);
-- A procura de ficheiros est· completamente dedicada, ou seja, n„o se aceita outros ficheiros que n„o os desejados;
-- SÛ se pode realizar a avaliaÁ„o da configuraÁ„o se forem inseridos previamente os ficheiros ham e spam;
-- Cada vez que È introduzido um novo ficheiro, as estruturas de dados fazem refresh de forma a ter tudo o mais atualizado possÌvel;
-- As max evaluations na geraÁ„o autom·tica est„o completamente din‚micas e o programa questiona o user para as introduzir.
+- A lista da configura√ß√£o autom√°tica n√£o √© edit√°vel e s√≥ recebe valores num√©ricos;
+- Os bot√µes n√£o est√£o ativos at√© se introduzir o ficheiro de regras (rules.cf);
+- A procura de ficheiros est√° completamente dedicada, ou seja, n√£o se aceita outros ficheiros que n√£o os desejados;
+- S√≥ se pode realizar a avalia√ß√£o da configura√ß√£o se forem inseridos previamente os ficheiros ham e spam;
+- Cada vez que √© introduzido um novo ficheiro, as estruturas de dados fazem refresh de forma a ter tudo o mais atualizado poss√≠vel;
+- As max evaluations na gera√ß√£o autom√°tica est√£o completamente din√¢micas e o programa questiona o user para as introduzir.
 
