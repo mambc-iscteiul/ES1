@@ -21,6 +21,8 @@ import InputOutput.SpamReader;
 import InputOutput.Writer;
 import Launch.Launch;
 /**
+ * Test class than tests all the existing functionalities on the GUI (e.g. buttons, text fields, tables).
+ * 
  * @author ES1-2017-IC1-70
  * @version 0.9
  */
@@ -33,12 +35,19 @@ class TesteGUI {
 	private Writer writer;
 	JButton tester;
 
+	/**
+	 * Run the Launch and check if the GUI is not null after this
+	 */
 	@Test
 	void testGUI() {
 		Launch.main(null);
 		assertNotNull(GUI.class);
 	}
 
+	/**
+	 * Creates a RulesReader, run it, and check if exists a List with weights of each rule from the file Rules.cf than is readed on the method run of RulesReader
+	 * It also confirms if the number of rows readed from the file Rules.cf is equals to original number of rows in this file.
+	 */
 	@Test
 	void testRulesReader() {
 		@SuppressWarnings("unused")
@@ -49,6 +58,9 @@ class TesteGUI {
 		assertEquals(335, GUI.getManualRulesWeightList().getRowCount());
 	}
 
+	/**
+	 * Creates a DefaultTableModelEdited and adds a test row, after that it will check if the columns are editable to both options, manual and automatic
+	 */
 	@Test
 	void testDefaultTableModelEdited() {
 		DefaultTableModelEdited manualList = new DefaultTableModelEdited(null, 1, ListType.MANUAL);
@@ -62,7 +74,10 @@ class TesteGUI {
 
 	}
 
-
+	
+	/**
+	 * Test all the buttons present in the GUI through the doClick() on each button
+	 */
 	@Test
 	void testButtons() {
 		GUI.ActivateButons();	
@@ -73,9 +88,11 @@ class TesteGUI {
 		}
 	}
 
+	/**
+	 * Test the Writer through running the Writer and checking if Writer is not null, in other words, check if exists a Writer after its creation.
+	 */
 	@Test
 	void testeWriter() {
-		//talvez ler o ficheiro e assert de que foram botadas 335 linhas
 		try {
 			GUI.setRulesFile(new File(GUI.getTextFieldRules().getText()));
 			writer = new Writer(GUI.getRulesFile(),GUI.getManualRulesWeightList());
@@ -86,6 +103,9 @@ class TesteGUI {
 		}
 	}
 
+	/**
+	 * Test the fileChooser, through clicking in all buttons (Rules, Ham, Spam) and checking if the Button List is enabled. After that, checks if the corresponding text fields are not empty.
+	 */
 	@Test
 	void testFileChooser() {
 		for (int i = 0; i < 3; i++) {
