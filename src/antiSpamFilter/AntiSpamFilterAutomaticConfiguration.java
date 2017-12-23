@@ -22,11 +22,11 @@ import org.uma.jmetal.util.experiment.util.ExperimentAlgorithm;
 import org.uma.jmetal.util.experiment.util.ExperimentProblem;
 
 public class AntiSpamFilterAutomaticConfiguration {
-	private static final int INDEPENDENT_RUNS = 5 ; //estava 5
+	private static final int INDEPENDENT_RUNS = 5 ; 
 	private static AntiSpamFilterProblem antiSpamFilterProblem;
 	private static int maxEvaluations;
 
-
+	
 	public AntiSpamFilterAutomaticConfiguration(AntiSpamFilterProblem antiSpamProblem, int maxEvaluations) {
 		antiSpamFilterProblem = antiSpamProblem;
 		AntiSpamFilterAutomaticConfiguration.maxEvaluations=maxEvaluations;

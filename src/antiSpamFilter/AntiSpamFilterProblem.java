@@ -10,8 +10,9 @@ import org.uma.jmetal.solution.DoubleSolution;
 import GUI.GUI;
 
 
+@SuppressWarnings("serial")
 public class AntiSpamFilterProblem extends AbstractDoubleProblem {
-
+	
 	private Map<String, Double> RulesMap;
 	private Map<Integer, ArrayList<String>> SpamMap;
 	private Map<Integer, ArrayList<String>> HamMap;

@@ -30,8 +30,6 @@ class TesteGUI {
 
 	Launch launch = new Launch();
 	private RulesReader rulesReader;
-	private HamReader hamReader;
-	private SpamReader spamReader;
 	private Writer writer;
 	JButton tester;
 

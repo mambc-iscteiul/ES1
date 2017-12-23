@@ -32,7 +32,7 @@ public class FalseNegativeAvaliator extends Thread {
 		this.spamFile = spamFile;
 		rulesMap = GUI.getRulesMap();
 	}
-
+	
 	/**
 	 * It creates a scanner to read the designated file and calculate the false negatives
 	 * If this thread was constructed using a separate Runnable run object, then that Runnable object's run method is called; otherwise, this method does nothing and returns. 

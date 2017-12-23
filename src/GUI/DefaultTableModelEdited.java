@@ -42,6 +42,7 @@ public class DefaultTableModelEdited extends DefaultTableModel {
 	public void addRow(Object[] rowData) {
 		super.addRow(rowData);
 	}
+
 	
 	/**
 	 *This method notifies all listeners that the value of the cell at [row, column] has been updated.

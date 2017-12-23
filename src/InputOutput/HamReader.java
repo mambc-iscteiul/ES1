@@ -25,7 +25,7 @@ public class HamReader extends Thread{
 	public HamReader(File file) {
 		this.hamFile=file;	
 	}
-
+	
 	/**
 	 * It associates the number of the email to the observed 
 	 * rules in that email(line) and maps that relation.
@@ -48,7 +48,6 @@ public class HamReader extends Thread{
 				key++;
 			}
 			scanner.close();
-			System.out.println("HAMREADER--------------->"+ GUI.getHamMap().size());
 		} catch (FileNotFoundException e) {
 		}
 

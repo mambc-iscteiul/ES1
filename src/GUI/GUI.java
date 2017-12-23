@@ -42,7 +42,6 @@ import InputOutput.RulesReader;
  *
  */
 
-
 public class GUI {
 
 	//Frame
@@ -496,28 +495,6 @@ public class GUI {
 	public static DefaultTableModelEdited getAutomaticRulesWeightList() {
 		return automaticRulesWeightList;
 	}
-	//--------------------------------------
-//	
-//	/**
-//	 * This method sets the list given in the arguments as the main manual weight list
-//	 * 
-//	 * @param manualRulesWeightList list to be the designated manual weight list 
-//	 */
-//	public static void setManualRulesWeightList(DefaultTableModelEdited manualRulesWeightList) {
-//		GUI.manualRulesWeightList = manualRulesWeightList;
-//	}
-	
-//	/**
-//	 * This method sets the list given in the arguments as the main manual weight list
-//	 * @param automaticRulesWeightList list to be the designated automatic weight list 
-//	 */
-//	public static void setAutomaticRulesWeightList(DefaultTableModelEdited automaticRulesWeightList) {
-//		GUI.automaticRulesWeightList = automaticRulesWeightList;
-//	}
-
-
-	//---------------------------------------
-
 	/**
 	 * This method returns the mapping of the rules and their weights for efficient logical computation 
 	 * 
@@ -708,5 +685,4 @@ public class GUI {
 	public  static void setSpamFile(File spam) {
 		GUI.spamFile = spam;
 	}
-
 }

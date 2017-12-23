@@ -19,7 +19,7 @@ public class SolutionReader extends Thread {
 	private double falsePositiveOptimization = 999999;
 	private double falseNegativeOptimization = 999999;
 	private int lineNumber = 0;
-
+	
 	/**
 	 * This method extracts the line of a designated file(AntiSpamFilterProblem.NSGAII.rs) which is the optimized set of rules calculated in reference to another algorithm-created-file(AntiSpamFilterProblem.NSGAII.rf)
 	 * and transfers the solution to the GUI. 

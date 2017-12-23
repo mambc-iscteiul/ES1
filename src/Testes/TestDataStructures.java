@@ -20,6 +20,9 @@ class TestDataStructures {
 	 * Start the test with a creation of a GUI window and click on the buttons on the lower part of the window.
 	 */
 
+
+	
+	
 	void init()
 	{
 		GUI gui =  new GUI(1100, 1100);
@@ -38,6 +41,10 @@ class TestDataStructures {
 	void testSpamReader() throws InterruptedException {
 		init();
 		assertNotNull(GUI.getSpamMap());
+<<<<<<< HEAD
+=======
+		
+>>>>>>> branch 'master' of https://github.com/mambc-iscteiul/ES1-2017-IC1-70.git
 		assertEquals(239, GUI.getSpamMap().size());
 	}
 
@@ -50,6 +57,10 @@ class TestDataStructures {
 	void testHamReader() throws InterruptedException {
 		init();
 		assertNotNull(GUI.getHamMap());
+<<<<<<< HEAD
+=======
+		
+>>>>>>> branch 'master' of https://github.com/mambc-iscteiul/ES1-2017-IC1-70.git
 		assertEquals(695, GUI.getHamMap().size());
 	}
 
